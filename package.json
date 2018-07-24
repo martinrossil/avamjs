@@ -1,0 +1,19 @@
+{
+  "name": "avamjs",
+  "version": "1.0.0",
+  "description": "ava.dk PWA",
+  "main": "src/index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/martinrossil/avamjs.git"
+  },
+  "author": "Martin Rossil",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/martinrossil/avamjs/issues"
+  },
+  "homepage": "https://github.com/martinrossil/avamjs#readme"
+}
