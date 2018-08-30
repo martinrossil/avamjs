@@ -1,15 +1,31 @@
 {
-  "hosting": {
-    "public": "dist",
-    "ignore": [
+  "hosting": 
+  {
+    "public": "src",
+    "ignore": 
+    [
       "firebase.json",
       "**/.*",
       "**/node_modules/**"
     ],
-    "rewrites": [
+    "rewrites": 
+    [
       {
         "source": "**",
         "destination": "/index.html"
+      }
+    ],
+    "headers": 
+    [ 
+      {
+        "source" : "**/*.@(mp4|webm|jpg|webp)",
+        "headers" : 
+        [ 
+          {
+            "key" : "Cache-Control",
+            "value" : "public, max-age=7200, s-maxage=7200"
+          } 
+        ]
       }
     ]
   }
