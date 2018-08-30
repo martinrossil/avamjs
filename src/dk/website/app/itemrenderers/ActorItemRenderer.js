@@ -1,0 +1,145 @@
+import BaseItemRenderer from "../../../ava/components/itemrenderers/BaseItemRenderer.js";
+import Config from "../Config.js";
+import ImageElement from "../../../ava/components/images/ImageElement.js";
+import TextElement from "../../../ava/components/text/TextElement.js";
+import Theme from "../../../ava/styles/Theme.js";
+import FontWeight from "../../../ava/constants/FontWeight.js";
+import System from "../../../ava/system/System.js";
+import CornerSquare from "./CornerSquare.js";
+export default class ActorItemRenderer extends BaseItemRenderer
+{
+    constructor()
+    {
+        super();
+    }
+    isInViewPortChanged()
+    {
+        //return;
+        if( this.isInViewPort )
+        {
+            if( !this.hasProfileBeenLoaded )
+            {
+                this.hasProfileBeenLoaded = true;
+                let i = this.data.i;
+                let ext = ImageElement.extension;
+                let url = Config.FIRE_BASE_STORAGE_BASE_URL + "profiles%2F";
+                    url += ext + "%2F" + this.getProfileSize + "%2F";
+                    url += i + "." + ext + "?alt=media";
+                this.image.source = url;
+            }
+        }
+    }
+    get getProfileSize()
+    {
+        let w = this.width;
+        if( w < 240 )
+        {
+            return 240;
+        }
+        else if( w < 320 )
+        {
+            return 320;
+        }
+        else if( w < 400 )
+        {
+            return 400;
+        }
+        return 480;
+    }
+    sizeChanged( w, h )
+    {
+        this.layoutChildren( w, h );
+    }
+    widthChanged( w )
+    {
+        this.layoutChildren( w, this.height );
+    }
+    heightChanged( h )
+    {
+        this.layoutChildren( this.width, h );
+    }
+    layoutChildren( w, h )
+    {
+        this.image.setSize( w, h );
+        this.nameTextElement.width = w;
+        this.nameTextElement.y = h + 8;
+        this.birthCountryTextElement.width = w;
+        this.birthCountryTextElement.y = h + 28;
+        this.cornerSquare.x = w - 30;
+    }
+    dataChanged()
+    {  
+        this.aTag.href = "/skuespillere/" + this.data.u;
+        this.image.alt = this.data.n;
+        this.image.title = this.data.n;
+        this.nameTextElement.text = this.data.n;
+        this.birthCountryTextElement.text = this.data.b;
+        this.cornerSquare.age = this.data.a;
+    }
+    initialize()
+    {
+        super.initialize();
+        this.z = 4;
+        this.backgroundColor = Config.SECONDARY_COLOR;
+        this.createChildren();
+    }
+    createChildren()
+    {   
+        this.addElement( this.aTag );
+        this.addElement( this.nameTextElement );
+        this.addElement( this.birthCountryTextElement );
+        this.addElement( this.cornerSquare );
+    }
+    get aTag()
+    {
+        if( !this._aTag )
+        {
+            this._aTag = document.createElement( "a" );
+            this._aTag.appendChild( this.image );
+        }
+        return this._aTag;
+    }
+    get image()
+    {
+        if( !this._image )
+        {
+            this._image = new ImageElement();
+            //this._image.listen( EventTypes.LOAD_COMPLETE, this.loadComplete.bind( this ) );
+            //this._image.listen( EventTypes.LOAD_ERROR, this.loadError.bind( this ) );
+        }
+        return this._image;
+    }
+    get nameTextElement()
+    {
+        if( !this._nameTextElement )
+        {
+            this._nameTextElement = new TextElement();
+            this._nameTextElement.textColor = Theme.PRIMARY_TEXT_COLOR;
+            this._nameTextElement.fontWeight = FontWeight.BOLD;
+            this._nameTextElement.wordWrap = false;
+        }
+        return this._nameTextElement;
+    }
+    get birthCountryTextElement()
+    {
+        if( !this._birthCountryTextElement )
+        {
+            this._birthCountryTextElement = new TextElement();
+            this._birthCountryTextElement.textColor = "#8e9bab";
+            this._birthCountryTextElement.wordWrap = false;
+        }
+        return this._birthCountryTextElement;
+    }
+    get cornerSquare()
+    {
+        if( !this._cornerSquare )
+        {
+            this._cornerSquare = new CornerSquare();
+            this._cornerSquare.backgroundColor = Config.SECONDARY_COLOR;
+            this._cornerSquare.y = -14;
+            this._cornerSquare.z = 2;
+        }
+        return this._cornerSquare;
+    }
+}
+customElements.define("actor-item-renderer", ActorItemRenderer ); 
