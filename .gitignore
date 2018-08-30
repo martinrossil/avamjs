@@ -1,1 +1,7 @@
 dist/
+*.jpg
+*.webp
+*.json
+*.cache
+*.webm
+*.mp4
