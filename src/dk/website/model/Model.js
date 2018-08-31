@@ -29,20 +29,4 @@ export default class Model
         }
         return this._actorsCollection;
     }
-    static get moviesGenresCollection()
-    {
-        if( !this._moviesGenresCollection )
-        {
-            this._moviesGenresCollection = new ArrayCollection( [] );  
-        }
-        return this._moviesGenresCollection;
-    }
-    static get trailersGenresCollection()
-    {
-        if( !this._trailersGenresCollection )
-        {
-            this._trailersGenresCollection = new ArrayCollection( [] );
-        }
-        return this._trailersGenresCollection;
-    }
 }
