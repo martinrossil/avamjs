@@ -28,7 +28,7 @@ export default class TrailerPlaybackLogic extends Logic
                 let iconButton = ClickTargetUtil.getIconButtonFromTarget( e.target );
                 if( iconButton )
                 {
-                    if( iconButton.href === "/trailers/" )
+                    if( iconButton.href === "/trailers" )
                     {
                         this.setProperty( "trailerDialog", "isShown", false );
                     }
