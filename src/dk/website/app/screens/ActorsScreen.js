@@ -1,10 +1,5 @@
 import BaseScreen from "../../../ava/screens/base/BaseScreen.js";
-import Colors from "../../../ava/styles/Colors.js";
-import Config from "../Config.js";
-import JSONLoader from "../../../ava/loaders/JSONLoader.js";
-import EventTypes from "../../../ava/constants/EventTypes.js";
 import AnchorLayout from "../../../ava/layouts/AnchorLayout.js";
-import Model from "../../model/Model.js";
 import ListElement from "../../../ava/components/lists/ListElement.js";
 import ScrollPolicy from "../../../ava/constants/ScrollPolicy.js";
 import AnchorLayoutData from "../../../ava/layouts/data/AnchorLayoutData.js";
@@ -15,27 +10,6 @@ export default class ActorsScreen extends BaseScreen
     constructor()
     {
         super();
-    }
-    firstShow()
-    {
-        //this.jsonLoader.load( Config.FIRE_BASE_DB_BASE_URL + 'actors.json?orderBy="b"&equalTo="Sverige"' );
-    }
-    actorsComplete( data )
-    {
-        if( data )
-        {
-            let actors = Object.values( data );
-            actors.sort( this.sortByCreated );
-            Model.actorsCollection.arrayData = actors;
-        }
-    }
-    sortByCreated( a, b ) 
-    {
-        if( a.c > b.c )
-        {
-            return -1;
-        }
-        return 1;
     }
     initialize()
     {
@@ -52,7 +26,6 @@ export default class ActorsScreen extends BaseScreen
             this._actorsList.horizontalScrollPolicy = ScrollPolicy.OFF;
             this._actorsList.layout = this.tiledRowsLayout;
             this._actorsList.layoutData = new AnchorLayoutData( 0, 0, 0, 0 );
-            this._actorsList.dataProvider = Model.actorsCollection;
             this._actorsList.itemRenderType = ActorItemRenderer;
         }
         return this._actorsList;
@@ -73,15 +46,6 @@ export default class ActorsScreen extends BaseScreen
             this._tiledRowsLayout.maxTotalWidth = 1024;
         }
         return this._tiledRowsLayout;
-    }
-    get jsonLoader()
-    {
-        if( !this._jsonLoader )
-        {
-            this._jsonLoader = new JSONLoader();
-            this._jsonLoader.listen( EventTypes.LOAD_COMPLETE, this.actorsComplete.bind( this ) );
-        }
-        return this._jsonLoader;
     }
 }
 customElements.define( "actors-screen", ActorsScreen );
