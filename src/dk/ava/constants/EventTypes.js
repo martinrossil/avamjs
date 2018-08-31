@@ -14,4 +14,5 @@ export default class EventTypes
     static get APPLICATION_LOAD_COMPLETE()  {return "applicationLoadComplete";}
     static get SHOW_COMPLETE()              {return "showComplete";}
     static get HIDE_COMPLETE()              {return "hideComplete";}
+    static get IS_ON_LAST_SCREEN_CHANGED()  {return "isOnLastScreenChanged";}
 }

@@ -35,10 +35,10 @@ export default class ListElement extends ScrollContainer
     }
     scrolling()
     {
-        let scrollPosition = this.div.scrollTop;
-        if( this.lastScrollPosition !== scrollPosition ) 
+        let sp = this.scrollPosition;
+        if( this.lastScrollPosition !== sp ) 
         {
-            if( this.lastScrollPosition < scrollPosition ) 
+            if( this.lastScrollPosition < sp ) 
             {
                 this.scrollDirection = ScrollDirection.UP;
             }
@@ -46,9 +46,14 @@ export default class ListElement extends ScrollContainer
             {
                 this.scrollDirection = ScrollDirection.DOWN;
             }
-            this.lastScrollPosition = scrollPosition;
+            this.lastScrollPosition = sp;
             this.setItemRenderersInViewPort();
+            this.setIsOnLastScreen();
         }
+    }
+    setIsOnLastScreen()
+    {
+        this.isOnLastScreen = this.scrollPosition > ( this.elementsContainer.height - 2 * this.height );
     }
     setItemRenderersInViewPort()
     {
@@ -115,6 +120,7 @@ export default class ListElement extends ScrollContainer
             this.addElements( elements );
         }
         this.setItemRenderersInViewPort();
+        this.setIsOnLastScreen();
     }
     dataProviderChanged()
     {
@@ -175,6 +181,22 @@ export default class ListElement extends ScrollContainer
     get scrollDirection()
     {
         return this._scrollDirection;
+    }
+    set isOnLastScreen( value )
+    {
+        if( this._isOnLastScreen !== value )
+        {
+            this._isOnLastScreen = value;
+            this.dispatch( EventTypes.IS_ON_LAST_SCREEN_CHANGED, value );
+        }
+    }
+    get isOnLastScreen()
+    {
+        return this._isOnLastScreen;
+    }
+    get scrollPosition()
+    {
+        return this.div.scrollTop;
     }
     get requestAnimationFrame()
     {
