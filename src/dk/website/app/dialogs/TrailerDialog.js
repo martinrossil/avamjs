@@ -1,8 +1,5 @@
 import BaseDialog from "./BaseDialog.js";
 import Colors from "../../../ava/styles/Colors.js";
-import FAB from "../../../ava/components/buttons/FAB.js";
-import IconNames from "../../../ava/constants/IconNames.js";
-import Theme from "../../../ava/styles/Theme.js";
 import AnchorLayoutData from "../../../ava/layouts/data/AnchorLayoutData.js";
 import EventTypes from "../../../ava/constants/EventTypes.js";
 import JSONLoader from "../../../ava/loaders/JSONLoader.js";
@@ -121,7 +118,7 @@ export default class TrailerDialog extends BaseDialog
             this._dialogTopBar = new DialogTopBar();
             this._dialogTopBar.layoutData = new AnchorLayoutData( 0, 0, 0 );
             this._dialogTopBar.backgroundColor = Colors.GREY_900;
-            this._dialogTopBar.closeHref = "/trailers/";
+            this._dialogTopBar.closeHref = "/trailers";
         }
         return this._dialogTopBar;
     }
