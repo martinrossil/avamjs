@@ -1,7 +1,4 @@
 import BaseScreen from "../../../ava/screens/base/BaseScreen.js";
-import JSONLoader from "../../../ava/loaders/JSONLoader.js";
-import EventTypes from "../../../ava/constants/EventTypes.js";
-import Model from "../../model/Model.js";
 import AnchorLayout from "../../../ava/layouts/AnchorLayout.js";
 import ListElement from "../../../ava/components/lists/ListElement.js";
 import ScrollPolicy from "../../../ava/constants/ScrollPolicy.js";
@@ -13,34 +10,6 @@ export default class MoviesScreen extends BaseScreen
     constructor()
     {
         super();
-    }
-    firstShow()
-    {
-        //this.jsonLoader.load( 'film/genrer/alle.json' );
-    }
-    moviesComplete( data )
-    {
-        if( data )
-        {
-            data.sort( this.sortByCreated );
-            Model.moviesCollection.arrayData = data;
-        }
-    }
-    sortByCreated( a, b )
-    {
-        if( a.i > b.i )
-        {
-            return -1;
-        }
-        return 1;
-    }
-    sortByRating( a, b ) 
-    {
-        if( a.r > b.r )
-        {
-            return -1;
-        }
-        return 1;
     }
     initialize()
     {
@@ -57,7 +26,6 @@ export default class MoviesScreen extends BaseScreen
             this._moviesList.horizontalScrollPolicy = ScrollPolicy.OFF;
             this._moviesList.layout = this.tiledRowsLayout;
             this._moviesList.layoutData = new AnchorLayoutData( 0, 0, 0, 0 );
-            this._moviesList.dataProvider = Model.moviesCollection;
             this._moviesList.itemRenderType = MovieItemRenderer;
         }
         return this._moviesList;
@@ -78,15 +46,6 @@ export default class MoviesScreen extends BaseScreen
             this._tiledRowsLayout.maxTotalWidth = 1024;
         }
         return this._tiledRowsLayout;
-    }
-    get jsonLoader()
-    {
-        if( !this._jsonLoader )
-        {
-            this._jsonLoader = new JSONLoader();
-            this._jsonLoader.listen( EventTypes.LOAD_COMPLETE, this.moviesComplete.bind( this ) );
-        }
-        return this._jsonLoader;
     }
 }
 customElements.define( "movies-screen", MoviesScreen );

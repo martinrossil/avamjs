@@ -2,7 +2,6 @@ import BaseScreen from "../../../ava/screens/base/BaseScreen.js";
 import ListElement from "../../../ava/components/lists/ListElement.js";
 import ScrollPolicy from "../../../ava/constants/ScrollPolicy.js";
 import AnchorLayoutData from "../../../ava/layouts/data/AnchorLayoutData.js";
-import Model from "../../model/Model.js";
 import VideoItemRenderer from "../itemrenderers/VideoItemRenderer.js";
 import TiledRowsLayout from "../../../ava/layouts/TiledRowsLayout.js";
 import AnchorLayout from "../../../ava/layouts/AnchorLayout.js";
@@ -27,7 +26,7 @@ export default class TrailersScreen extends BaseScreen
             this._videosList.horizontalScrollPolicy = ScrollPolicy.OFF;
             this._videosList.layout = this.tiledRowsLayout;
             this._videosList.layoutData = new AnchorLayoutData( 0, 0, 0, 0 );
-            this._videosList.dataProvider = Model.trailersCollection;
+            //this._videosList.dataProvider = Model.trailersCollection;
             this._videosList.itemRenderType = VideoItemRenderer;
         }
         return this._videosList;

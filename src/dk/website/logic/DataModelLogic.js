@@ -3,15 +3,14 @@ import JSONLoader from "../../ava/loaders/JSONLoader.js";
 import EventTypes from "../../ava/constants/EventTypes.js";
 import Model from "../model/Model.js";
 import ClickTargetUtil from "../ClickTargetUtil.js";
+import GenreItemRenderer from "../app/itemrenderers/GenreItemRenderer.js";
+import ArrayCollection from "../../ava/data/ArrayCollection.js";
 export default class DataModelLogic extends Logic
 {
     constructor()
     {
         super();
-        this.hasTrailerGenresBeenLoaded = false;
-        this.isLoadingTrailerGenres = false;
-        this.hasMovieGenresBeenLoaded = false;
-        this.isLoadingMovieGenres = false;
+        this.currentSort = "sortedByCreated";
         this.listen( "AvaApp", EventTypes.APPLICATION_LOAD_COMPLETE, this.applicationLoadComplete.bind( this ) );
         document.addEventListener( "click", this.clicked.bind( this ) );
     }
@@ -26,49 +25,120 @@ export default class DataModelLogic extends Logic
             {
                 this.iconButtonClicked( iconButton.href );
             }
+            else
+            {
+                let itemRenderer = ClickTargetUtil.getItemRendererFromTarget( e.target );
+                if( itemRenderer )
+                {
+                    if( itemRenderer instanceof GenreItemRenderer )
+                    {
+                        this.genreItemRendererClicked( itemRenderer.data.h );
+                    }
+                }
+            }
+        }
+    }
+    genreItemRendererClicked( href )
+    {
+        let path = href + "/" + this.currentSort;
+        if( !this.loadedPaths[ path ] )
+        {
+            this.jsonLoader.load( "/data" + path + "/0.json" );
+        }
+        else
+        {
+            let arrayCollection = this.loadedPaths[ path ];
+            if( href.indexOf( "trailers" ) != -1 )
+            {
+                this.setProperty( "videosList", "dataProvider", arrayCollection );
+            }
+            else if( href.indexOf( "film" ) != -1 )
+            {
+                this.setProperty( "moviesList", "dataProvider", arrayCollection );
+            }
         }
     }
     iconButtonClicked( href )
     {
-        if( href === "/trailers/genrer" )
+        let pathArray = href.split( "/" );
+            pathArray.shift();
+        if( pathArray.length == 2 )
         {
-            if( !this.hasTrailerGenresBeenLoaded )
+            if( !this.loadedPaths[ href ] )
             {
-                this.isLoadingTrailerGenres = true;
-                this.jsonLoader.load( '/data/filter/trailers/genrer.json' );
+                this.jsonLoader.load( "/data" + href + ".json" );
             }
-        }
-        else if( href === "/film/genrer" )
-        {
-            if( !this.hasMovieGenresBeenLoaded )
-            {
-                this.isLoadingMovieGenres = true;
-                this.jsonLoader.load( '/data/filter/film/genrer.json' );
-            }
-        }
+        }   
     }
     loadComplete( data )
     {
-        if( this.isLoadingTrailerGenres )
-        {
-            this.isLoadingTrailerGenres = false;
-            this.hasTrailerGenresBeenLoaded = true;
-            Model.trailersGenresCollection.arrayData = data;
-        }
-        else if( this.isLoadingMovieGenres )
-        {
-            this.isLoadingMovieGenres = false;
-            this.hasMovieGenresBeenLoaded = true;
-            Model.moviesGenresCollection.arrayData = data;
-        }
         if( data )
         {
-            Model.moviesCollection.arrayData = data.items;
+            if( data.top === "trailers" )
+            {
+                this.trailersDataRecieved( data );
+            }
+            else if( data.top === "film" )
+            {
+                this.filmDataRecieved( data );
+            }
+        }
+    }
+    trailersDataRecieved( data )
+    {
+        if( data.sub === "genrer" )
+        {
+            this.trailersGenresDataRecieved( data );
+        }
+    }
+    filmDataRecieved( data )
+    {
+        if( data.sub === "genrer" )
+        {
+            this.filmGenresDataRecieved( data );
+        }
+    }
+    filmGenresDataRecieved( data )
+    {
+        if( data.subsub && data.sort )
+        {
+            let path = "/" + data.top + "/" + data.sub + "/" + data.subsub + "/" + data.sort;
+            if( !this.loadedPaths[ path ] )
+            {
+                let arrayCollection = new ArrayCollection( data.items );
+                this.loadedPaths[ path ] = arrayCollection;
+                this.setProperty( "moviesList", "dataProvider", arrayCollection );
+            }
+        }
+        else
+        {
+            let movieseGenresListDataProvider = new ArrayCollection( data.items );
+            this.loadedPaths[ "/" + data.top + "/" + data.sub ] = movieseGenresListDataProvider;
+            this.setProperty( "movieGenresList", "dataProvider", movieseGenresListDataProvider );
+        }
+    }
+    trailersGenresDataRecieved( data )
+    {
+        if( data.subsub && data.sort )
+        {
+            let path = "/" + data.top + "/" + data.sub + "/" + data.subsub + "/" + data.sort;
+            if( !this.loadedPaths[ path ] )
+            {
+                let arrayCollection = new ArrayCollection( data.items );
+                this.loadedPaths[ path ] = arrayCollection;
+                this.setProperty( "videosList", "dataProvider", arrayCollection );
+            }
+        }
+        else
+        {
+            let trailersGenresListDataProvider = new ArrayCollection( data.items );
+            this.loadedPaths[ "/" + data.top + "/" + data.sub ] = trailersGenresListDataProvider;
+            this.setProperty( "trailersGenresList", "dataProvider", trailersGenresListDataProvider );
         }
     }
     applicationLoadComplete()
     {
-        this.jsonLoader.load( 'data/filter/film/sortedByCreated/genrer/alle/0.json' );
+        //this.jsonLoader.load( 'data/filter/film/sortedByCreated/genrer/alle/0.json' );
     }
     get jsonLoader()
     {
@@ -78,5 +148,13 @@ export default class DataModelLogic extends Logic
             this._jsonLoader.listen( EventTypes.LOAD_COMPLETE, this.loadComplete.bind( this ) );
         }
         return this._jsonLoader;
+    }
+    get loadedPaths()
+    {
+        if( !this._loadedPaths )
+        {
+            this._loadedPaths = {};
+        }
+        return this._loadedPaths;
     }
 }
