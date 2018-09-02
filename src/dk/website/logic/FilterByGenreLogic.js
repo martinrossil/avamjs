@@ -1,9 +1,6 @@
 import Logic from "../../ava/logic/Logic.js";
 import ClickTargetUtil from "../ClickTargetUtil.js";
 import GenreItemRenderer from "../app/itemrenderers/GenreItemRenderer.js";
-import JSONLoader from "../../ava/loaders/JSONLoader.js";
-import EventTypes from "../../ava/constants/EventTypes.js";
-import Model from "../model/Model.js";
 import BottomNavigationBarItemRenderer from "../../ava/components/itemrenderers/BottomNavigationBarItemRenderer.js";
 export default class FilterByGenreLogic extends Logic
 {
@@ -47,18 +44,5 @@ export default class FilterByGenreLogic extends Logic
                 }
             }
         }
-    }
-    loadComplete( data )
-    {
-        Model.moviesCollection.arrayData = data;
-    }
-    get jsonLoader()
-    {
-        if( !this._jsonLoader )
-        {
-            this._jsonLoader = new JSONLoader();
-            this._jsonLoader.listen( EventTypes.LOAD_COMPLETE, this.loadComplete.bind( this ) );
-        }
-        return this._jsonLoader;
     }
 }
