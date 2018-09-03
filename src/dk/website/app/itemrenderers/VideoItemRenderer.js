@@ -22,9 +22,7 @@ export default class VideoItemRenderer extends BaseItemRenderer
                 let ext = ImageElement.extension;
                 let url = "/baggrunde/" + this.getBackdropSize + "/" + this.data.u + "-baggrund." + ext;
                 this.image.source = url;
-                this.image.alt = this.data.t;
-                this.image.title = this.data.t;
-                this.aTag.href = "/trailers/" + this.data.u;
+                
                 this.titleTextElement.text = this.data.t;
                 this.typeTextElement.text = this.data.d;
                 //this.releaseTextElement.text = this.data.p;
@@ -82,6 +80,15 @@ export default class VideoItemRenderer extends BaseItemRenderer
         //this.releaseTextElement.width = w;
         //this.releaseTextElement.y = h + 30;
         this.cornerSquare.x = w - 30;
+    }
+    dataChanged()
+    {
+        if( this.data )
+        {
+            this.image.alt = this.data.t; 
+            this.image.title = this.data.t;
+            this.aTag.href = "/trailers/" + this.data.u;
+        }
     }
     initialize()
     {
