@@ -22,10 +22,6 @@ export default class MovieItemRenderer extends BaseItemRenderer
                 let ext = ImageElement.extension;
                 let url = "/plakater/" + this.getPosterSize + "/" + this.data.u + "-plakat." + ext;
                 this.image.source = url;
-
-                this.aTag.href = "/film/info/" + this.data.u;
-                this.image.alt = this.data.t;
-                this.image.title = this.data.t;
                 this.releaseTextElement.text = this.data.p;
                 if( this.data.r )
                 {
@@ -77,6 +73,15 @@ export default class MovieItemRenderer extends BaseItemRenderer
         this.releaseTextElement.width = w;
         this.releaseTextElement.y = h + 8;
         this.cornerSquare.x = w - 30;
+    }
+    dataChanged()
+    {
+        if( this.data )
+        {
+            this.image.alt = this.data.t;
+            this.image.title = this.data.t;
+            this.aTag.href = "/film/info/" + this.data.u;
+        }
     }
     initialize()
     {
