@@ -20,6 +20,7 @@ import RippleSurface from "../../ava/components/display/RippleSurface.js";
 import AvaAppBar from "./bars/AvaAppBar.js";
 import TrailersGenresDrawer from "./drawers/TrailersGenresDrawer.js";
 import MoviesGenresDrawer from "./drawers/MoviesGenresDrawer.js";
+import ActorsDrawer from "./drawers/ActorsDrawer.js";
 export default class AvaApp extends ApplicationElement
 {
     constructor()
@@ -49,6 +50,7 @@ export default class AvaApp extends ApplicationElement
         //this.addElement( this.rippleSurface );
         this.addElement( this.trailersGenresDrawer );
         this.addElement( this.moviesGenresDrawer );
+        this.addElement( this.actorsDrawer );
         this.addElement( this.trailerDialog );
     }
     get moviesGenresDrawer()
@@ -75,6 +77,18 @@ export default class AvaApp extends ApplicationElement
             this._trailersGenresDrawer.closeHref = "/trailers";
         }
         return this._trailersGenresDrawer;
+    }
+    get actorsDrawer()
+    {
+        if( !this._actorsDrawer )
+        {
+            this._actorsDrawer = new ActorsDrawer();
+            this._actorsDrawer.uid = "actorsDrawer";
+            this._actorsDrawer.backgroundColor = Theme.PRIMARY_COLOR;
+            this._actorsDrawer.title = "Lande";
+            this._actorsDrawer.closeHref = "/skuespillerer";
+        }
+        return this._actorsDrawer;
     }
     get rippleSurface()
     {
