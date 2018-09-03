@@ -22,6 +22,20 @@ export default class AvaAppBar extends AppBar
         this.addElement( this.openTrailersGenresDrawerIconButton );
         //this.addElement( this.openTrailersLanguagesDrawerIconButton );
         this.addElement( this.openMovieGenresDrawerIconButton );
+        this.addElement( this.openActorsDrawerIconButton );
+    }
+    get openActorsDrawerIconButton()
+    {
+        if( !this._openActorsDrawerIconButton )
+        {
+            this._openActorsDrawerIconButton = new IconButton();
+            this._openActorsDrawerIconButton.uid = "openActorsDrawerIconButton";
+            this._openActorsDrawerIconButton.isVisible = false;
+            this._openActorsDrawerIconButton.href = "/skuespillere/lande";
+            this._openActorsDrawerIconButton.iconName = IconNames.FILTER_LIST;
+            this._openActorsDrawerIconButton.layoutData = new AnchorLayoutData( NaN, NaN, 4, NaN, NaN, 0 );
+        }
+        return this._openActorsDrawerIconButton;
     }
     get openMovieGenresDrawerIconButton()
     {
