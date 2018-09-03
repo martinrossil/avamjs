@@ -4,6 +4,8 @@ import EventTypes from "../../ava/constants/EventTypes.js";
 import ClickTargetUtil from "../ClickTargetUtil.js";
 import GenreItemRenderer from "../app/itemrenderers/GenreItemRenderer.js";
 import ArrayCollection from "../../ava/data/ArrayCollection.js";
+import CountryItemRenderer from "../app/itemrenderers/CountryItemRenderer.js";
+import BottomNavigationBarItemRenderer from "../../ava/components/itemrenderers/BottomNavigationBarItemRenderer.js";
 export default class DataModelLogic extends Logic
 {
     constructor()
@@ -11,9 +13,12 @@ export default class DataModelLogic extends Logic
         super();
         this.currentSort = "sortedByCreated";
         this.currentGenre = "alle";
-        this.listen( "AvaApp", EventTypes.APPLICATION_LOAD_COMPLETE, this.applicationLoadComplete.bind( this ) );
+        this.currentCountry = "alle";
         document.addEventListener( "click", this.clicked.bind( this ) );
+        this.listen( "AvaApp", EventTypes.APPLICATION_LOAD_COMPLETE, this.applicationLoadComplete.bind( this ) );
         this.listen( "moviesList", EventTypes.IS_ON_LAST_SCREEN_CHANGED, this.moviesListIsOnLastScreenChanged.bind( this ) );
+        this.listen( "videosList", EventTypes.IS_ON_LAST_SCREEN_CHANGED, this.videosListIsOnLastScreenChanged.bind( this ) );
+        this.listen( "actorsList", EventTypes.IS_ON_LAST_SCREEN_CHANGED, this.actorsListIsOnLastScreenChanged.bind( this ) );
     }
     clicked( e )
     {
@@ -35,23 +40,98 @@ export default class DataModelLogic extends Logic
                     {
                         this.genreItemRendererClicked( itemRenderer.data );
                     }
+                    else if( itemRenderer instanceof CountryItemRenderer )
+                    {
+                        this.countryItemRendererClicked( itemRenderer.data );
+                    }
+                    else if( itemRenderer instanceof BottomNavigationBarItemRenderer )
+                    {
+                        this.bottomNavigationItemRendererClicked( itemRenderer.data.href );
+                    }
                 }
             }
         }
     }
     moviesListIsOnLastScreenChanged( isOnLastScreen )
     {
-        console.log( "DataModelLogic", "moviesListIsOnLastScreenChanged", isOnLastScreen );
         if( isOnLastScreen )
         {
             let path = "/film/genrer/" + this.currentGenre + "/" + this.currentSort;
             if( this.loadedPaths[ path ] )
             {
                 let chunksObject = this.loadedPaths[ path ];
-                if( chunksObject.index < chunksObject.total )
+                if( chunksObject.index < chunksObject.total - 1 )
                 {
                     this.jsonLoader.load( "/data" + path + "/" + ( chunksObject.index + 1 ) + ".json" );
                 }
+            }
+        }
+    }
+    videosListIsOnLastScreenChanged( isOnLastScreen )
+    {
+        if( isOnLastScreen )
+        {
+            let path = "/trailers/genrer/" + this.currentGenre + "/" + this.currentSort;
+            if( this.loadedPaths[ path ] )
+            {
+                let chunksObject = this.loadedPaths[ path ];
+                if( chunksObject.index < chunksObject.total - 1 )
+                {
+                    this.jsonLoader.load( "/data" + path + "/" + ( chunksObject.index + 1 ) + ".json" );
+                }
+            }
+        }
+    }
+    actorsListIsOnLastScreenChanged( isOnLastScreen )
+    {
+        if( isOnLastScreen )
+        {
+            let path = "/skuespillere/lande/" + this.currentCountry + "/" + this.currentSort;
+            if( this.loadedPaths[ path ] )
+            {
+                let chunksObject = this.loadedPaths[ path ];
+                if( chunksObject.index < chunksObject.total - 1 )
+                {
+                    this.jsonLoader.load( "/data" + path + "/" + ( chunksObject.index + 1 ) + ".json" );
+                }
+            }
+        }
+    }
+    bottomNavigationItemRendererClicked( href )
+    {
+        console.log( href );
+        let path;
+        if( href === "/trailers" )
+        {
+            path = href + "/genrer/" + this.currentGenre + "/" + this.currentSort;
+        }
+        else if( href === "/film" )
+        {
+            path = href + "/genrer/" + this.currentGenre + "/" + this.currentSort;
+        }
+        else
+        {
+            path = href + "/lande/" + this.currentCountry + "/" + this.currentSort;
+        }
+        console.log( path );
+        if( !this.loadedPaths[ path ] )
+        {
+            this.jsonLoader.load( "/data" + path + "/0.json" );
+        }
+        else
+        {
+            let chunksObject = this.loadedPaths[ path ];
+            if( path.indexOf( "trailers" ) != -1 )
+            {
+                this.setProperty( "videosList", "dataProvider", chunksObject.collection );
+            }
+            else if( path.indexOf( "film" ) != -1 )
+            {
+                this.setProperty( "moviesList", "dataProvider", chunksObject.collection );
+            }
+            else
+            {
+                this.setProperty( "actorsList", "dataProvider", chunksObject.collection );
             }
         }
     }
@@ -66,15 +146,33 @@ export default class DataModelLogic extends Logic
         }
         else
         {
-            /*let arrayCollection = this.loadedPaths[ path ];
-            if( href.indexOf( "trailers" ) != -1 )
+            let chunksObject = this.loadedPaths[ path ];
+            if( path.indexOf( "film" ) != -1 )
             {
-                this.setProperty( "videosList", "dataProvider", arrayCollection );
+                this.setProperty( "moviesList", "dataProvider", chunksObject.collection );
             }
-            else if( href.indexOf( "film" ) != -1 )
+            else if( path.indexOf( "trailers" ) != -1 )
             {
-                this.setProperty( "moviesList", "dataProvider", arrayCollection );
-            }*/
+                this.setProperty( "videosList", "dataProvider", chunksObject.collection );
+            }
+        }
+    }
+    countryItemRendererClicked( data )
+    {
+        this.currentCountry = data.l.toLowerCase();
+        let href = data.h;
+        let path = href + "/" + this.currentSort;
+        if( !this.loadedPaths[ path ] )
+        {
+            this.jsonLoader.load( "/data" + path + "/0.json" );
+        }
+        else
+        {
+            let chunksObject = this.loadedPaths[ path ];
+            if( path.indexOf( "skuespillere" ) != -1 )
+            {
+                this.setProperty( "actorsList", "dataProvider", chunksObject.collection );
+            }
         }
     }
     iconButtonClicked( href )
@@ -88,7 +186,6 @@ export default class DataModelLogic extends Logic
     {
         if( data )
         {
-            console.log( data );
             if( data.path === "/film/genrer" )
             {
                 let moviesGenresListDataProvider = new ArrayCollection( data.items );
@@ -100,6 +197,12 @@ export default class DataModelLogic extends Logic
                 let trailersGenresListDataProvider = new ArrayCollection( data.items );
                 this.loadedPaths[ data.path ] = trailersGenresListDataProvider;
                 this.setProperty( "trailersGenresList", "dataProvider", trailersGenresListDataProvider );
+            }
+            else if( data.path === "/skuespillere/lande" )
+            {
+                let actorsCountriesListDataProvider = new ArrayCollection( data.items );
+                this.loadedPaths[ data.path ] = actorsCountriesListDataProvider;
+                this.setProperty( "actorsCountriesList", "dataProvider", actorsCountriesListDataProvider );
             }
             else
             {
@@ -126,72 +229,16 @@ export default class DataModelLogic extends Logic
                 {
                     this.setProperty( "videosList", "dataProvider", chunksObject.collection );
                 }
+                else if( data.path.indexOf( "skuespillere" ) != -1 )
+                {
+                    this.setProperty( "actorsList", "dataProvider", chunksObject.collection );
+                }
             }
-            /*if( data.top === "trailers" )
-            {
-                this.trailersDataRecieved( data );
-            }
-            else if( data.top === "film" )
-            {
-                this.filmDataRecieved( data );
-            }*/
-        }
-    }
-    trailersDataRecieved( data )
-    {
-        if( data.sub === "genrer" )
-        {
-            this.trailersGenresDataRecieved( data );
-        }
-    }
-    filmDataRecieved( data )
-    {
-        if( data.sub === "genrer" )
-        {
-            this.filmGenresDataRecieved( data );
-        }
-    }
-    filmGenresDataRecieved( data )
-    {
-        if( data.subsub && data.sort )
-        {
-            let path = "/" + data.top + "/" + data.sub + "/" + data.subsub + "/" + data.sort;
-            if( !this.loadedPaths[ path ] )
-            {
-                let arrayCollection = new ArrayCollection( data.items );
-                this.loadedPaths[ path ] = arrayCollection;
-                this.setProperty( "moviesList", "dataProvider", arrayCollection );
-            }
-        }
-        else
-        {
-            let movieseGenresListDataProvider = new ArrayCollection( data.items );
-            this.loadedPaths[ "/" + data.top + "/" + data.sub ] = movieseGenresListDataProvider;
-            this.setProperty( "movieGenresList", "dataProvider", movieseGenresListDataProvider );
-        }
-    }
-    trailersGenresDataRecieved( data )
-    {
-        if( data.subsub && data.sort )
-        {
-            let path = "/" + data.top + "/" + data.sub + "/" + data.subsub + "/" + data.sort;
-            if( !this.loadedPaths[ path ] )
-            {
-                let arrayCollection = new ArrayCollection( data.items );
-                this.loadedPaths[ path ] = arrayCollection;
-                this.setProperty( "videosList", "dataProvider", arrayCollection );
-            }
-        }
-        else
-        {
-            let trailersGenresListDataProvider = new ArrayCollection( data.items );
-            this.loadedPaths[ "/" + data.top + "/" + data.sub ] = trailersGenresListDataProvider;
-            this.setProperty( "trailersGenresList", "dataProvider", trailersGenresListDataProvider );
         }
     }
     applicationLoadComplete()
     {
-        //this.jsonLoader.load( 'data/filter/film/sortedByCreated/genrer/alle/0.json' );
+        this.jsonLoader.load( 'data/trailers/genrer/alle/' + this.currentSort + '/0.json' );
     }
     get jsonLoader()
     {
