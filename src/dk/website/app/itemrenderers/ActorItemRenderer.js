@@ -14,18 +14,17 @@ export default class ActorItemRenderer extends BaseItemRenderer
     }
     isInViewPortChanged()
     {
-        //return;
         if( this.isInViewPort )
         {
             if( !this.hasProfileBeenLoaded )
             {
                 this.hasProfileBeenLoaded = true;
-                let i = this.data.i;
                 let ext = ImageElement.extension;
-                let url = Config.FIRE_BASE_STORAGE_BASE_URL + "profiles%2F";
-                    url += ext + "%2F" + this.getProfileSize + "%2F";
-                    url += i + "." + ext + "?alt=media";
+                let url = "/profile/" + this.getProfileSize + "/" + this.data.u + "-profil." + ext;
                 this.image.source = url;
+                this.nameTextElement.text = this.data.n;
+                this.birthCountryTextElement.text = this.data.b;
+                this.cornerSquare.age = this.data.a;
             }
         }
     }
@@ -69,12 +68,12 @@ export default class ActorItemRenderer extends BaseItemRenderer
     }
     dataChanged()
     {  
-        this.aTag.href = "/skuespillere/" + this.data.u;
-        this.image.alt = this.data.n;
-        this.image.title = this.data.n;
-        this.nameTextElement.text = this.data.n;
-        this.birthCountryTextElement.text = this.data.b;
-        this.cornerSquare.age = this.data.a;
+        if( this.data )
+        {
+            this.image.alt = this.data.n; 
+            this.image.title = this.data.n;
+            this.aTag.href = "/skuespillere/" + this.data.u;
+        }
     }
     initialize()
     {
