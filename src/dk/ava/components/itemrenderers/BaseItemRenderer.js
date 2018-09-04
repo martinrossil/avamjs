@@ -9,6 +9,7 @@ export default class BaseItemRenderer extends DisplayContainer
     {
         super.initialize();
         //this.isVisible = false;
+        this._isSelected = false;
         this._isInViewPort = false;
     }
     isSelectedChanged()
