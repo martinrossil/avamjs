@@ -23,6 +23,7 @@ export default class DisplayElement extends BaseElement
         this._backgroundColor = "";
         this._notifyPropertyAnimationEnd = false;
         this._isInteractive = true;
+        this._cornerRadius = 0;
         this.appendChild( this.div );
     }
     sizeChanged( w, h )
@@ -317,6 +318,18 @@ export default class DisplayElement extends BaseElement
     get isInteractive()
     {
         return this._isInteractive;
+    }
+    set cornerRadius( value )
+    {
+        if( this._cornerRadius !== value )
+        {
+            this._cornerRadius = value;
+            this.div.style.borderRadius = value + "px";
+        }
+    }
+    get cornerRadius()
+    {
+        return this._cornerRadius;
     }
 }
 customElements.define( "display-element", DisplayElement );
