@@ -6,6 +6,7 @@ import GenreItemRenderer from "../app/itemrenderers/GenreItemRenderer.js";
 import ArrayCollection from "../../ava/data/ArrayCollection.js";
 import CountryItemRenderer from "../app/itemrenderers/CountryItemRenderer.js";
 import BottomNavigationBarItemRenderer from "../../ava/components/itemrenderers/BottomNavigationBarItemRenderer.js";
+import FilterTypeItemRenderer from "../app/itemrenderers/FilterTypeItemRenderer.js";
 export default class DataModelLogic extends Logic
 {
     constructor()
@@ -48,8 +49,39 @@ export default class DataModelLogic extends Logic
                     {
                         this.bottomNavigationItemRendererClicked( itemRenderer.data.href );
                     }
+                    else if( itemRenderer instanceof FilterTypeItemRenderer )
+                    {
+                        this.filterTypeItemRendererClicked( itemRenderer.data.href );
+                    }
                 }
             }
+        }
+    }
+    filterTypeItemRendererClicked( href )
+    {
+        console.log( "filterTypeItemRendererClicked", href );
+        if( href === "/trailers/genrer" )
+        {
+            this.setProperty( "trailersFilterTypesList", "selectedIndex", 0 );
+
+            this.setProperty( "trailersGenresList", "isVisible", true );
+            this.setProperty( "trailersGenresList", "isInteractive", true );
+            this.setProperty( "trailersCountriesList", "isVisible", false );
+            this.setProperty( "trailersCountriesList", "isInteractive", false );
+        }
+        else if( href === "/trailers/lande" )
+        {
+            this.setProperty( "trailersFilterTypesList", "selectedIndex", 1 );
+
+            if( !this.loadedPaths[ href ] )
+            {
+                this.jsonLoader.load( "/data" + href + ".json" );
+            }
+
+            this.setProperty( "trailersGenresList", "isVisible", false );
+            this.setProperty( "trailersGenresList", "isInteractive", false );
+            this.setProperty( "trailersCountriesList", "isVisible", true );
+            this.setProperty( "trailersCountriesList", "isInteractive", true );
         }
     }
     moviesListIsOnLastScreenChanged( isOnLastScreen )
@@ -137,8 +169,18 @@ export default class DataModelLogic extends Logic
     }
     genreItemRendererClicked( data )
     {
-        this.currentGenre = data.g.toLowerCase();
+        console.log( "genreItemRendererClicked", data );
         let href = data.h;
+        if( href.indexOf( "/trailers/genrer" ) != -1 )
+        {
+            let trailersGenrerDataProvider = this.loadedPaths[ "/trailers/genrer" ];
+            if( trailersGenrerDataProvider )
+            {
+                let selectedTrailersGenrerIndex = trailersGenrerDataProvider.getItemIndex( data );
+                this.setProperty( "trailersGenresList", "selectedIndex", selectedTrailersGenrerIndex );
+            }
+        }
+        this.currentGenre = data.g.toLowerCase();
         let path = href + "/" + this.currentSort;
         if( !this.loadedPaths[ path ] )
         {
@@ -177,9 +219,12 @@ export default class DataModelLogic extends Logic
     }
     iconButtonClicked( href )
     {
-        if( !this.loadedPaths[ href ] )
+        if( href !== "/trailers" && href !== "/film" && href !== "/skuespillere" )
         {
-            this.jsonLoader.load( "/data" + href + ".json" );
+            if( !this.loadedPaths[ href ] )
+            {
+                this.jsonLoader.load( "/data" + href + ".json" );
+            }
         }
     }
     loadComplete( data )
@@ -197,6 +242,12 @@ export default class DataModelLogic extends Logic
                 let trailersGenresListDataProvider = new ArrayCollection( data.items );
                 this.loadedPaths[ data.path ] = trailersGenresListDataProvider;
                 this.setProperty( "trailersGenresList", "dataProvider", trailersGenresListDataProvider );
+            }
+            else if( data.path === "/trailers/lande" )
+            {
+                let trailersCountriesListDataProvider = new ArrayCollection( data.items );
+                this.loadedPaths[data.path  ] = trailersCountriesListDataProvider;
+                this.setProperty( "trailersCountriesList", "dataProvider", trailersCountriesListDataProvider );
             }
             else if( data.path === "/skuespillere/lande" )
             {
