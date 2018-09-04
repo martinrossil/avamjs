@@ -14,13 +14,10 @@ import ActorsScreen from "./screens/ActorsScreen.js";
 import Config from "./Config.js";
 import BusinessLogic from "../logic/BusinessLogic.js";
 import TrailerDialog from "./dialogs/TrailerDialog.js";
-import VideoControls from "../../ava/components/media/VideoControls.js";
-import IconButton from "../../ava/components/buttons/IconButton.js";
-import RippleSurface from "../../ava/components/display/RippleSurface.js";
 import AvaAppBar from "./bars/AvaAppBar.js";
-import TrailersGenresDrawer from "./drawers/TrailersGenresDrawer.js";
 import MoviesGenresDrawer from "./drawers/MoviesGenresDrawer.js";
 import ActorsDrawer from "./drawers/ActorsDrawer.js";
+import TrailersDrawer from "./drawers/TrailersDrawer.js";
 export default class AvaApp extends ApplicationElement
 {
     constructor()
@@ -32,6 +29,7 @@ export default class AvaApp extends ApplicationElement
     {
         Theme.APP_BACKGROUND_COLOR = Config.APP_BACKGROUND_COLOR;
         Theme.PRIMARY_COLOR = Config.PRIMARY_COLOR;
+        Theme.PRIMARY_COLOR_DARK = Config.PRIMARY_COLOR_DARK;
         Theme.ICON_COLOR = Colors.WHITE;
         Theme.PRIMARY_TEXT_COLOR = Colors.WHITE;
         Theme.RIPPLE_COLOR = Colors.WHITE;
@@ -42,13 +40,7 @@ export default class AvaApp extends ApplicationElement
         this.addElement( this.screensNavigator );
         this.addElement( this.bottomNavigationBar );
         this.addElement( this.appBar );
-        
-        //this.addElement( this.videoControls );
-        //window.addEventListener( "touchstart", this.touchStart.bind( this ) );
-        //this.progress = 0;
-        //this.addElement( this.iconButton );
-        //this.addElement( this.rippleSurface );
-        this.addElement( this.trailersGenresDrawer );
+        this.addElement( this.trailersDrawer );
         this.addElement( this.moviesGenresDrawer );
         this.addElement( this.actorsDrawer );
         this.addElement( this.trailerDialog );
@@ -62,21 +54,20 @@ export default class AvaApp extends ApplicationElement
             this._moviesGenresDrawer.backgroundColor = Theme.PRIMARY_COLOR;
             this._moviesGenresDrawer.title = "Genrer";
             this._moviesGenresDrawer.closeHref = "/film";
-            //this._moviesGenresDrawer.isShown = true;
         }
         return this._moviesGenresDrawer;
     }
-    get trailersGenresDrawer()
+    get trailersDrawer()
     {
-        if( !this._trailersGenresDrawer )
+        if( !this._trailersDrawer )
         {
-            this._trailersGenresDrawer = new TrailersGenresDrawer();
-            this._trailersGenresDrawer.uid = "trailersGenresDrawer";
-            this._trailersGenresDrawer.backgroundColor = Theme.PRIMARY_COLOR;
-            this._trailersGenresDrawer.title = "Genrer";
-            this._trailersGenresDrawer.closeHref = "/trailers";
+            this._trailersDrawer = new TrailersDrawer();
+            this._trailersDrawer.uid = "trailersDrawer";
+            this._trailersDrawer.backgroundColor = Theme.PRIMARY_COLOR_DARK;
+            this._trailersDrawer.closeHref = "/trailers";
+            this._trailersDrawer.isShown = true;
         }
-        return this._trailersGenresDrawer;
+        return this._trailersDrawer;
     }
     get actorsDrawer()
     {
@@ -86,45 +77,9 @@ export default class AvaApp extends ApplicationElement
             this._actorsDrawer.uid = "actorsDrawer";
             this._actorsDrawer.backgroundColor = Theme.PRIMARY_COLOR;
             this._actorsDrawer.title = "Lande";
-            this._actorsDrawer.closeHref = "/skuespillerer";
+            this._actorsDrawer.closeHref = "/skuespillere";
         }
         return this._actorsDrawer;
-    }
-    get rippleSurface()
-    {
-        if( !this._rippleSurface )
-        {
-            this._rippleSurface = new RippleSurface();
-            this._rippleSurface.clipContent = false;
-            this._rippleSurface.setSize( 300, 300 );
-            //this._rippleSurface.listen( EventTypes.TRIGGERED, this.rippleSurfaceTriggered.bind( this ) );
-        }
-        return this._rippleSurface;
-    }
-    get iconButton()
-    {
-        if( !this._iconButton )
-        {
-            this._iconButton = new IconButton();
-            this._iconButton.iconName = IconNames.PLAY_ARROW;
-            this._iconButton.layoutData = new AnchorLayoutData( NaN, NaN, NaN, NaN, 0, 0 );
-        }
-        return this._iconButton;
-    }
-    touchStart()
-    {
-        this.progress += .1;
-        this.videoControls.loadProgress = this.progress;
-    }
-    get videoControls()
-    {
-        if( !this._videoControls )
-        {
-            this._videoControls = new VideoControls();
-            this._videoControls.backgroundColor = Colors.GREY_900;
-            this._videoControls.layoutData = new AnchorLayoutData( 0, NaN, 0, 0 );
-        }
-        return this._videoControls;
     }
     get trailerDialog()
     {

@@ -31,6 +31,21 @@ export default class Theme
         }
         return this._PRIMARY_COLOR;
     }
+    static set PRIMARY_COLOR_DARK( value )
+    {
+        if( this._PRIMARY_COLOR_DARK != value )
+        {
+            this._PRIMARY_COLOR_DARK = value;
+        }
+    }
+    static get PRIMARY_COLOR_DARK()
+    {
+        if( !this._PRIMARY_COLOR_DARK )
+        {
+            this._PRIMARY_COLOR_DARK = Colors.BLUE_900;
+        }
+        return this._PRIMARY_COLOR_DARK;
+    }
     static set ACCENT_COLOR( value )
     {
         if( this._ACCENT_COLOR != value )
