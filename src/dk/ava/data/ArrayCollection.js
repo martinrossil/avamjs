@@ -18,6 +18,10 @@ export default class ArrayCollection extends EventDispatcher
         this._arrayData = this.arrayData.concat( items );
         this.dispatch( CollectionEventTypes.ITEMS_ADDED, items );
     }
+    getItemIndex( item )
+    {
+        return this.arrayData.indexOf( item );
+    }
     getItemAt( index )
     {
         if( index < this.arrayData.length )
