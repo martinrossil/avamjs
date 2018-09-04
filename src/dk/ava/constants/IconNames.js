@@ -15,5 +15,6 @@ export default class IconNames
     static get VIDEO_LIBRARY()  {return "VIDEO_LIBRARY";};
     static get MOVIE()          {return "MOVIE";};
     static get STARS()          {return "STARS";};
-    static get DATE_RANGE()     {return "DATE_RANGE"}
+    static get DATE_RANGE()     {return "DATE_RANGE";};
+    static get MOVIE_FILTER()   {return "MOVIE_FILTER"};
 }
