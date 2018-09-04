@@ -18,6 +18,7 @@ export default class TrailerDialog extends BaseDialog
     }
     isShownChanged()
     {
+        super.isShownChanged();
         if( !this.isShown )
         {
             this.href = null;

@@ -7,14 +7,29 @@ import IconNames from "../../../ava/constants/IconNames.js";
 import AnchorLayoutData from "../../../ava/layouts/data/AnchorLayoutData.js";
 import TextElement from "../../../ava/components/text/TextElement.js";
 import Theme from "../../../ava/styles/Theme.js";
+import EventTypes from "../../../ava/constants/EventTypes.js";
 export default class BaseDrawer extends LayoutContainer
 {
     constructor()
     {
         super();
     }
+    propertyAnimationEnded( property )
+    {
+        if( property === "x" )
+        {
+            if( this.x === window.innerWidth )
+            {
+                this.isVisible = false;
+            }
+        }
+    }
     isShownChanged()
     {
+        if( this.isShown )
+        {
+            this.isVisible = true;
+        }
         this.x = this.isShown ? window.innerWidth - this.width : window.innerWidth;
         if( !this.hasBeenShown )
         {
@@ -31,12 +46,14 @@ export default class BaseDrawer extends LayoutContainer
         super.initialize();
         this.layout = new AnchorLayout();
         this.resizeAndPosition = this.resizeAndPosition.bind( this );
-        this.width = 4 * 56;
-        this.height = window.innerHeight;
+        this.setSize( 4 * 56, window.innerHeight );
         this.z = 8;
+        this.x = window.innerWidth;
+        this.isVisible = false;
         this.shadowDirection = Direction.WEST;
+        this.notifyPropertyAnimationEnd = true;
+        this.listen( EventTypes.PROPERTY_ANIMATION_ENDED, this.propertyAnimationEnded.bind( this ) );
         this.animatedProperties = [ new AnimatedProperty( "x", 225, "ease-in" ) ];
-        this.resizeAndPosition();
         window.addEventListener( "resize", this.resizeAndPosition );
         this.addElement( this.titleTextElement );
         this.addElement( this.closeIconButton ); 
