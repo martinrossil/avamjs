@@ -13,9 +13,51 @@ export default class ListElement extends ScrollContainer
         this.itemRemovedAt  = this.itemRemovedAt.bind( this );
         this.itemRemoved    = this.itemRemoved.bind( this );
     }
+    selectedIndexChanged()
+    {
+        console.log( "ListElement", "selectedIndexChanged", this.selectedIndex );
+        if( this.selectedIndex != -1 )
+        {
+            if( this.dataProvider && this.dataProvider.length > this.selectedIndex )
+            {
+                let data = this.dataProvider.getItemAt( this.selectedIndex );
+                if( data )
+                {
+                    let itemRenderers = this.childElements;
+                    let itemRenderer;
+                    for( itemRenderer of itemRenderers )
+                    {
+                        itemRenderer.isSelected = itemRenderer.data === data;
+                    }
+                }
+                else
+                {
+                    this.unSelectAllItemRenderers();
+                }
+            }
+            else
+            {
+                this.unSelectAllItemRenderers();
+            }
+        }
+        else
+        {
+            this.unSelectAllItemRenderers();
+        }
+    }
+    unSelectAllItemRenderers()
+    {
+        let itemRenderers = this.childElements;
+        let itemRenderer;
+        for( itemRenderer of itemRenderers )
+        {
+            itemRenderer.isSelected = false;
+        }
+    }
     initialize()
     {
         super.initialize();
+        this._selectedIndex = -1;
         //this.itemRendererTriggered = this.itemRendererTriggered.bind( this );
         this.lastScrollPosition = 0;
         this.requestTick();
@@ -129,6 +171,7 @@ export default class ListElement extends ScrollContainer
         {
             this.itemsAdded( this.dataProvider.arrayData );
         }
+        this.selectedIndexChanged();
     }
     set itemRenderType( value )
     {
@@ -208,6 +251,18 @@ export default class ListElement extends ScrollContainer
                                             window.msRequestAnimationFrame.bind( window );
         }
         return this._requestAnimationFrame;
+    }
+    set selectedIndex( value )
+    {
+        if( this._selectedIndex !== value )
+        {
+            this._selectedIndex = value;
+            this.selectedIndexChanged();
+        }
+    }
+    get selectedIndex()
+    {
+        return this._selectedIndex;
     }
 }
 customElements.define("list-element", ListElement ); 
