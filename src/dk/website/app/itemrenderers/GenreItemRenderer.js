@@ -4,11 +4,19 @@ import TextElement from "../../../ava/components/text/TextElement.js";
 import Theme from "../../../ava/styles/Theme.js";
 import RippleSurface from "../../../ava/components/display/RippleSurface.js";
 import TextAlign from "../../../ava/constants/TextAlign.js";
+import DisplayElement from "../../../ava/components/display/DisplayElement.js";
+import AnimatedProperty from "../../../ava/animation/AnimatedProperty.js";
 export default class GenreItemRenderer extends BaseItemRenderer
 {
     constructor()
     {
         super();
+    }
+    isSelectedChanged()
+    {
+        super.isSelectedChanged();
+        console.log( "GenreItemRenderer", "isSelectedChanged", this.data.g, this.isSelected );
+        this.selectionLayer.opacity = this.isSelected ? .12 : 0;
     }
     dataChanged()
     {
@@ -35,6 +43,7 @@ export default class GenreItemRenderer extends BaseItemRenderer
     {
         this.rippleSurface.setSize( w, h );
         this.countTextElement.width = w - 8;
+        this.selectionLayer.setSize( w, h - 8 );
     }
     initialize()
     {
@@ -54,9 +63,23 @@ export default class GenreItemRenderer extends BaseItemRenderer
             this._aTag = document.createElement( "a" );
             this._aTag.appendChild( this.labelTextElement );
             this._aTag.appendChild( this.countTextElement );
+            this._aTag.appendChild( this.selectionLayer );
             this._aTag.appendChild( this.rippleSurface );
         }
         return this._aTag;
+    }
+    get selectionLayer()
+    {
+        if( !this._selectionLayer )
+        {
+            this._selectionLayer = new DisplayElement();
+            this._selectionLayer.y = 4;
+            this._selectionLayer.backgroundColor = Theme.PRIMARY_TEXT_COLOR;
+            this._selectionLayer.opacity = 0;
+            this._selectionLayer.animatedProperties = [ new AnimatedProperty( "opacity" ) ];
+            this._selectionLayer.cornerRadius = 4;
+        }
+        return this._selectionLayer;
     }
     get rippleSurface()
     {
@@ -72,6 +95,7 @@ export default class GenreItemRenderer extends BaseItemRenderer
         if( !this._labelTextElement )
         {
             this._labelTextElement = new TextElement();
+            this._labelTextElement.x = 8;
             this._labelTextElement.y = 12;
             this._labelTextElement.textColor = Theme.PRIMARY_TEXT_COLOR;
         }
