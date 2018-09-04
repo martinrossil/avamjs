@@ -4,7 +4,6 @@ import ImageElement from "../../../ava/components/images/ImageElement.js";
 import TextElement from "../../../ava/components/text/TextElement.js";
 import Theme from "../../../ava/styles/Theme.js";
 import FontWeight from "../../../ava/constants/FontWeight.js";
-import System from "../../../ava/system/System.js";
 import CornerSquare from "./CornerSquare.js";
 export default class ActorItemRenderer extends BaseItemRenderer
 {
