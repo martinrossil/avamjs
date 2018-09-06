@@ -8,6 +8,7 @@ import IconNames from "../../../ava/constants/IconNames.js";
 import DisplayElement from "../../../ava/components/display/DisplayElement.js";
 import Theme from "../../../ava/styles/Theme.js";
 import LinkItemRenderer from "../itemrenderers/base/LinkItemRenderer.js";
+import IconButton from "../../../ava/components/buttons/IconButton.js";
 export default class TrailersDrawer extends BaseDrawer
 {
     constructor()
@@ -21,12 +22,13 @@ export default class TrailersDrawer extends BaseDrawer
     }
     initialize()
     {
-        this.addElement( this.topBlock );
         super.initialize();
         this.createChildren();
     }
     createChildren()
     {
+        this.addElement( this.topBlock );
+        this.addElement( this.closeIconButton ); 
         this.addElement( this.trailersFilterList );
         this.addElement( this.trailersDrawerList );
     }
@@ -40,6 +42,17 @@ export default class TrailersDrawer extends BaseDrawer
             this._topBlock.height = 52 + 96;
         }
         return this._topBlock;
+    }
+    get closeIconButton()
+    {
+        if( !this._closeIconButton )
+        {
+            this._closeIconButton = new IconButton();
+            this._closeIconButton.uid = "trailersDrawerCloseButton";
+            this._closeIconButton.iconName = IconNames.ARROW_FORWARD;
+            this._closeIconButton.layoutData = new AnchorLayoutData( NaN, 4, 4 ); 
+        }
+        return this._closeIconButton;
     }
     get trailersFilterList()
     {
