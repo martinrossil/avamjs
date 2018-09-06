@@ -2,9 +2,6 @@ import LayoutContainer from "../../../ava/components/display/LayoutContainer.js"
 import Direction from "../../../ava/constants/Direction.js";
 import AnimatedProperty from "../../../ava/animation/AnimatedProperty.js";
 import AnchorLayout from "../../../ava/layouts/AnchorLayout.js";
-import IconButton from "../../../ava/components/buttons/IconButton.js";
-import IconNames from "../../../ava/constants/IconNames.js";
-import AnchorLayoutData from "../../../ava/layouts/data/AnchorLayoutData.js";
 import Theme from "../../../ava/styles/Theme.js";
 import EventTypes from "../../../ava/constants/EventTypes.js";
 export default class BaseDrawer extends LayoutContainer
@@ -46,17 +43,6 @@ export default class BaseDrawer extends LayoutContainer
         this.listen( EventTypes.PROPERTY_ANIMATION_ENDED, this.propertyAnimationEnded.bind( this ) );
         this.animatedProperties = [ new AnimatedProperty( "x", 225, "ease-in" ) ];
         window.addEventListener( "resize", this.resizeAndPosition );
-        this.addElement( this.closeIconButton ); 
-    }
-    get closeIconButton()
-    {
-        if( !this._closeIconButton )
-        {
-            this._closeIconButton = new IconButton();
-            this._closeIconButton.iconName = IconNames.ARROW_FORWARD;
-            this._closeIconButton.layoutData = new AnchorLayoutData( NaN, 4, 4 );
-        }
-        return this._closeIconButton;
     }
     resizeAndPosition()
     {
@@ -74,18 +60,6 @@ export default class BaseDrawer extends LayoutContainer
     get isShown()
     {
         return this._isShown;
-    }
-    set closeHref( value )
-    {
-        if( this._closeHref !== value )
-        {
-            this._closeHref = value;
-            this.closeIconButton.href = value;
-        }
-    }
-    get closeHref()
-    {
-        return this._closeHref;
     }
 }
 customElements.define("base-drawer", BaseDrawer ); 
