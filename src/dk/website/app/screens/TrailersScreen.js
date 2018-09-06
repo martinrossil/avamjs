@@ -15,21 +15,20 @@ export default class TrailersScreen extends BaseScreen
     {
         super.initialize();
         this.layout = new AnchorLayout();
-        this.addElement( this.videosList );
+        this.addElement( this.trailersList );
     }
-    get videosList()
+    get trailersList()
     {
-        if( !this._videosList )
+        if( !this._trailersList )
         {
-            this._videosList = new ListElement();
-            this._videosList.uid = "videosList";
-            this._videosList.horizontalScrollPolicy = ScrollPolicy.OFF;
-            this._videosList.layout = this.tiledRowsLayout;
-            this._videosList.layoutData = new AnchorLayoutData( 0, 0, 0, 0 );
-            //this._videosList.dataProvider = Model.trailersCollection;
-            this._videosList.itemRenderType = VideoItemRenderer;
+            this._trailersList = new ListElement();
+            this._trailersList.uid = "trailersList";
+            this._trailersList.horizontalScrollPolicy = ScrollPolicy.OFF;
+            this._trailersList.layout = this.tiledRowsLayout;
+            this._trailersList.layoutData = new AnchorLayoutData( 0, 0, 0, 0 );
+            this._trailersList.itemRenderType = VideoItemRenderer;
         }
-        return this._videosList;
+        return this._trailersList;
     }
     get tiledRowsLayout()
     {
