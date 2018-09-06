@@ -49,6 +49,7 @@ export default class DisplayElement extends BaseElement
     }
     animationEnded( e )
     {
+        e.preventDefault();
         e.stopImmediatePropagation();
         if( this.notifyPropertyAnimationEnd )
         {
@@ -106,7 +107,7 @@ export default class DisplayElement extends BaseElement
                 this.div.style.transitionProperty = transitionProperties.join();
                 this.div.style.transitionDuration = transitionDurations.join();
                 this.div.style.transitionTimingFunctions = transitionTimingFunctions.join();
-                this.div.addEventListener( "transitionend", this.animationEnded );
+                this.div.addEventListener( "transitionend", this.animationEnded, false );
             }
             else
             {
