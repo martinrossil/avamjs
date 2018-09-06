@@ -4,7 +4,7 @@ import GenreItemRenderer from "../itemrenderers/GenreItemRenderer.js";
 import AnchorLayoutData from "../../../ava/layouts/data/AnchorLayoutData.js";
 import ScrollPolicy from "../../../ava/constants/ScrollPolicy.js";
 import ListElement from "../../../ava/components/lists/ListElement.js";
-export default class MoviesGenresDrawer extends BaseDrawer
+export default class MoviesDrawer extends BaseDrawer
 {
     constructor()
     {
@@ -41,4 +41,4 @@ export default class MoviesGenresDrawer extends BaseDrawer
         return this._verticalLayout;
     }
 }
-customElements.define("movies-genres-drawer", MoviesGenresDrawer ); 
+customElements.define("movies-drawer", MoviesDrawer ); 
