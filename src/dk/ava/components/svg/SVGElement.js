@@ -7,7 +7,6 @@ export default class SVGElement extends BaseElement
     constructor()
     {
         super();
-        this.animationEnded = this.animationEnded.bind( this );
     }
     setSize( w, h )
     {
@@ -63,6 +62,8 @@ export default class SVGElement extends BaseElement
     initialize()
     {
         super.initialize();
+        this.notifyPropertyAnimationEnd = false;
+        this.animationEnded = this.animationEnded.bind( this );
         this._x = 0;
         this._y = 0;
         this._z = 0;
@@ -86,20 +87,25 @@ export default class SVGElement extends BaseElement
     }
     animationEnded( e )
     {
-        let property = e.propertyName;
-        if( property === "transform" )
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        if( this.notifyPropertyAnimationEnd )
         {
-            property = "scale";
+            let property = e.propertyName;
+            if( property === "transform" )
+            {
+                property = "scale";
+            }
+            else if( property === "left" )
+            {
+                property = "x";
+            }
+            else if( property === "top" )
+            {
+                property = "y";
+            }
+            this.dispatch( EventTypes.PROPERTY_ANIMATION_ENDED, property );
         }
-        else if( property === "left" )
-        {
-            property = "x";
-        }
-        else if( property === "top" )
-        {
-            property = "y";
-        }
-        this.dispatch( EventTypes.PROPERTY_ANIMATION_ENDED, property );
     }
     get defs()
     {
@@ -412,6 +418,17 @@ export default class SVGElement extends BaseElement
     get opacity()
     {
         return this._opacity;
+    }
+    set notifyPropertyAnimationEnd( value )
+    {
+        if( this._notifyPropertyAnimationEnd !== value )
+        {
+            this._notifyPropertyAnimationEnd = value;
+        }
+    }
+    get notifyPropertyAnimationEnd()
+    {
+        return this._notifyPropertyAnimationEnd;
     }
 }
 customElements.define( "svg-element", SVGElement );
