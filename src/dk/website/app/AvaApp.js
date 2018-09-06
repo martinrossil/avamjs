@@ -18,6 +18,7 @@ import AvaAppBar from "./bars/AvaAppBar.js";
 import ActorsDrawer from "./drawers/ActorsDrawer.js";
 import TrailersDrawer from "./drawers/TrailersDrawer.js";
 import MoviesDrawer from "./drawers/MoviesDrawer.js";
+import ScrimElement from "../../ava/components/dialogs/ScrimElement.js";
 export default class AvaApp extends ApplicationElement
 {
     constructor()
@@ -40,10 +41,20 @@ export default class AvaApp extends ApplicationElement
         this.addElement( this.screensNavigator );
         this.addElement( this.bottomNavigationBar );
         this.addElement( this.appBar );
+        this.addElement( this.overlay );
         this.addElement( this.trailersDrawer );
         this.addElement( this.moviesDrawer );
         this.addElement( this.actorsDrawer );
         this.addElement( this.trailerDialog );
+    }
+    get overlay()
+    {
+        if( !this._overlay )
+        {
+            this._overlay = new ScrimElement();
+            this._overlay.uid = "overlay";
+        }
+        return this._overlay;
     }
     get trailersDrawer()
     {
