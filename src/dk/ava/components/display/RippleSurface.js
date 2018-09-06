@@ -8,20 +8,21 @@ export default class RippleSurface extends DisplayContainer
     constructor()
     {
         super();
+        
+    }
+    initialize()
+    {
+        super.initialize();
         this.touchStart = this.touchStart.bind( this );
         this.mouseDown = this.mouseDown.bind( this );
         this.windowTouchEnd = this.windowTouchEnd.bind( this );
         this.windowMouseUp = this.windowMouseUp.bind( this );
         this.meMouseUp = this.meMouseUp.bind( this );
-    }
-    initialize()
-    {
-        super.initialize();
         this._rippleColor = Theme.RIPPLE_COLOR;
         this.clipContent = true;
-        this.addEventListener( "touchstart", this.touchStart, { capture : true, passive : true } );
+        this.addEventListener( "touchstart", this.touchStart, { capture : true, passive : false } );
         this.addEventListener( "mousedown", this.mouseDown, { capture : true } );
-        this.addEventListener( "mouseup", this.meMouseUp, { capture : true } );
+        
         this.createChildren();
     }
     createChildren()
@@ -52,7 +53,7 @@ export default class RippleSurface extends DisplayContainer
     }
     touchStart( e )
     {
-        //e.preventDefault();
+        e.preventDefault();
         window.addEventListener( "touchend", this.windowTouchEnd );
         if( !this.hasMouseEventsBeenRemoved )
         {
@@ -77,6 +78,7 @@ export default class RippleSurface extends DisplayContainer
     mouseDown( e )
     {
         window.addEventListener( "mouseup", this.windowMouseUp );
+        this.addEventListener( "mouseup", this.meMouseUp, { capture : true } );
         let px = e.pageX;
         let py = e.pageY;
         let rect = this.div.getBoundingClientRect();
@@ -94,6 +96,7 @@ export default class RippleSurface extends DisplayContainer
     }
     meMouseUp( e )
     {
+        this.removeEventListener( "mouseup", this.meMouseUp, { capture : true } );
         this.dispatch( EventTypes.TRIGGERED );
     }
     windowTouchEnd( e )
