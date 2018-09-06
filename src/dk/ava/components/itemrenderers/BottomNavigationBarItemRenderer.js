@@ -58,6 +58,9 @@ export default class BottomNavigationBarItemRenderer extends BaseItemRenderer
     createChildren()
     {
         this.addElement( this.aTag );
+        this.addElement( this.icon );
+        this.addElement( this.labelText );
+        //this.addElement( this.rippleSurface );
     }
     get aTag()
     {
@@ -65,9 +68,9 @@ export default class BottomNavigationBarItemRenderer extends BaseItemRenderer
         {
             this._aTag = document.createElement( "a" );
             this._aTag.appendChild( this.background );
-            this._aTag.appendChild( this.icon );
-            this._aTag.appendChild( this.labelText );
-            this._aTag.appendChild( this.rippleSurface );
+            //this._aTag.appendChild( this.icon );
+            //this._aTag.appendChild( this.labelText );
+            //this._aTag.appendChild( this.rippleSurface );
         }
         return this._aTag;
     }
