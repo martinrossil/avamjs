@@ -18,37 +18,9 @@ export default class AvaAppBar extends AppBar
     createChildren()
     {
         this.addElement( this.titleTextElement );
-        //this.addElement( this.openTrailersCountriesDrawerIconButton );
-        this.addElement( this.openTrailersGenresDrawerIconButton );
-        //this.addElement( this.openTrailersLanguagesDrawerIconButton );
-        this.addElement( this.openMovieGenresDrawerIconButton );
-        this.addElement( this.openActorsDrawerIconButton );
-    }
-    get openActorsDrawerIconButton()
-    {
-        if( !this._openActorsDrawerIconButton )
-        {
-            this._openActorsDrawerIconButton = new IconButton();
-            this._openActorsDrawerIconButton.uid = "openActorsDrawerIconButton";
-            this._openActorsDrawerIconButton.isVisible = false;
-            this._openActorsDrawerIconButton.href = "/skuespillere/lande";
-            this._openActorsDrawerIconButton.iconName = IconNames.FILTER_LIST;
-            this._openActorsDrawerIconButton.layoutData = new AnchorLayoutData( NaN, NaN, 4, NaN, NaN, 0 );
-        }
-        return this._openActorsDrawerIconButton;
-    }
-    get openMovieGenresDrawerIconButton()
-    {
-        if( !this._openMovieGenresDrawerIconButton )
-        {
-            this._openMovieGenresDrawerIconButton = new IconButton();
-            this._openMovieGenresDrawerIconButton.uid = "openMovieGenresDrawerIconButton";
-            this._openMovieGenresDrawerIconButton.isVisible = false;
-            this._openMovieGenresDrawerIconButton.href = "/film/genrer";
-            this._openMovieGenresDrawerIconButton.iconName = IconNames.FILTER_LIST;
-            this._openMovieGenresDrawerIconButton.layoutData = new AnchorLayoutData( NaN, NaN, 4, NaN, NaN, 0 );
-        }
-        return this._openMovieGenresDrawerIconButton;
+        this.addElement( this.trailersDrawerIconButton );
+        this.addElement( this.movieDrawerIconButton );
+        this.addElement( this.actorsDrawerIconButton );
     }
     get titleTextElement()
     {
@@ -63,39 +35,43 @@ export default class AvaAppBar extends AppBar
         }
         return this._titleTextElement;
     }
-    get openTrailersGenresDrawerIconButton()
+    get trailersDrawerIconButton()
     {
-        if( !this._openTrailersGenresDrawerIconButton )
+        if( !this._trailersDrawerIconButton )
         {
-            this._openTrailersGenresDrawerIconButton = new IconButton();
-            this._openTrailersGenresDrawerIconButton.uid = "openTrailersGenresDrawerIconButton";
-            this._openTrailersGenresDrawerIconButton.href = "/trailers/genrer";
-            this._openTrailersGenresDrawerIconButton.iconName = IconNames.FILTER_LIST;
-            this._openTrailersGenresDrawerIconButton.layoutData = new AnchorLayoutData( NaN, NaN, 4, NaN, NaN, 0 );
+            this._trailersDrawerIconButton = new IconButton();
+            this._trailersDrawerIconButton.uid = "trailersDrawerIconButton";
+            this._trailersDrawerIconButton.href = "/trailers/filter";
+            this._trailersDrawerIconButton.iconName = IconNames.FILTER_LIST;
+            this._trailersDrawerIconButton.layoutData = new AnchorLayoutData( NaN, NaN, 4, NaN, NaN, 0 );
         }
-        return this._openTrailersGenresDrawerIconButton;
+        return this._trailersDrawerIconButton;
     }
-    get openTrailersCountriesDrawerIconButton()
+    get movieDrawerIconButton()
     {
-        if( !this._openTrailersCountriesDrawerIconButton )
+        if( !this._movieDrawerIconButton )
         {
-            this._openTrailersCountriesDrawerIconButton = new IconButton();
-            this._openTrailersCountriesDrawerIconButton.href = "/trailers/lande/";
-            this._openTrailersCountriesDrawerIconButton.iconName = IconNames.DATE_RANGE;
-            this._openTrailersCountriesDrawerIconButton.layoutData = new AnchorLayoutData( NaN, NaN, 52, NaN, NaN, 0 );
+            this._movieDrawerIconButton = new IconButton();
+            this._movieDrawerIconButton.uid = "filmDrawerIconButton";
+            this._movieDrawerIconButton.isVisible = false;
+            this._movieDrawerIconButton.href = "/film/filter";
+            this._movieDrawerIconButton.iconName = IconNames.FILTER_LIST;
+            this._movieDrawerIconButton.layoutData = new AnchorLayoutData( NaN, NaN, 4, NaN, NaN, 0 );
         }
-        return this._openTrailersCountriesDrawerIconButton;
+        return this._movieDrawerIconButton;
     }
-    get openTrailersLanguagesDrawerIconButton()
+    get actorsDrawerIconButton()
     {
-        if( !this._openTrailersLanguagesDrawerIconButton )
+        if( !this._actorsDrawerIconButton )
         {
-            this._openTrailersLanguagesDrawerIconButton = new IconButton();
-            this._openTrailersLanguagesDrawerIconButton.href = "/trailers/sprog/";
-            this._openTrailersLanguagesDrawerIconButton.iconName = IconNames.LANGUAGE;
-            this._openTrailersLanguagesDrawerIconButton.layoutData = new AnchorLayoutData( NaN, NaN, 100, NaN, NaN, 0 );
+            this._actorsDrawerIconButton = new IconButton();
+            this._actorsDrawerIconButton.uid = "skuespillereDrawerIconButton";
+            this._actorsDrawerIconButton.isVisible = false;
+            this._actorsDrawerIconButton.href = "/skuespillere/filter";
+            this._actorsDrawerIconButton.iconName = IconNames.FILTER_LIST;
+            this._actorsDrawerIconButton.layoutData = new AnchorLayoutData( NaN, NaN, 4, NaN, NaN, 0 );
         }
-        return this._openTrailersLanguagesDrawerIconButton;
+        return this._actorsDrawerIconButton;
     }
     set title( value )
     {
