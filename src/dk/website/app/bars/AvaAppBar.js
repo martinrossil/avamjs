@@ -18,7 +18,9 @@ export default class AvaAppBar extends AppBar
     createChildren()
     {
         this.addElement( this.titleTextElement );
+        this.addElement( this.trailersSortIconButton );
         this.addElement( this.trailersDrawerIconButton );
+        this.addElement( this.movieSortIconButton );
         this.addElement( this.movieDrawerIconButton );
         this.addElement( this.actorsDrawerIconButton );
     }
@@ -35,17 +37,39 @@ export default class AvaAppBar extends AppBar
         }
         return this._titleTextElement;
     }
+    get trailersSortIconButton()
+    {
+        if( !this._trailersSortIconButton )
+        {
+            this._trailersSortIconButton = new IconButton();
+            this._trailersSortIconButton.uid = "trailersSortIconButton";
+            this._trailersSortIconButton.iconName = IconNames.SORT;
+            this._trailersSortIconButton.layoutData = new AnchorLayoutData( NaN, NaN, 52, NaN, NaN, 0 );
+        }
+        return this._trailersSortIconButton;
+    }
     get trailersDrawerIconButton()
     {
         if( !this._trailersDrawerIconButton )
         {
             this._trailersDrawerIconButton = new IconButton();
             this._trailersDrawerIconButton.uid = "trailersDrawerIconButton";
-            this._trailersDrawerIconButton.href = "/trailers/filter";
             this._trailersDrawerIconButton.iconName = IconNames.FILTER_LIST;
             this._trailersDrawerIconButton.layoutData = new AnchorLayoutData( NaN, NaN, 4, NaN, NaN, 0 );
         }
         return this._trailersDrawerIconButton;
+    }
+    get movieSortIconButton()
+    {
+        if( !this._movieSortIconButton )
+        {
+            this._movieSortIconButton = new IconButton();
+            this._movieSortIconButton.uid = "moviesSortIconButton";
+            this._movieSortIconButton.isVisible = false;
+            this._movieSortIconButton.iconName = IconNames.SORT;
+            this._movieSortIconButton.layoutData = new AnchorLayoutData( NaN, NaN, 52, NaN, NaN, 0 );
+        }
+        return this._movieSortIconButton;
     }
     get movieDrawerIconButton()
     {
@@ -54,11 +78,22 @@ export default class AvaAppBar extends AppBar
             this._movieDrawerIconButton = new IconButton();
             this._movieDrawerIconButton.uid = "filmDrawerIconButton";
             this._movieDrawerIconButton.isVisible = false;
-            this._movieDrawerIconButton.href = "/film/filter";
             this._movieDrawerIconButton.iconName = IconNames.FILTER_LIST;
             this._movieDrawerIconButton.layoutData = new AnchorLayoutData( NaN, NaN, 4, NaN, NaN, 0 );
         }
         return this._movieDrawerIconButton;
+    }
+    get actorsSortIconButton()
+    {
+        if( !this._actorsSortIconButton )
+        {
+            this._actorsSortIconButton = new IconButton();
+            this._actorsSortIconButton.uid = "actorsSortIconButton";
+            this._actorsSortIconButton.isVisible = false;
+            this._actorsSortIconButton.iconName = IconNames.SORT;
+            this._actorsSortIconButton.layoutData = new AnchorLayoutData( NaN, NaN, 52, NaN, NaN, 0 );
+        }
+        return this._actorsSortIconButton;
     }
     get actorsDrawerIconButton()
     {
@@ -67,7 +102,6 @@ export default class AvaAppBar extends AppBar
             this._actorsDrawerIconButton = new IconButton();
             this._actorsDrawerIconButton.uid = "skuespillereDrawerIconButton";
             this._actorsDrawerIconButton.isVisible = false;
-            this._actorsDrawerIconButton.href = "/skuespillere/filter";
             this._actorsDrawerIconButton.iconName = IconNames.FILTER_LIST;
             this._actorsDrawerIconButton.layoutData = new AnchorLayoutData( NaN, NaN, 4, NaN, NaN, 0 );
         }
