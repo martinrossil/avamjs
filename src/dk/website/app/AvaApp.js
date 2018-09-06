@@ -15,9 +15,9 @@ import Config from "./Config.js";
 import BusinessLogic from "../logic/BusinessLogic.js";
 import TrailerDialog from "./dialogs/TrailerDialog.js";
 import AvaAppBar from "./bars/AvaAppBar.js";
-import MoviesGenresDrawer from "./drawers/MoviesGenresDrawer.js";
 import ActorsDrawer from "./drawers/ActorsDrawer.js";
 import TrailersDrawer from "./drawers/TrailersDrawer.js";
+import MoviesDrawer from "./drawers/MoviesDrawer.js";
 export default class AvaApp extends ApplicationElement
 {
     constructor()
@@ -41,21 +41,9 @@ export default class AvaApp extends ApplicationElement
         this.addElement( this.bottomNavigationBar );
         this.addElement( this.appBar );
         this.addElement( this.trailersDrawer );
-        this.addElement( this.moviesGenresDrawer );
+        this.addElement( this.moviesDrawer );
         this.addElement( this.actorsDrawer );
         this.addElement( this.trailerDialog );
-    }
-    get moviesGenresDrawer()
-    {
-        if( !this._moviesGenresDrawer )
-        {
-            this._moviesGenresDrawer = new MoviesGenresDrawer();
-            this._moviesGenresDrawer.uid = "moviesGenresDrawer";
-            this._moviesGenresDrawer.backgroundColor = Theme.PRIMARY_COLOR;
-            this._moviesGenresDrawer.title = "Genrer";
-            this._moviesGenresDrawer.closeHref = "/film";
-        }
-        return this._moviesGenresDrawer;
     }
     get trailersDrawer()
     {
@@ -63,20 +51,26 @@ export default class AvaApp extends ApplicationElement
         {
             this._trailersDrawer = new TrailersDrawer();
             this._trailersDrawer.uid = "trailersDrawer";
-            this._trailersDrawer.backgroundColor = Theme.PRIMARY_COLOR_DARK;
             this._trailersDrawer.closeHref = "/trailers";
-            this._trailersDrawer.isShown = true;
         }
         return this._trailersDrawer;
+    }
+    get moviesDrawer()
+    {
+        if( !this._moviesDrawer )
+        {
+            this._moviesDrawer = new MoviesDrawer();
+            this._moviesDrawer.uid = "filmDrawer";
+            this._moviesDrawer.closeHref = "/film";
+        }
+        return this._moviesDrawer;
     }
     get actorsDrawer()
     {
         if( !this._actorsDrawer )
         {
             this._actorsDrawer = new ActorsDrawer();
-            this._actorsDrawer.uid = "actorsDrawer";
-            this._actorsDrawer.backgroundColor = Theme.PRIMARY_COLOR;
-            this._actorsDrawer.title = "Lande";
+            this._actorsDrawer.uid = "skuespillereDrawer";
             this._actorsDrawer.closeHref = "/skuespillere";
         }
         return this._actorsDrawer;
@@ -120,7 +114,7 @@ export default class AvaApp extends ApplicationElement
             this._bottomNavigationBar = new BottomNavigationBar();
             this._bottomNavigationBar.uid = "bottomNavigationBar";
             this._bottomNavigationBar.isShown = true;
-            this._bottomNavigationBar.selectedIndex = 0;
+            //this._bottomNavigationBar.selectedIndex = 0;
             this._bottomNavigationBar.itemRenderType = BottomNavigationBarItemRenderer;
             this._bottomNavigationBar.dataProvider = new ArrayCollection( [ { icon : IconNames.VIDEO_LIBRARY, label : "Trailers", href : "/trailers" },
                                                                             { icon : IconNames.MOVIE, label : "Film", href : "/film" }, 
