@@ -43,9 +43,9 @@ export default class ScrimElement extends LayoutContainer
             this.opacity = 0;
         }
     }
-    rippleTriggered( data )
+    rippleTriggered()
     {
-        console.log( "rippleTriggered", data );
+        this.dispatch( EventTypes.TRIGGERED );
     }
     initialize()
     {
