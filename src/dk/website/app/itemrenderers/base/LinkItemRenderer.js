@@ -14,7 +14,6 @@ export default class LinkItemRenderer extends BaseItemRenderer
     }
     isSelectedChanged()
     {
-        //this.selectionLayer.isVisible = this.isSelected;
         this.selectionLayer.opacity = this.isSelected ? .12 : 0;
     }
     dataChanged()

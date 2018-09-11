@@ -26,7 +26,8 @@ export default class BaseDrawer extends LayoutContainer
         {
             this.isVisible = true;
         }
-        this.x = this.isShown ? window.innerWidth - this.width : window.innerWidth;
+        let iw = window.innerWidth;
+        this.x = this.isShown ? iw - this.width : iw;
     }
     initialize()
     {
