@@ -18,10 +18,8 @@ import ActorsDrawer from "./drawers/ActorsDrawer.js";
 import TrailersDrawer from "./drawers/TrailersDrawer.js";
 import MoviesDrawer from "./drawers/MoviesDrawer.js";
 import ScrimElement from "../../ava/components/dialogs/ScrimElement.js";
-import UIDS from "./UIDS.js";
-import Config from "./Config.js";
-import TestDisplayElement from "./test/TestDisplayElement.js";
-//import { url } from "./inspector";
+import UIDS from "./consts/UIDS.js";
+import Config from "./consts/Config.js";
 export default class AvaApp extends ApplicationElement
 {
     constructor()
@@ -42,20 +40,6 @@ export default class AvaApp extends ApplicationElement
         super.initialize();
         this.layout = new AnchorLayout();
         new BusinessLogic();
-        //const url = "url(" + window.location.origin + "http://127.0.0.1:8081/dk/website/app/gunship.woff2)";
-        /*const url = "url(http://127.0.0.1:8081/dk/website/app/gunship.woff2)";
-        const font = new FontFace( "gunship", url );
-        font.load().then( ( loadedFont ) =>
-        {
-            document.fonts.add( loadedFont );
-            Theme.FONT_FAMILY = "gunship";
-            console.log( "font loaded" );
-            this.createChildren();
-        })
-        .catch( ( error ) =>
-        {
-            console.log( "error", error );
-        });*/
         this.createChildren();
     }
     createChildren()
@@ -68,19 +52,6 @@ export default class AvaApp extends ApplicationElement
         this.addElement( this.moviesDrawer );
         this.addElement( this.actorsDrawer );
         this.addElement( this.trailerDialog );
-        //this.addElement( this.testDisplayElement );
-    }
-    get testDisplayElement()
-    {
-        if( !this._testDisplayElement )
-        {
-            this._testDisplayElement = new TestDisplayElement();
-            this._testDisplayElement.layoutData = new AnchorLayoutData( NaN, NaN, NaN, NaN, 0, 0 );
-            this._testDisplayElement.width = 200;
-            this._testDisplayElement.height = 200;
-            this._testDisplayElement.backgroundColor = "#CC0000";
-        }
-        return this._testDisplayElement;
     }
     get overlay()
     {
@@ -105,7 +76,7 @@ export default class AvaApp extends ApplicationElement
         if( !this._moviesDrawer )
         {
             this._moviesDrawer = new MoviesDrawer();
-            this._moviesDrawer.uid = "moviesDrawer";
+            this._moviesDrawer.uid = UIDS.MOVIES_DRAWER;
         }
         return this._moviesDrawer;
     }
@@ -114,7 +85,7 @@ export default class AvaApp extends ApplicationElement
         if( !this._actorsDrawer )
         {
             this._actorsDrawer = new ActorsDrawer();
-            this._actorsDrawer.uid = "actorsDrawer";
+            this._actorsDrawer.uid = UIDS.ACTORS_DRAWER;
         }
         return this._actorsDrawer;
     }
@@ -123,7 +94,7 @@ export default class AvaApp extends ApplicationElement
         if( !this._trailerDialog )
         {
             this._trailerDialog = new TrailerDialog();
-            this._trailerDialog.uid = "trailerDialog";
+            this._trailerDialog.uid = UIDS.TRAILER_DIALOG;
         }
         return this._trailerDialog;
     }
@@ -132,7 +103,7 @@ export default class AvaApp extends ApplicationElement
         if( !this._appBar )
         {
             this._appBar = new AvaAppBar();
-            this._appBar.uid = "appBar";
+            this._appBar.uid = UIDS.APP_BAR;
             this._appBar.isShown = true;
         }
         return this._appBar;
@@ -142,7 +113,7 @@ export default class AvaApp extends ApplicationElement
         if( !this._screensNavigator )
         {
             this._screensNavigator = new ScreensNavigator();
-            this._screensNavigator.uid = "screensNavigator";
+            this._screensNavigator.uid = UIDS.SCREENS_NAVIGATOR;
             this._screensNavigator.layoutData = new AnchorLayoutData( 0, 0, 0, 0 );
             this._screensNavigator.addScreen( new TrailersScreen() );
             this._screensNavigator.addScreen( new MoviesScreen() );
@@ -155,9 +126,8 @@ export default class AvaApp extends ApplicationElement
         if( !this._bottomNavigationBar )
         {
             this._bottomNavigationBar = new BottomNavigationBar();
-            this._bottomNavigationBar.uid = "bottomNavigationBar";
+            this._bottomNavigationBar.uid = UIDS.BOTTOM_NAVIGATION_BAR
             this._bottomNavigationBar.isShown = true;
-            //this._bottomNavigationBar.selectedIndex = 0;
             this._bottomNavigationBar.itemRenderType = BottomNavigationBarItemRenderer;
             this._bottomNavigationBar.dataProvider = new ArrayCollection( [ { icon : IconNames.VIDEO_LIBRARY, label : "Trailers", href : "/trailers" },
                                                                             { icon : IconNames.MOVIE, label : "Film", href : "/film" }, 

@@ -4,7 +4,7 @@ import AnchorLayoutData from "../../../ava/layouts/data/AnchorLayoutData.js";
 import Theme from "../../../ava/styles/Theme.js";
 import IconButton from "../../../ava/components/buttons/IconButton.js";
 import IconNames from "../../../ava/constants/IconNames.js";
-import UIDS from "../UIDS.js";
+import UIDS from "../consts/UIDS.js";
 export default class AvaAppBar extends AppBar
 {
     constructor()
@@ -45,7 +45,7 @@ export default class AvaAppBar extends AppBar
         {
             this._trailersSortIconButton = new IconButton();
             this._trailersSortIconButton.isVisible = false;
-            this._trailersSortIconButton.uid = "trailersSortIconButton";
+            this._trailersSortIconButton.uid = UIDS.TRAILERS_SORT_ICON_BUTTON;
             this._trailersSortIconButton.iconName = IconNames.SORT;
             this._trailersSortIconButton.layoutData = new AnchorLayoutData( NaN, NaN, 52, NaN, NaN, 0 );
         }
@@ -68,7 +68,7 @@ export default class AvaAppBar extends AppBar
         if( !this._movieSortIconButton )
         {
             this._movieSortIconButton = new IconButton();
-            this._movieSortIconButton.uid = "moviesSortIconButton";
+            this._movieSortIconButton.uid = UIDS.MOVIES_SORT_ICON_BUTTON;
             this._movieSortIconButton.isVisible = false;
             this._movieSortIconButton.iconName = IconNames.SORT;
             this._movieSortIconButton.layoutData = new AnchorLayoutData( NaN, NaN, 52, NaN, NaN, 0 );
@@ -80,7 +80,7 @@ export default class AvaAppBar extends AppBar
         if( !this._movieDrawerIconButton )
         {
             this._movieDrawerIconButton = new IconButton();
-            this._movieDrawerIconButton.uid = "moviesDrawerIconButton";
+            this._movieDrawerIconButton.uid = UIDS.MOVIES_DRAWER_ICON_BUTTON;
             this._movieDrawerIconButton.isVisible = false;
             this._movieDrawerIconButton.iconName = IconNames.FILTER_LIST;
             this._movieDrawerIconButton.layoutData = new AnchorLayoutData( NaN, NaN, 4, NaN, NaN, 0 );
@@ -92,7 +92,7 @@ export default class AvaAppBar extends AppBar
         if( !this._actorsSortIconButton )
         {
             this._actorsSortIconButton = new IconButton();
-            this._actorsSortIconButton.uid = "actorsSortIconButton";
+            this._actorsSortIconButton.uid = UIDS.ACTORS_SORT_ICON_BUTTON;
             this._actorsSortIconButton.isVisible = false;
             this._actorsSortIconButton.iconName = IconNames.SORT;
             this._actorsSortIconButton.layoutData = new AnchorLayoutData( NaN, NaN, 52, NaN, NaN, 0 );
@@ -104,7 +104,7 @@ export default class AvaAppBar extends AppBar
         if( !this._actorsDrawerIconButton )
         {
             this._actorsDrawerIconButton = new IconButton();
-            this._actorsDrawerIconButton.uid = "actorsDrawerIconButton";
+            this._actorsDrawerIconButton.uid = UIDS.ACTORS_DRAWER_ICON_BUTTON;
             this._actorsDrawerIconButton.isVisible = false;
             this._actorsDrawerIconButton.iconName = IconNames.FILTER_LIST;
             this._actorsDrawerIconButton.layoutData = new AnchorLayoutData( NaN, NaN, 4, NaN, NaN, 0 );

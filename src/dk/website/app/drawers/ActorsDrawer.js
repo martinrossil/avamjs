@@ -9,6 +9,7 @@ import IconButton from "../../../ava/components/buttons/IconButton.js";
 import IconNames from "../../../ava/constants/IconNames.js";
 import LinkItemRenderer from "../itemrenderers/base/LinkItemRenderer.js";
 import ArrayCollection from "../../../ava/data/ArrayCollection.js";
+import UIDS from "../consts/UIDS.js";
 export default class ActorsDrawer extends BaseDrawer
 {
     constructor()
@@ -27,7 +28,7 @@ export default class ActorsDrawer extends BaseDrawer
     }
     createChildren()
     {
-        this.addElement( this.actorDrawersList );
+        this.addElement( this.actorsCountriesList );
         this.addElement( this.topBlock );
         this.addElement( this.closeIconButton );
         this.addElement( this.filterList );
@@ -48,7 +49,7 @@ export default class ActorsDrawer extends BaseDrawer
         if( !this._closeIconButton )
         {
             this._closeIconButton = new IconButton();
-            this._closeIconButton.uid = "actorsDrawerCloseButton";
+            this._closeIconButton.uid = UIDS.ACTORS_DRAWER_CLOSE_BUTTON;
             this._closeIconButton.iconName = IconNames.ARROW_FORWARD;
             this._closeIconButton.layoutData = new AnchorLayoutData( NaN, 4, 4 ); 
         }
@@ -60,7 +61,7 @@ export default class ActorsDrawer extends BaseDrawer
         {
             this._filterList = new ListElement();
             this._filterList.height = 48;
-            this._filterList.uid = "actorsFilterList";
+            this._filterList.uid = UIDS.ACTORS_FILTER_LIST;
             this._filterList.horizontalScrollPolicy = ScrollPolicy.OFF;
             this._filterList.layout = new VerticalLayout();
             this._filterList.layoutData = new AnchorLayoutData( 8, 52, 8 );
@@ -79,19 +80,19 @@ export default class ActorsDrawer extends BaseDrawer
         }
         return this._filterListDataProvider;
     }
-    get actorDrawersList()
+    get actorsCountriesList()
     {
-        if( !this._actorDrawersList )
+        if( !this._actorsCountriesList )
         {
-            this._actorDrawersList = new ListElement();
-            this._actorDrawersList.uid = "actorsDrawerList";
-            this._actorDrawersList.horizontalScrollPolicy = ScrollPolicy.OFF;
-            this._actorDrawersList.layout = new VerticalLayout();
-            this._actorDrawersList.layoutData = new AnchorLayoutData( 8, 100, 8, 16 );
-            this._actorDrawersList.itemRenderType = LinkItemRenderer;
-            this._actorDrawersList.selectedIndex = 0;
+            this._actorsCountriesList = new ListElement();
+            this._actorsCountriesList.uid = UIDS.ACTORS_COUNTRIES_LIST;
+            this._actorsCountriesList.horizontalScrollPolicy = ScrollPolicy.OFF;
+            this._actorsCountriesList.layout = new VerticalLayout();
+            this._actorsCountriesList.layoutData = new AnchorLayoutData( 8, 100, 8, 16 );
+            this._actorsCountriesList.itemRenderType = LinkItemRenderer;
+            this._actorsCountriesList.selectedIndex = 0;
         }
-        return this._actorDrawersList;
+        return this._actorsCountriesList;
     }
 }
 customElements.define("actors-drawer", ActorsDrawer ); 

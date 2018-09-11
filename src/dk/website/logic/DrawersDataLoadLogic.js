@@ -2,16 +2,16 @@ import Logic from "../../ava/logic/Logic.js";
 import JSONLoader from "../../ava/loaders/JSONLoader.js";
 import EventTypes from "../../ava/constants/EventTypes.js";
 import ArrayCollection from "../../ava/data/ArrayCollection.js";
-import ClickTargetUtil from "../ClickTargetUtil.js";
-import UIDS from "../app/UIDS.js";
+import ClickTargetUtil from "../app/utils/ClickTargetUtil.js";
+import UIDS from "../app/consts/UIDS.js";
 export default class DrawersDataLoadLogic extends Logic
 {
     constructor()
     {
         super();
         this.listen( UIDS.TRAILERS_DRAWER_ICON_BUTTON, EventTypes.TRIGGERED, this.trailersDrawerIconButtonTriggered.bind( this ) );
-        this.listen( "moviesDrawerIconButton", EventTypes.TRIGGERED, this.moviesDrawerIconButtonTriggered.bind( this ) );
-        this.listen( "actorsDrawerIconButton", EventTypes.TRIGGERED, this.actorsDrawerIconButtonTriggered.bind( this ) );
+        this.listen( UIDS.MOVIES_DRAWER_ICON_BUTTON, EventTypes.TRIGGERED, this.moviesDrawerIconButtonTriggered.bind( this ) );
+        this.listen( UIDS.ACTORS_DRAWER_ICON_BUTTON, EventTypes.TRIGGERED, this.actorsDrawerIconButtonTriggered.bind( this ) );
         window.addEventListener( "popstate", this.popped.bind( this ) );
         document.addEventListener( "click", this.clicked.bind( this ) );
     }
@@ -45,7 +45,12 @@ export default class DrawersDataLoadLogic extends Logic
             if( path === "/trailers/genrer" || path === "/trailers/lande" )
             {
                 this.loadPath( path );
+                let index = path === "/trailers/genrer" ? 0 : 1;
+                this.setProperty( "trailersFilterList", "selectedIndex", index );
             }
+            
+            this.setProperty( "trailersGenresList", "isVisible", path === "/trailers/genrer" );
+            this.setProperty( "trailersCountriesList", "isVisible", path === "/trailers/lande" );
         }
     }
     loadPath( path )
@@ -64,9 +69,13 @@ export default class DrawersDataLoadLogic extends Logic
     setViewData( path, data )
     {
         let listUid;
-        if( path === "/trailers/genrer" || path === "/trailers/lande" )
+        if( path === "/trailers/genrer" )
         {
-            listUid = "trailersDrawerList";
+            listUid = "trailersGenresList";
+        }
+        else if( path === "/trailers/lande" )
+        {
+            listUid = "trailersCountriesList";
         }
         else if( path === "/film/genrer" || path === "/film/lande" )
         {

@@ -5,6 +5,7 @@ import ScrollPolicy from "../../../ava/constants/ScrollPolicy.js";
 import AnchorLayoutData from "../../../ava/layouts/data/AnchorLayoutData.js";
 import MovieItemRenderer from "../itemrenderers/MovieItemRenderer.js";
 import TiledRowsLayout from "../../../ava/layouts/TiledRowsLayout.js";
+import UIDS from "../consts/UIDS.js";
 export default class MoviesScreen extends BaseScreen
 {
     constructor()
@@ -22,7 +23,7 @@ export default class MoviesScreen extends BaseScreen
         if( !this._moviesList )
         {
             this._moviesList = new ListElement();
-            this._moviesList.uid = "moviesList";
+            this._moviesList.uid = UIDS.MOVIES_LIST;
             this._moviesList.horizontalScrollPolicy = ScrollPolicy.OFF;
             this._moviesList.layout = this.tiledRowsLayout;
             this._moviesList.layoutData = new AnchorLayoutData( 0, 0, 0, 0 );

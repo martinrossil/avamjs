@@ -2,8 +2,8 @@ import Logic from "../../ava/logic/Logic.js";
 import EventTypes from "../../ava/constants/EventTypes.js";
 import JSONLoader from "../../ava/loaders/JSONLoader.js";
 import ArrayCollection from "../../ava/data/ArrayCollection.js";
-import ClickTargetUtil from "../ClickTargetUtil.js";
-import UIDS from "../app/UIDS.js";
+import UIDS from "../app/consts/UIDS.js";
+import ClickTargetUtil from "../app/utils/ClickTargetUtil.js";
 export default class ListsDataLoadLogic extends Logic
 {
     constructor()
@@ -120,15 +120,15 @@ export default class ListsDataLoadLogic extends Logic
         let listUid;
         if( path.indexOf( "/trailers" ) != -1 )
         {
-            listUid = "trailersList";
+            listUid = UIDS.TRAILERS_LIST;
         }
         else if( path.indexOf( "/film" ) != -1 )
         {
-            listUid = "moviesList";
+            listUid = UIDS.MOVIES_LIST;
         }
         else if( path.indexOf( "/skuespillere" ) != -1 )
         {
-            listUid = "actorsList";
+            listUid = UIDS.ACTORS_LIST;
         }
         if( listUid )
         {

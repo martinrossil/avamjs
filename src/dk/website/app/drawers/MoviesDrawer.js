@@ -9,6 +9,7 @@ import DisplayElement from "../../../ava/components/display/DisplayElement.js";
 import Theme from "../../../ava/styles/Theme.js";
 import LinkItemRenderer from "../itemrenderers/base/LinkItemRenderer.js";
 import ArrayCollection from "../../../ava/data/ArrayCollection.js";
+import UIDS from "../consts/UIDS.js";
 export default class MoviesDrawer extends BaseDrawer
 {
     constructor()
@@ -27,7 +28,8 @@ export default class MoviesDrawer extends BaseDrawer
     }
     createChildren()
     {
-        this.addElement( this.moviesDrawerList );
+        this.addElement( this.moviesCountriesList );
+        this.addElement( this.moviesGenresList );
         this.addElement( this.topBlock );
         this.addElement( this.closeIconButton );
         this.addElement( this.filterList );
@@ -48,7 +50,7 @@ export default class MoviesDrawer extends BaseDrawer
         if( !this._closeIconButton )
         {
             this._closeIconButton = new IconButton();
-            this._closeIconButton.uid = "moviesDrawerCloseButton";
+            this._closeIconButton.uid = UIDS.MOVIES_DRAWER_CLOSE_BUTTON;
             this._closeIconButton.iconName = IconNames.ARROW_FORWARD;
             this._closeIconButton.layoutData = new AnchorLayoutData( NaN, 4, 4 ); 
         }
@@ -60,7 +62,7 @@ export default class MoviesDrawer extends BaseDrawer
         {
             this._filterList = new ListElement();
             this._filterList.height = 96;
-            this._filterList.uid = "moviesFilterList";
+            this._filterList.uid = UIDS.MOVIES_FILTER_LIST;
             this._filterList.horizontalScrollPolicy = ScrollPolicy.OFF;
             this._filterList.layout = new VerticalLayout();
             this._filterList.layoutData = new AnchorLayoutData( 8, 52, 8 );
@@ -81,19 +83,33 @@ export default class MoviesDrawer extends BaseDrawer
         }
         return this._filterListDataProvider;
     }
-    get moviesDrawerList()
+    get moviesGenresList()
     {
-        if( !this._moviesDrawerList )
+        if( !this._moviesGenresList )
         {
-            this._moviesDrawerList = new ListElement();
-            this._moviesDrawerList.uid = "movieDrawerList";
-            this._moviesDrawerList.horizontalScrollPolicy = ScrollPolicy.OFF;
-            this._moviesDrawerList.layout = new VerticalLayout();
-            this._moviesDrawerList.layoutData = new AnchorLayoutData( 8, 148, 8, 16 );
-            this._moviesDrawerList.itemRenderType = LinkItemRenderer;
-            this._moviesDrawerList.selectedIndex = 0;
+            this._moviesGenresList = new ListElement();
+            this._moviesGenresList.uid = UIDS.MOVIES_GENRES_LIST;
+            this._moviesGenresList.horizontalScrollPolicy = ScrollPolicy.OFF;
+            this._moviesGenresList.layout = new VerticalLayout();
+            this._moviesGenresList.layoutData = new AnchorLayoutData( 8, 148, 8, 16 );
+            this._moviesGenresList.itemRenderType = LinkItemRenderer;
+            this._moviesGenresList.selectedIndex = 0;
         }
-        return this._moviesDrawerList;
+        return this._moviesGenresList;
+    }
+    get moviesCountriesList()
+    {
+        if( !this._moviesCountriesList )
+        {
+            this._moviesCountriesList = new ListElement();
+            this._moviesCountriesList.uid = UIDS.MOVIES_COUNTRIES_LIST;
+            this._moviesCountriesList.horizontalScrollPolicy = ScrollPolicy.OFF;
+            this._moviesCountriesList.layout = new VerticalLayout();
+            this._moviesCountriesList.layoutData = new AnchorLayoutData( 8, 148, 8, 16 );
+            this._moviesCountriesList.itemRenderType = LinkItemRenderer;
+            this._moviesCountriesList.selectedIndex = 0;
+        }
+        return this._moviesCountriesList;
     }
 }
 customElements.define("movies-drawer", MoviesDrawer ); 

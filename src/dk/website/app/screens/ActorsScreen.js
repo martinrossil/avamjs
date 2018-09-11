@@ -5,6 +5,7 @@ import ScrollPolicy from "../../../ava/constants/ScrollPolicy.js";
 import AnchorLayoutData from "../../../ava/layouts/data/AnchorLayoutData.js";
 import ActorItemRenderer from "../itemrenderers/ActorItemRenderer.js";
 import TiledRowsLayout from "../../../ava/layouts/TiledRowsLayout.js";
+import UIDS from "../consts/UIDS.js";
 export default class ActorsScreen extends BaseScreen
 {
     constructor()
@@ -22,7 +23,7 @@ export default class ActorsScreen extends BaseScreen
         if( !this._actorsList )
         {
             this._actorsList = new ListElement();
-            this._actorsList.uid = "actorsList";
+            this._actorsList.uid = UIDS.ACTORS_LIST;
             this._actorsList.horizontalScrollPolicy = ScrollPolicy.OFF;
             this._actorsList.layout = this.tiledRowsLayout;
             this._actorsList.layoutData = new AnchorLayoutData( 0, 0, 0, 0 );

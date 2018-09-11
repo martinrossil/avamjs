@@ -1,7 +1,7 @@
 import Logic from "../../ava/logic/Logic.js";
 import EventTypes from "../../ava/constants/EventTypes.js";
-import ClickTargetUtil from "../ClickTargetUtil.js";
-import UIDS from "../app/UIDS.js";
+import UIDS from "../app/consts/UIDS.js";
+import ClickTargetUtil from "../app/utils/ClickTargetUtil.js";
 export default class TopNavigationLogic extends Logic
 {
     constructor()
@@ -50,18 +50,18 @@ export default class TopNavigationLogic extends Logic
         }
         if( index > -1 )
         {
-            this.setProperty( "bottomNavigationBar", "selectedIndex", index );
-            this.setProperty( "screensNavigator", "selectedIndex", index );
+            this.setProperty( UIDS.BOTTOM_NAVIGATION_BAR, "selectedIndex", index );
+            this.setProperty( UIDS.SCREENS_NAVIGATOR, "selectedIndex", index );
         }
         this.setIconButtonsVisibility( index );
     }
     setIconButtonsVisibility( index )
     {
-        this.setProperty( "trailersSortIconButton", "isVisible", index === 0 );
+        this.setProperty( UIDS.TRAILERS_SORT_ICON_BUTTON, "isVisible", index === 0 );
         this.setProperty( UIDS.TRAILERS_DRAWER_ICON_BUTTON, "isVisible", index === 0 );
-        this.setProperty( "moviesSortIconButton", "isVisible", index === 1 );
-        this.setProperty( "moviesDrawerIconButton", "isVisible", index === 1 );
-        this.setProperty( "actorsSortIconButton", "isVisible", index === 2 );
-        this.setProperty( "actorsDrawerIconButton", "isVisible", index === 2 );
+        this.setProperty( UIDS.MOVIES_SORT_ICON_BUTTON, "isVisible", index === 1 );
+        this.setProperty( UIDS.MOVIES_DRAWER_ICON_BUTTON, "isVisible", index === 1 );
+        this.setProperty( UIDS.ACTORS_SORT_ICON_BUTTON, "isVisible", index === 2 );
+        this.setProperty( UIDS.ACTORS_DRAWER_ICON_BUTTON, "isVisible", index === 2 );
     }
 }

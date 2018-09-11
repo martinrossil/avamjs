@@ -2,9 +2,10 @@ import BaseScreen from "../../../ava/screens/base/BaseScreen.js";
 import ListElement from "../../../ava/components/lists/ListElement.js";
 import ScrollPolicy from "../../../ava/constants/ScrollPolicy.js";
 import AnchorLayoutData from "../../../ava/layouts/data/AnchorLayoutData.js";
-import VideoItemRenderer from "../itemrenderers/VideoItemRenderer.js";
 import TiledRowsLayout from "../../../ava/layouts/TiledRowsLayout.js";
 import AnchorLayout from "../../../ava/layouts/AnchorLayout.js";
+import TrailerItemRenderer from "../itemrenderers/TrailerItemRenderer.js";
+import UIDS from "../consts/UIDS.js";
 export default class TrailersScreen extends BaseScreen
 {
     constructor()
@@ -22,11 +23,11 @@ export default class TrailersScreen extends BaseScreen
         if( !this._trailersList )
         {
             this._trailersList = new ListElement();
-            this._trailersList.uid = "trailersList";
+            this._trailersList.uid = UIDS.TRAILERS_LIST;
             this._trailersList.horizontalScrollPolicy = ScrollPolicy.OFF;
             this._trailersList.layout = this.tiledRowsLayout;
             this._trailersList.layoutData = new AnchorLayoutData( 0, 0, 0, 0 );
-            this._trailersList.itemRenderType = VideoItemRenderer;
+            this._trailersList.itemRenderType = TrailerItemRenderer;
         }
         return this._trailersList;
     }
