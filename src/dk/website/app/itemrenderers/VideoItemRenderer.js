@@ -1,6 +1,5 @@
 import BaseItemRenderer from "../../../ava/components/itemrenderers/BaseItemRenderer.js";
 import ImageElement from "../../../ava/components/images/ImageElement.js";
-import Config from "../Config.js";
 import TextElement from "../../../ava/components/text/TextElement.js";
 import Theme from "../../../ava/styles/Theme.js";
 import FontWeight from "../../../ava/constants/FontWeight.js";
@@ -94,7 +93,7 @@ export default class VideoItemRenderer extends BaseItemRenderer
     {
         super.initialize();
         this.z = 4;
-        this.backgroundColor = Config.SECONDARY_COLOR;
+        this.backgroundColor = Theme.SECONDARY_COLOR;
         this.createChildren();
     }
     createChildren()

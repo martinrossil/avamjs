@@ -1,5 +1,4 @@
 import BaseItemRenderer from "../../../ava/components/itemrenderers/BaseItemRenderer.js";
-import Config from "../Config.js";
 import ImageElement from "../../../ava/components/images/ImageElement.js";
 import TextElement from "../../../ava/components/text/TextElement.js";
 import Theme from "../../../ava/styles/Theme.js";
@@ -78,7 +77,7 @@ export default class ActorItemRenderer extends BaseItemRenderer
     {
         super.initialize();
         this.z = 4;
-        this.backgroundColor = Config.SECONDARY_COLOR;
+        this.backgroundColor = Theme.SECONDARY_COLOR;
         this.createChildren();
     }
     createChildren()
@@ -133,7 +132,7 @@ export default class ActorItemRenderer extends BaseItemRenderer
         if( !this._cornerSquare )
         {
             this._cornerSquare = new CornerSquare();
-            this._cornerSquare.backgroundColor = Config.SECONDARY_COLOR;
+            this._cornerSquare.backgroundColor = Theme.SECONDARY_COLOR;
             this._cornerSquare.y = -14;
             this._cornerSquare.z = 2;
         }
