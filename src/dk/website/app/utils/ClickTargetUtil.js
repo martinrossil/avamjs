@@ -1,5 +1,5 @@
-import BaseItemRenderer from "../ava/components/itemrenderers/BaseItemRenderer.js";
-import IconButton from "../ava/components/buttons/IconButton.js";
+import BaseItemRenderer from "../../../ava/components/itemrenderers/BaseItemRenderer.js";
+import IconButton from "../../../ava/components/buttons/IconButton.js";
 export default class ClickTargetUtil
 {
     constructor()
