@@ -3,6 +3,7 @@ import ImageElement from "../../../ava/components/images/ImageElement.js";
 import TextElement from "../../../ava/components/text/TextElement.js";
 import Theme from "../../../ava/styles/Theme.js";
 import CornerSquare from "./CornerSquare.js";
+import Util from "../utils/Util.js";
 export default class MovieItemRenderer extends BaseItemRenderer
 {
     constructor()
@@ -19,7 +20,7 @@ export default class MovieItemRenderer extends BaseItemRenderer
                 this.hasPosterBeenLoaded = true;
                 let i = this.data.i;
                 let ext = ImageElement.extension;
-                let url = "/plakater/" + this.getPosterSize + "/" + this.data.u + "-plakat." + ext;
+                let url = "/plakater/" + Util.getImageSize( this.width ) + "/" + this.data.u + "-plakat." + ext;
                 this.image.source = url;
                 this.releaseTextElement.text = this.data.p;
                 if( this.data.r )
@@ -32,27 +33,6 @@ export default class MovieItemRenderer extends BaseItemRenderer
                 }
             }
         }
-    }
-    get getPosterSize()
-    {
-        let w = this.width;
-        if( w < 240 )
-        {
-            return 240;
-        }
-        else if( w < 320 )
-        {
-            return 320;
-        }
-        else if( w < 400 )
-        {
-            return 400;
-        }
-        else if( w < 480 )
-        {
-            return 480;
-        }
-        return 560;
     }
     sizeChanged( w, h )
     {

@@ -4,6 +4,7 @@ import TextElement from "../../../ava/components/text/TextElement.js";
 import Theme from "../../../ava/styles/Theme.js";
 import FontWeight from "../../../ava/constants/FontWeight.js";
 import CornerSquare from "./CornerSquare.js";
+import Util from "../utils/Util.js";
 export default class ActorItemRenderer extends BaseItemRenderer
 {
     constructor()
@@ -18,30 +19,13 @@ export default class ActorItemRenderer extends BaseItemRenderer
             {
                 this.hasProfileBeenLoaded = true;
                 let ext = ImageElement.extension;
-                let url = "/profile/" + this.getProfileSize + "/" + this.data.u + "-profil." + ext;
+                let url = "/profile/" + Util.getImageSize( this.width ) + "/" + this.data.u + "-profil." + ext;
                 this.image.source = url;
                 this.nameTextElement.text = this.data.n;
                 this.birthCountryTextElement.text = this.data.b;
                 this.cornerSquare.age = this.data.a;
             }
         }
-    }
-    get getProfileSize()
-    {
-        let w = this.width;
-        if( w < 240 )
-        {
-            return 240;
-        }
-        else if( w < 320 )
-        {
-            return 320;
-        }
-        else if( w < 400 )
-        {
-            return 400;
-        }
-        return 480;
     }
     sizeChanged( w, h )
     {
