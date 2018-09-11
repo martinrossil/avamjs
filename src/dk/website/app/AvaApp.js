@@ -19,9 +19,9 @@ import TrailersDrawer from "./drawers/TrailersDrawer.js";
 import MoviesDrawer from "./drawers/MoviesDrawer.js";
 import ScrimElement from "../../ava/components/dialogs/ScrimElement.js";
 import UIDS from "./UIDS.js";
-import AppColors from "./AppColors.js";
 import Config from "./Config.js";
 import TestDisplayElement from "./test/TestDisplayElement.js";
+//import { url } from "./inspector";
 export default class AvaApp extends ApplicationElement
 {
     constructor()
@@ -42,6 +42,24 @@ export default class AvaApp extends ApplicationElement
         super.initialize();
         this.layout = new AnchorLayout();
         new BusinessLogic();
+        //const url = "url(" + window.location.origin + "http://127.0.0.1:8081/dk/website/app/gunship.woff2)";
+        /*const url = "url(http://127.0.0.1:8081/dk/website/app/gunship.woff2)";
+        const font = new FontFace( "gunship", url );
+        font.load().then( ( loadedFont ) =>
+        {
+            document.fonts.add( loadedFont );
+            Theme.FONT_FAMILY = "gunship";
+            console.log( "font loaded" );
+            this.createChildren();
+        })
+        .catch( ( error ) =>
+        {
+            console.log( "error", error );
+        });*/
+        this.createChildren();
+    }
+    createChildren()
+    {
         this.addElement( this.screensNavigator );
         this.addElement( this.bottomNavigationBar );
         this.addElement( this.appBar );
