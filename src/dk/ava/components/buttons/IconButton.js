@@ -83,18 +83,9 @@ export default class IconButton extends DisplayContainer
     }
     createChildren()
     {
-        this.addElement( this.aTag );
+        this.addElement( this.background );
         this.addElement( this.icon );
         this.addElement( this.svg );
-    }
-    get aTag()
-    {
-        if( !this._aTag )
-        {
-            this._aTag = document.createElement( "a" );
-            this._aTag.appendChild( this.background );
-        }
-        return this._aTag;
     }
     get background()
     {
@@ -188,18 +179,6 @@ export default class IconButton extends DisplayContainer
     get rippleColor()
     {
         return this._rippleColor;
-    }
-    set href( value )
-    {
-        if( this._href != value )
-        {
-            this._href = value;
-            this.aTag.href = value;
-        }
-    }
-    get href()
-    {
-        return this._href;
     }
 }
 customElements.define("icon-button", IconButton);
