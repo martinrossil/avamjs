@@ -57,9 +57,24 @@ export default class Theme
     {
         if( !this._ACCENT_COLOR )
         {
-            this._ACCENT_COLOR = Colors.PINK_500;
+            this._ACCENT_COLOR = Colors.GREEN_500;
         }
         return this._ACCENT_COLOR;
+    }
+    static set ACCENT_COLOR_DARK( value )
+    {
+        if( this._ACCENT_COLOR_DARK != value )
+        {
+            this._ACCENT_COLOR_DARK = value;
+        }
+    }
+    static get ACCENT_COLOR_DARK()
+    {
+        if( !this._ACCENT_COLOR_DARK )
+        {
+            this._ACCENT_COLOR_DARK = Colors.GREEN_700;
+        }
+        return this._ACCENT_COLOR_DARK;
     }
     static set RIPPLE_COLOR( value )
     {
