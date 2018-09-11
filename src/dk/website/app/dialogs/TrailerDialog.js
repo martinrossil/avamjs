@@ -2,8 +2,6 @@ import BaseDialog from "./BaseDialog.js";
 import Colors from "../../../ava/styles/Colors.js";
 import AnchorLayoutData from "../../../ava/layouts/data/AnchorLayoutData.js";
 import EventTypes from "../../../ava/constants/EventTypes.js";
-import JSONLoader from "../../../ava/loaders/JSONLoader.js";
-import Config from "../Config.js";
 import VideoElement from "../../../ava/components/media/VideoElement.js";
 import MediaEventTypes from "../../../ava/constants/MediaEventTypes.js";
 import SpinnerElement from "../../../ava/components/progress/SpinnerElement.js";
@@ -37,30 +35,6 @@ export default class TrailerDialog extends BaseDialog
             this.videoElement.source = source;
             this.videoElement.play();
         }
-    }
-    hrefChanged()
-    {
-        if( this.href )
-        {
-            let url = Config.FIRE_BASE_DB_BASE_URL + 'info/videos/' + this.href.replace( "/trailers/", "" ) + ".json";
-            this.jsonLoader.load( url );
-        }
-    }
-    videoInfoComplete( data )
-    {
-        if( data )
-        {
-            let id = data.i;
-            let url = Config.FIRE_BASE_STORAGE_BASE_URL + "videos%2F" + id + ".mp4?alt=media";
-            this.videoElement.source = url;
-            this.videoElement.play();
-        }
-    }
-    videoInfoAborted()
-    {
-    }
-    videoInfoError()
-    {
     }
     initialize()
     {
@@ -179,17 +153,6 @@ export default class TrailerDialog extends BaseDialog
             this._videoElement.listen( MediaEventTypes.CURRENT_TIME_CHANGED, this.currentTimeChanged.bind( this ) );
         }
         return this._videoElement;
-    }
-    get jsonLoader()
-    {
-        if( !this._jsonLoader )
-        {
-            this._jsonLoader = new JSONLoader();
-            this._jsonLoader.listen( EventTypes.LOAD_COMPLETE, this.videoInfoComplete.bind( this ) );
-            this._jsonLoader.listen( EventTypes.LOAD_ABORTED, this.videoInfoAborted.bind( this ) );
-            this._jsonLoader.listen( EventTypes.LOAD_ERROR, this.videoInfoError.bind( this ) );
-        }
-        return this._jsonLoader;
     }
 }
 customElements.define("trailer-dialog", TrailerDialog);
