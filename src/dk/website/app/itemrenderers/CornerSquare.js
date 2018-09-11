@@ -4,7 +4,6 @@ import Colors from "../../../ava/styles/Colors.js";
 import TextElement from "../../../ava/components/text/TextElement.js";
 import FontWeight from "../../../ava/constants/FontWeight.js";
 import TextAlign from "../../../ava/constants/TextAlign.js";
-import AppColors from "../AppColors.js";
 export default class CornerSquare extends DisplayContainer
 {
     constructor()
@@ -51,15 +50,15 @@ export default class CornerSquare extends DisplayContainer
             this.textElement.text = value;
             if( value > 6.9 )
             {
-                this.backgroundColor = AppColors.GREEN;// Colors.GREEN_700
+                this.backgroundColor = Colors.GREEN_700
             }
             else if( value > 4.9 )
             {
-                this.backgroundColor = AppColors.ORANGE;// Colors.AMBER_700;
+                this.backgroundColor = Colors.AMBER_700;
             }
             else
             {
-                this.backgroundColor = AppColors.RED;// Colors.RED_700;
+                this.backgroundColor = Colors.RED_700;
             }
         }
     }
