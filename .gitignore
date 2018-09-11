@@ -5,3 +5,4 @@ dist/
 *.cache
 *.webm
 *.mp4
+node_modules/
