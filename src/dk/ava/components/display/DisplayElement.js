@@ -11,6 +11,7 @@ export default class DisplayElement extends BaseElement
     initialize()
     {
         super.initialize();
+        this.style.position = "absolute";
         this.animationEnded = this.animationEnded.bind( this );
         this._x = 0;
         this._y = 0;
@@ -24,7 +25,6 @@ export default class DisplayElement extends BaseElement
         this._notifyPropertyAnimationEnd = false;
         this._isInteractive = true;
         this._cornerRadius = 0;
-        this.appendChild( this.div );
     }
     sizeChanged( w, h )
     {
@@ -37,15 +37,6 @@ export default class DisplayElement extends BaseElement
     heightChanged( h )
     {
         // override
-    }
-    get div()
-    {
-        if( !this._div )
-        {
-            this._div = document.createElement( "div" );
-            this._div.style.position = "absolute";
-        }
-        return this._div;
     }
     animationEnded( e )
     {
@@ -104,16 +95,16 @@ export default class DisplayElement extends BaseElement
                     transitionDurations.push( animatedProperty.duration + "ms" );
                     transitionTimingFunctions.push( animatedProperty.easing );
                 }
-                this.div.style.transitionProperty = transitionProperties.join();
-                this.div.style.transitionDuration = transitionDurations.join();
-                this.div.style.transitionTimingFunctions = transitionTimingFunctions.join();
-                this.div.addEventListener( "transitionend", this.animationEnded, false );
+                this.style.transitionProperty = transitionProperties.join();
+                this.style.transitionDuration = transitionDurations.join();
+                this.style.transitionTimingFunctions = transitionTimingFunctions.join();
+                this.addEventListener( "transitionend", this.animationEnded, false );
             }
             else
             {
-                this.div.style.transitionProperty = "";
-                this.div.style.transitionDuration = "";
-                this.div.style.transitionTimingFunctions = "";
+                this.style.transitionProperty = "";
+                this.style.transitionDuration = "";
+                this.style.transitionTimingFunctions = "";
             }
         }
     }
@@ -127,8 +118,8 @@ export default class DisplayElement extends BaseElement
         {
             this._x = x;
             this._y = y;
-            this.div.style.left = x + "px";
-            this.div.style.top = y + "px";
+            this.style.left = x + "px";
+            this.style.top = y + "px";
         }
         else
         {
@@ -141,9 +132,9 @@ export default class DisplayElement extends BaseElement
         if( this._width !== w && this._height !== h )
         {
             this._width = w;
-            this.div.style.width = w + "px";
+            this.style.width = w + "px";
             this._height = h;
-            this.div.style.height = h + "px";
+            this.style.height = h + "px";
             this.sizeChanged( w, h );
         }
         else
@@ -157,7 +148,7 @@ export default class DisplayElement extends BaseElement
         if( this._x !== value )
         {
             this._x = value;
-            this.div.style.left = value + "px";
+            this.style.left = value + "px";
         }
     }
     get x()
@@ -169,7 +160,7 @@ export default class DisplayElement extends BaseElement
         if( this._y !== value )
         {
             this._y = value;
-            this.div.style.top = value + "px";
+            this.style.top = value + "px";
         }
     }
     get y()
@@ -181,7 +172,7 @@ export default class DisplayElement extends BaseElement
         if( this._width !== value )
         {
             this._width = value;
-            this.div.style.width = value + "px";
+            this.style.width = value + "px";
             this.widthChanged( value );
         }
     }
@@ -194,7 +185,7 @@ export default class DisplayElement extends BaseElement
         if( this._height != value ) 
         {
             this._height = value;
-            this.div.style.height = value + "px";
+            this.style.height = value + "px";
             this.heightChanged( value );
         }
     }
@@ -207,7 +198,7 @@ export default class DisplayElement extends BaseElement
         if( this.backgroundColor != value ) 
         {
             this._backgroundColor = value;
-            this.div.style.backgroundColor = value;
+            this.style.backgroundColor = value;
         }
     }
     get backgroundColor() 
@@ -230,7 +221,7 @@ export default class DisplayElement extends BaseElement
         if( this._z !== value ) 
         {
             this._z = value;
-            this.div.style.boxShadow = Shadows.getShadow( value, this.shadowDirection );
+            this.style.boxShadow = Shadows.getShadow( value, this.shadowDirection );
         }
     }
     get z()
@@ -244,7 +235,7 @@ export default class DisplayElement extends BaseElement
             this._shadowDirection = value;
             if( this.z !== 0 )
             {
-                this.div.style.boxShadow = Shadows.getShadow( this.z, value );
+                this.style.boxShadow = Shadows.getShadow( this.z, value );
             }
         }
     }
@@ -257,7 +248,7 @@ export default class DisplayElement extends BaseElement
         if( this._scale !== value )
         {
             this._scale = value;
-            this.div.style.transform = "scale( " + value + ", " + value + ")";
+            this.style.transform = "scale( " + value + ", " + value + ")";
         }
     }
     get scale()
@@ -269,7 +260,7 @@ export default class DisplayElement extends BaseElement
         if( this.opacity != value )
         {
             this._opacity = value;
-            this.div.style.opacity = value + "";
+            this.style.opacity = value + "";
         }
     }
     get opacity()
@@ -281,8 +272,7 @@ export default class DisplayElement extends BaseElement
         if( this._isVisible != value )
         {
             this._isVisible = value;
-            this.div.style.visibility = value ? "visible" : "hidden";
-            //this.div.style.display = value ? "" : "none";
+            this.style.visibility = value ? "visible" : "hidden";
         }
     }
     get isVisible()
@@ -294,14 +284,6 @@ export default class DisplayElement extends BaseElement
         if( this._notifyPropertyAnimationEnd !== value )
         {
             this._notifyPropertyAnimationEnd = value;
-            /*if( value )
-            {
-                this.div.addEventListener( "transitionend", this.animationEnded );
-            }
-            else
-            {
-                this.div.removeEventListener( "transitionend", this.animationEnded );
-            }*/
         }
     }
     get notifyPropertyAnimationEnd()
@@ -313,7 +295,7 @@ export default class DisplayElement extends BaseElement
         if( this._isInteractive !== value )
         {
             this._isInteractive = value;
-            this.div.style.pointerEvents = value ? "" : "none";
+            this.style.pointerEvents = value ? "" : "none";
         }
     }
     get isInteractive()
@@ -325,7 +307,7 @@ export default class DisplayElement extends BaseElement
         if( this._cornerRadius !== value )
         {
             this._cornerRadius = value;
-            this.div.style.borderRadius = value + "px";
+            this.style.borderRadius = value + "px";
         }
     }
     get cornerRadius()

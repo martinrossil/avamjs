@@ -145,7 +145,7 @@ export default class VideoControls extends LayoutContainer
     }
     fullScreenIconButtonTriggered()
     {
-        let app = ApplicationElement.app.div;
+        let app = ApplicationElement.app;
         if( !document.fullscreenElement && !document.mozFullScreenElement &&
             !document.webkitFullscreenElement && !document.msFullscreenElement )
         {

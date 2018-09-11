@@ -62,7 +62,7 @@ export default class ImageElement extends DisplayElement
         this.notifyPropertyAnimationEnd = false;
         this.opacity = 0;
         this.animatedProperties = [ new AnimatedProperty( "opacity", 375 ) ];
-        this.div.appendChild( this.image );
+        this.appendChild( this.image );
     }
     get image()
     {

@@ -29,7 +29,7 @@ export default class IconElement extends DisplayElement
         this.isInteractive = false;
         this.iconColor = Theme.ICON_COLOR;
         this.setSize( 24, 24 );
-        this.div.appendChild( this.svg );
+        this.appendChild( this.svg );
     }
     get svg()
     {

@@ -26,7 +26,7 @@ export default class SpinnerElement extends DisplayElement
         if( this.shouldRotate )
         {
             this.rotation += this.speed;
-            this.div.style.transform = "rotate(" + this.rotation + "deg)";
+            this.style.transform = "rotate(" + this.rotation + "deg)";
             this.requestAnimationFrame( this.animationTick.bind( this ) );
         }
     }
@@ -52,7 +52,7 @@ export default class SpinnerElement extends DisplayElement
         this.shouldRotate = false;
         this.notifyPropertyAnimationEnd = true;
         this.animatedProperties = [ new AnimatedProperty( "opacity", 225, "ease-in" ) ];
-        this.div.appendChild( this.svg );
+        this.appendChild( this.svg );
     }
     get svg()
     {

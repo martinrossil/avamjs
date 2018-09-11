@@ -53,7 +53,7 @@ export default class IconButton extends DisplayContainer
             let touch = e.changedTouches[ 0 ];
             let px = touch.pageX;
             let py = touch.pageY;
-            let rect = this.div.getBoundingClientRect();
+            let rect = this.getBoundingClientRect();
             if( px > rect.x && px < rect.x + rect.width )
             {
                 if( py > rect.y && py < rect.y + rect.height )

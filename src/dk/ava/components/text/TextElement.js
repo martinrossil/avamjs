@@ -33,8 +33,8 @@ export default class TextElement extends DisplayElement
         if( this._text != value )
         {
             this._text = value;
-            this.div.textContent = value;
-            //this.height = this.div.scrollHeight;
+            this.textContent = value;
+            //this.height = this.scrollHeight;
         }
     }
     get text()
@@ -46,7 +46,7 @@ export default class TextElement extends DisplayElement
         if( this._textColor != value )
         {
             this._textColor = value;
-            this.div.style.color = value;
+            this.style.color = value;
         }
     }
     get textColor()
@@ -58,8 +58,8 @@ export default class TextElement extends DisplayElement
         if( this._fontSize != value )
         {
             this._fontSize = value;
-            this.div.style.fontSize = value + "px";
-            //this.height = this.div.scrollHeight;
+            this.style.fontSize = value + "px";
+            //this.height = this.scrollHeight;
         }
     }
     get fontSize()
@@ -71,8 +71,8 @@ export default class TextElement extends DisplayElement
         if( this._fontWeight != value )
         {
             this._fontWeight = value;
-            this.div.style.fontWeight = value;
-            //this.height = this.div.scrollHeight;
+            this.style.fontWeight = value;
+            //this.height = this.scrollHeight;
         }
     }
     get fontWeight()
@@ -84,8 +84,8 @@ export default class TextElement extends DisplayElement
         if( this._fontFamily != value )
         {
             this._fontFamily = value;
-            this.div.style.fontFamily = value;
-            //this.height = this.div.scrollHeight;
+            this.style.fontFamily = value;
+            //this.height = this.scrollHeight;
         }
     }
     get fontFamily()
@@ -97,8 +97,8 @@ export default class TextElement extends DisplayElement
         if( this._lineHeight != value )
         {
             this._lineHeight = value;
-            this.div.style.lineHeight = value + "";
-            //this.height = this.div.scrollHeight;
+            this.style.lineHeight = value + "";
+            //this.height = this.scrollHeight;
         }
     }
     get lineHeight()
@@ -110,7 +110,7 @@ export default class TextElement extends DisplayElement
         if( this._textAlign != value )
         {
             this._textAlign = value;
-            this.div.style.textAlign = value;
+            this.style.textAlign = value;
         }
     }
     get textAlign()
@@ -124,15 +124,15 @@ export default class TextElement extends DisplayElement
             this._wordWrap = value;
             if( value )
             {
-                this.div.style.overflow = "";
-                this.div.style.whiteSpace = "";
-                this.div.style.textOverflow = "";
+                this.style.overflow = "";
+                this.style.whiteSpace = "";
+                this.style.textOverflow = "";
             }
             else
             {
-                this.div.style.overflow = "hidden";
-                this.div.style.whiteSpace = "nowrap";
-                this.div.style.textOverflow = "ellipsis"; 
+                this.style.overflow = "hidden";
+                this.style.whiteSpace = "nowrap";
+                this.style.textOverflow = "ellipsis"; 
             }
         }
     }

@@ -24,7 +24,7 @@ export default class VerticalLayout extends BaseLayout
     layoutElements( w, h )
     {
         super.layoutElements( w, h );
-        let scrollbarWidth = this.host.div.offsetWidth - this.host.div.parentNode.parentNode.clientWidth;
+        let scrollbarWidth = this.host.offsetWidth - this.host.parentNode.clientWidth;
         let elements = this.host.childElements;
         let element;
         let y = this.paddingTop;
@@ -64,7 +64,7 @@ export default class VerticalLayout extends BaseLayout
         {
             this.host.height = y + this.paddingBottom - vg;
         }
-        let scrollbarWidthAfter = this.host.div.offsetWidth - this.host.div.parentNode.parentNode.clientWidth;
+        let scrollbarWidthAfter = this.host.offsetWidth - this.host.parentNode.clientWidth;
         if( scrollbarWidthAfter != scrollbarWidth )
         {
             this.layoutElements( w, h );

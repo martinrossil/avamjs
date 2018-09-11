@@ -64,7 +64,7 @@ export default class ScrollContainer extends DisplayElement
         super.initialize();
         this.horizontalScrollPolicy = ScrollPolicy.ON;
         this.verticalScrollPolicy = ScrollPolicy.ON;
-        this.div.appendChild( this.elementsContainer );
+        this.appendChild( this.elementsContainer );
     }
     get elementsContainer()
     {
@@ -81,12 +81,12 @@ export default class ScrollContainer extends DisplayElement
             this._horizontalScrollPolicy = value;
             if( value === ScrollPolicy.ON )
             {
-                this.div.style.overflowX = "auto";
+                this.style.overflowX = "auto";
                 this.elementsContainer.autoSizeHorizontal = true;
             }
             else
             {
-                this.div.style.overflowX = "hidden";
+                this.style.overflowX = "hidden";
                 this.elementsContainer.autoSizeHorizontal = false;
                 this.elementsContainer.width = this.width;
             }
@@ -103,12 +103,12 @@ export default class ScrollContainer extends DisplayElement
             this._verticalScrollPolicy = value;
             if( value === ScrollPolicy.ON )
             {
-                this.div.style.overflowY = "auto";
+                this.style.overflowY = "auto";
                 this.elementsContainer.autoSizeVertical = true;
             }
             else
             {
-                this.div.style.overflowY = "hidden";
+                this.style.overflowY = "hidden";
                 this.elementsContainer.autoSizeVertical = false;
                 this.elementsContainer.height = this.height;
             }

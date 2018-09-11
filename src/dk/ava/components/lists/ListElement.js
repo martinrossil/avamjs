@@ -57,10 +57,8 @@ export default class ListElement extends ScrollContainer
         this.itemRemovedAt  = this.itemRemovedAt.bind( this );
         this.itemRemoved    = this.itemRemoved.bind( this );
         this._selectedIndex = -1;
-        //this.itemRendererTriggered = this.itemRendererTriggered.bind( this );
         this.lastScrollPosition = 0;
         this.requestTick();
-        //this.div.addEventListener( EventTypes.TRIGGERED, this.itemRendererTriggered );
     }
     itemRendererTriggered( e )
     {
@@ -101,7 +99,7 @@ export default class ListElement extends ScrollContainer
         let itemRenderers = this.childElements;
         let itemRenderer;
         let height = this.height;
-        let scrollPosition = this.div.scrollTop;
+        let scrollPosition = this.scrollTop;
         let min = scrollPosition - 2 * height;
         let max = scrollPosition + 2 * height
         let y;
@@ -238,7 +236,7 @@ export default class ListElement extends ScrollContainer
     }
     get scrollPosition()
     {
-        return this.div.scrollTop;
+        return this.scrollTop;
     }
     get requestAnimationFrame()
     {

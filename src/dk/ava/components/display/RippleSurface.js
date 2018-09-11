@@ -66,7 +66,7 @@ export default class RippleSurface extends DisplayContainer
             let touch = e.changedTouches[ 0 ];
             let px = touch.pageX;
             let py = touch.pageY;
-            let rect = this.div.getBoundingClientRect();
+            let rect = this.getBoundingClientRect();
             let localX = px - rect.x;
             let localY = py - rect.y;
             this.circle.x = localX - this.circle.width * .5;
@@ -81,7 +81,7 @@ export default class RippleSurface extends DisplayContainer
         this.addEventListener( "mouseup", this.meMouseUp, { capture : true } );
         let px = e.pageX;
         let py = e.pageY;
-        let rect = this.div.getBoundingClientRect();
+        let rect = this.getBoundingClientRect();
         let localX = px - rect.x;
         let localY = py - rect.y;
         this.circle.x = localX - this.circle.width * .5;
@@ -107,7 +107,7 @@ export default class RippleSurface extends DisplayContainer
             let touch = e.changedTouches[ 0 ];
             let px = touch.pageX;
             let py = touch.pageY;
-            let rect = this.div.getBoundingClientRect();
+            let rect = this.getBoundingClientRect();
             if( px > rect.x && px < rect.x + rect.width )
             {
                 if( py > rect.y && py < rect.y + rect.height )

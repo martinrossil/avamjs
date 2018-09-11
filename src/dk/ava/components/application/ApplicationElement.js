@@ -42,9 +42,9 @@ export default class ApplicationElement extends LayoutContainer
         super.initialize();
         this.appLoadComplete = this.appLoadComplete.bind( this );
         ApplicationElement.app = this;
-        if( this.div.style[ "-webkit-overflow-scrolling" ] != undefined )
+        if( this.style[ "-webkit-overflow-scrolling" ] != undefined )
         {
-            this.div.style[ "-webkit-overflow-scrolling" ]  = "touch";
+            this.style[ "-webkit-overflow-scrolling" ]  = "touch";
         }
         System.START_TIME = new Date();
         this.setSize( window.innerWidth, window.innerHeight ); 

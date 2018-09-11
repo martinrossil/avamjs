@@ -20,31 +20,31 @@ export default class DisplayContainer extends DisplayElement
             element = elements[ i ];
             frag.appendChild( element );
         }
-        this.div.appendChild( frag );
+        this.appendChild( frag );
     }
     addElement( displayElement )
     {
-        this.div.appendChild( displayElement );
+        this.appendChild( displayElement );
     }
     removeElement( displayElement )
     {
-        this.div.removeChild( displayElement );
+        this.removeChild( displayElement );
     }
     removeAllChildElements()
     {
         let lastElement;
-        while( lastElement = this.div.lastChild )
+        while( lastElement = this.lastChild )
         {
-            this.div.removeChild( lastElement );
+            this.removeChild( lastElement );
         }
     }
     containsElement( element )
     {
-        return this.div.contains( element );
+        return this.contains( element );
     }
     getElementAt( index )
     {
-        return this.div.childNodes[ index ];
+        return this.childNodes[ index ];
     }
     getElementIndex( element )
     {
@@ -64,22 +64,22 @@ export default class DisplayContainer extends DisplayElement
     }
     get hasElements() 
     {
-        return this.div.hasChildNodes();
+        return this.hasChildNodes();
     }
     get childElements()
     {
-        return this.div.childNodes;
+        return this.childNodes;
     }
     get numElements()
     {
-        return this.div.childNodes.length;
+        return this.childNodes.length;
     }
     set clipContent( value )
     {
         if( this._clipContent !== value )
         {
             this._clipContent = value;
-            this.div.style.overflow = value ? "hidden" : ""; 
+            this.style.overflow = value ? "hidden" : ""; 
         }
     }
     get clipContent()
