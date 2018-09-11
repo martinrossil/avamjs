@@ -22,7 +22,7 @@ export default class ActorsScreen extends BaseScreen
         if( !this._actorsList )
         {
             this._actorsList = new ListElement();
-            this._actorsList.uid = "skuespillereList";
+            this._actorsList.uid = "actorsList";
             this._actorsList.horizontalScrollPolicy = ScrollPolicy.OFF;
             this._actorsList.layout = this.tiledRowsLayout;
             this._actorsList.layoutData = new AnchorLayoutData( 0, 0, 0, 0 );

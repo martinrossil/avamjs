@@ -22,7 +22,7 @@ export default class MoviesScreen extends BaseScreen
         if( !this._moviesList )
         {
             this._moviesList = new ListElement();
-            this._moviesList.uid = "filmList";
+            this._moviesList.uid = "moviesList";
             this._moviesList.horizontalScrollPolicy = ScrollPolicy.OFF;
             this._moviesList.layout = this.tiledRowsLayout;
             this._moviesList.layoutData = new AnchorLayoutData( 0, 0, 0, 0 );

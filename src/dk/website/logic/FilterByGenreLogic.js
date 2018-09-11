@@ -3,6 +3,7 @@ import ClickTargetUtil from "../ClickTargetUtil.js";
 import GenreItemRenderer from "../app/itemrenderers/GenreItemRenderer.js";
 import BottomNavigationBarItemRenderer from "../../ava/components/itemrenderers/BottomNavigationBarItemRenderer.js";
 import CountryItemRenderer from "../app/itemrenderers/CountryItemRenderer.js";
+import UIDS from "../app/UIDS.js";
 export default class FilterByGenreLogic extends Logic
 {
     constructor()
@@ -20,10 +21,10 @@ export default class FilterByGenreLogic extends Logic
             if( iconButton )
             {
                 let showMovieGenres = iconButton.href === "/film/genrer";
-                let showTrailersGenres = iconButton.href === "/trailers/genrer";
+                let showTrailersDrawer = iconButton.href === "/trailers/genrer";
                 let showActorsDrawer = iconButton.href === "/skuespillere/lande";
                 this.setProperty( "moviesGenresDrawer", "isShown", showMovieGenres );
-                this.setProperty( "trailersGenresDrawer", "isShown", showTrailersGenres );
+                this.setProperty( UIDS.TRAILERS_DRAWER, "isShown", showTrailersDrawer );
                 this.setProperty( "actorsDrawer", "isShown", showActorsDrawer );
             }
             let itemRenderer = ClickTargetUtil.getItemRendererFromTarget( e.target );
@@ -32,7 +33,6 @@ export default class FilterByGenreLogic extends Logic
                 if( itemRenderer instanceof GenreItemRenderer )
                 {
                     let href = itemRenderer.data.h;
-                    this.setProperty( "trailersGenresDrawer", "isShown", false );
                     this.setProperty( "moviesGenresDrawer", "isShown", false );
                 }
                 else if( itemRenderer instanceof CountryItemRenderer )

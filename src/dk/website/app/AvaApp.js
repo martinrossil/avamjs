@@ -11,7 +11,6 @@ import ScreensNavigator from "../../ava/screens/ScreensNavigator.js";
 import TrailersScreen from "./screens/TrailersScreen.js";
 import MoviesScreen from "./screens/MoviesScreen.js";
 import ActorsScreen from "./screens/ActorsScreen.js";
-import Config from "./Config.js";
 import BusinessLogic from "../logic/BusinessLogic.js";
 import TrailerDialog from "./dialogs/TrailerDialog.js";
 import AvaAppBar from "./bars/AvaAppBar.js";
@@ -19,22 +18,26 @@ import ActorsDrawer from "./drawers/ActorsDrawer.js";
 import TrailersDrawer from "./drawers/TrailersDrawer.js";
 import MoviesDrawer from "./drawers/MoviesDrawer.js";
 import ScrimElement from "../../ava/components/dialogs/ScrimElement.js";
+import UIDS from "./UIDS.js";
+import AppColors from "./AppColors.js";
+import Config from "./Config.js";
 export default class AvaApp extends ApplicationElement
 {
     constructor()
     {
         super();
-        this.uid = "AvaApp";
+        this.uid = UIDS.APP;
     }
     initialize()
     {
-        Theme.APP_BACKGROUND_COLOR = Config.APP_BACKGROUND_COLOR;
-        Theme.PRIMARY_COLOR = Config.PRIMARY_COLOR;
-        Theme.PRIMARY_COLOR_DARK = Config.PRIMARY_COLOR_DARK;
-        Theme.ICON_COLOR = Colors.WHITE;
-        Theme.PRIMARY_TEXT_COLOR = Colors.WHITE;
-        Theme.RIPPLE_COLOR = Colors.WHITE;
-        Theme.ACCENT_COLOR = Colors.WHITE;
+        Theme.APP_BACKGROUND_COLOR  = Config.APP_BACKGROUND_COLOR;
+        Theme.PRIMARY_COLOR         = Config.PRIMARY_COLOR
+        Theme.PRIMARY_COLOR_DARK    = Config.PRIMARY_COLOR_DARK;
+        Theme.ACCENT_COLOR          = Config.ACCENT_COLOR
+        Theme.ACCENT_COLOR_DARK     = Config.ACCENT_COLOR_DARK;
+        Theme.ICON_COLOR            = Colors.WHITE;
+        Theme.PRIMARY_TEXT_COLOR    = Colors.WHITE;
+        Theme.RIPPLE_COLOR          = Colors.WHITE;
         super.initialize();
         this.layout = new AnchorLayout();
         new BusinessLogic();
@@ -52,7 +55,7 @@ export default class AvaApp extends ApplicationElement
         if( !this._overlay )
         {
             this._overlay = new ScrimElement();
-            this._overlay.uid = "overlay";
+            this._overlay.uid = UIDS.OVERLAY; 
         }
         return this._overlay;
     }
@@ -61,8 +64,7 @@ export default class AvaApp extends ApplicationElement
         if( !this._trailersDrawer )
         {
             this._trailersDrawer = new TrailersDrawer();
-            this._trailersDrawer.uid = "trailersDrawer";
-            this._trailersDrawer.closeHref = "/trailers";
+            this._trailersDrawer.uid = UIDS.TRAILERS_DRAWER;
         }
         return this._trailersDrawer;
     }
@@ -71,8 +73,7 @@ export default class AvaApp extends ApplicationElement
         if( !this._moviesDrawer )
         {
             this._moviesDrawer = new MoviesDrawer();
-            this._moviesDrawer.uid = "filmDrawer";
-            this._moviesDrawer.closeHref = "/film";
+            this._moviesDrawer.uid = "moviesDrawer";
         }
         return this._moviesDrawer;
     }
@@ -81,8 +82,7 @@ export default class AvaApp extends ApplicationElement
         if( !this._actorsDrawer )
         {
             this._actorsDrawer = new ActorsDrawer();
-            this._actorsDrawer.uid = "skuespillereDrawer";
-            this._actorsDrawer.closeHref = "/skuespillere";
+            this._actorsDrawer.uid = "actorsDrawer";
         }
         return this._actorsDrawer;
     }

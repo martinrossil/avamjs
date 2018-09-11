@@ -3,6 +3,7 @@ import ClickTargetUtil from "../ClickTargetUtil.js";
 import JSONLoader from "../../ava/loaders/JSONLoader.js";
 import EventTypes from "../../ava/constants/EventTypes.js";
 import ArrayCollection from "../../ava/data/ArrayCollection.js";
+import UIDS from "../app/UIDS.js";
 export default class DataLogic extends Logic
 {
     constructor()
@@ -12,7 +13,7 @@ export default class DataLogic extends Logic
         this.currentChildFilter = "alle";
         this.currentSort = "nyeste";
         document.addEventListener( "click", this.clicked.bind( this ) );
-        this.listen( "AvaApp", EventTypes.APPLICATION_LOAD_COMPLETE, this.applicationLoadComplete.bind( this ) );
+        this.listen( UIDS.APP, EventTypes.APPLICATION_LOAD_COMPLETE, this.applicationLoadComplete.bind( this ) );
     }
     applicationLoadComplete()
     {

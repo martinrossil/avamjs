@@ -1,6 +1,7 @@
 import Logic from "../../ava/logic/Logic.js";
 import ClickTargetUtil from "../ClickTargetUtil.js";
 import EventTypes from "../../ava/constants/EventTypes.js";
+import UIDS from "../app/UIDS.js";
 export default class ShowHideUILogic extends Logic
 {
     constructor()
@@ -8,7 +9,7 @@ export default class ShowHideUILogic extends Logic
         super();
         window.addEventListener( "popstate", this.popped.bind( this ) );
         document.addEventListener( "click", this.clicked.bind( this ) );
-        this.listen( "AvaApp", EventTypes.APPLICATION_LOAD_COMPLETE, this.applicationLoadComplete.bind( this ) );
+        this.listen( UIDS.APP, EventTypes.APPLICATION_LOAD_COMPLETE, this.applicationLoadComplete.bind( this ) );
     }
     applicationLoadComplete()
     {
@@ -58,7 +59,7 @@ export default class ShowHideUILogic extends Logic
         {
             top = "trailers";
         }
-        this.setProperty( "trailersDrawerIconButton", "isVisible", top === "trailers" );
+        this.setProperty( UIDS.TRAILERS_DRAWER_ICON_BUTTON, "isVisible", top === "trailers" );
         this.setProperty( "filmDrawerIconButton", "isVisible", top === "film" );
         this.setProperty( "skuespillereDrawerIconButton", "isVisible", top === "skuespillere" );
     }
@@ -70,7 +71,7 @@ export default class ShowHideUILogic extends Logic
     hideDrawers()
     {
         this.setProperty( "filmDrawer", "isShown", false );
-        this.setProperty( "trailersDrawer", "isShown", false );
+        this.setProperty( UIDS.TRAILERS_DRAWER, "isShown", false );
         this.setProperty( "skuespillereDrawer", "isShown", false );
     }
 }

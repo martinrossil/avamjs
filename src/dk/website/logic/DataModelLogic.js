@@ -7,16 +7,17 @@ import ArrayCollection from "../../ava/data/ArrayCollection.js";
 import CountryItemRenderer from "../app/itemrenderers/CountryItemRenderer.js";
 import BottomNavigationBarItemRenderer from "../../ava/components/itemrenderers/BottomNavigationBarItemRenderer.js";
 import FilterTypeItemRenderer from "../app/itemrenderers/FilterTypeItemRenderer.js";
+import UIDS from "../app/UIDS.js";
 export default class DataModelLogic extends Logic
 {
     constructor()
     {
         super();
-        this.currentSort = "sortedByCreated";
+        this.currentSort = "sortedByCreated"; 
         this.currentGenre = "alle";
         this.currentCountry = "alle";
         document.addEventListener( "click", this.clicked.bind( this ) );
-        this.listen( "AvaApp", EventTypes.APPLICATION_LOAD_COMPLETE, this.applicationLoadComplete.bind( this ) );
+        this.listen( UIDS.APP, EventTypes.APPLICATION_LOAD_COMPLETE, this.applicationLoadComplete.bind( this ) );
         this.listen( "moviesList", EventTypes.IS_ON_LAST_SCREEN_CHANGED, this.moviesListIsOnLastScreenChanged.bind( this ) );
         this.listen( "videosList", EventTypes.IS_ON_LAST_SCREEN_CHANGED, this.videosListIsOnLastScreenChanged.bind( this ) );
         this.listen( "actorsList", EventTypes.IS_ON_LAST_SCREEN_CHANGED, this.actorsListIsOnLastScreenChanged.bind( this ) );

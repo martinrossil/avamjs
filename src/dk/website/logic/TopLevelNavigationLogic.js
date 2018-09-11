@@ -2,6 +2,7 @@ import Logic from "../../ava/logic/Logic.js";
 import EventTypes from "../../ava/constants/EventTypes.js";
 import BottomNavigationBarItemRenderer from "../../ava/components/itemrenderers/BottomNavigationBarItemRenderer.js";
 import ClickTargetUtil from "../ClickTargetUtil.js";
+import UIDS from "../app/UIDS.js";
 export default class TopLevelNavigationLogic extends Logic
 {
     constructor()
@@ -9,7 +10,7 @@ export default class TopLevelNavigationLogic extends Logic
         super();
         window.addEventListener( "popstate", this.popped.bind( this ) ); 
         document.addEventListener( "click", this.clicked.bind( this ) );
-        this.listen( "AvaApp", EventTypes.APPLICATION_LOAD_COMPLETE, this.applicationLoadComplete.bind( this ) );
+        this.listen( UIDS.APP, EventTypes.APPLICATION_LOAD_COMPLETE, this.applicationLoadComplete.bind( this ) );
     }
     applicationLoadComplete()
     {
@@ -58,6 +59,6 @@ export default class TopLevelNavigationLogic extends Logic
     {
         this.setProperty( "screensNavigator", "selectedIndex", index );
         this.setProperty( "appBar", "title", title );
-        document.title = title;
+        //document.title = title;
     }
 }
