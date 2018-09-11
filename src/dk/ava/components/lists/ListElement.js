@@ -7,15 +7,9 @@ export default class ListElement extends ScrollContainer
     constructor()
     {
         super();
-        this.reset          = this.reset.bind( this );
-        this.itemAdded      = this.itemAdded.bind( this );
-        this.itemsAdded     = this.itemsAdded.bind( this );
-        this.itemRemovedAt  = this.itemRemovedAt.bind( this );
-        this.itemRemoved    = this.itemRemoved.bind( this );
     }
     selectedIndexChanged()
     {
-        console.log( "ListElement", "selectedIndexChanged", this.selectedIndex );
         if( this.selectedIndex != -1 )
         {
             if( this.dataProvider && this.dataProvider.length > this.selectedIndex )
@@ -57,6 +51,11 @@ export default class ListElement extends ScrollContainer
     initialize()
     {
         super.initialize();
+        this.reset          = this.reset.bind( this );
+        this.itemAdded      = this.itemAdded.bind( this );
+        this.itemsAdded     = this.itemsAdded.bind( this );
+        this.itemRemovedAt  = this.itemRemovedAt.bind( this );
+        this.itemRemoved    = this.itemRemoved.bind( this );
         this._selectedIndex = -1;
         //this.itemRendererTriggered = this.itemRendererTriggered.bind( this );
         this.lastScrollPosition = 0;
