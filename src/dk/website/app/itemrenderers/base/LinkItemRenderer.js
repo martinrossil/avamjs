@@ -2,10 +2,10 @@ import BaseItemRenderer from "../../../../ava/components/itemrenderers/BaseItemR
 import VerticalLayoutData from "../../../../ava/layouts/data/VerticalLayoutData.js";
 import DisplayElement from "../../../../ava/components/display/DisplayElement.js";
 import Theme from "../../../../ava/styles/Theme.js";
-import AnimatedProperty from "../../../../ava/animation/AnimatedProperty.js";
 import TextElement from "../../../../ava/components/text/TextElement.js";
 import RippleSurface from "../../../../ava/components/display/RippleSurface.js";
 import TextAlign from "../../../../ava/constants/TextAlign.js";
+import AnimatedProperty from "../../../../ava/animation/AnimatedProperty.js";
 export default class LinkItemRenderer extends BaseItemRenderer
 {
     constructor()
@@ -14,6 +14,7 @@ export default class LinkItemRenderer extends BaseItemRenderer
     }
     isSelectedChanged()
     {
+        //this.selectionLayer.isVisible = this.isSelected;
         this.selectionLayer.opacity = this.isSelected ? .12 : 0;
     }
     dataChanged()
@@ -66,9 +67,10 @@ export default class LinkItemRenderer extends BaseItemRenderer
         if( !this._aTag )
         {
             this._aTag = document.createElement( "a" );
+            this._aTag.appendChild( this.selectionLayer );
             this._aTag.appendChild( this.labelTextElement );
             this._aTag.appendChild( this.countTextElement );
-            this._aTag.appendChild( this.selectionLayer );
+            
             //this._aTag.appendChild( this.rippleSurface );
         }
         return this._aTag;
@@ -80,7 +82,9 @@ export default class LinkItemRenderer extends BaseItemRenderer
             this._labelTextElement = new TextElement();
             this._labelTextElement.x = 8;
             this._labelTextElement.y = 12;
+            this._labelTextElement.width = 3 * 56;
             this._labelTextElement.textColor = Theme.PRIMARY_TEXT_COLOR;
+            this._labelTextElement.wordWrap = false;
         }
         return this._labelTextElement;
     }
