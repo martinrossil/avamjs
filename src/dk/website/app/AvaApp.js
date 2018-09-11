@@ -21,6 +21,7 @@ import ScrimElement from "../../ava/components/dialogs/ScrimElement.js";
 import UIDS from "./UIDS.js";
 import AppColors from "./AppColors.js";
 import Config from "./Config.js";
+import TestDisplayElement from "./test/TestDisplayElement.js";
 export default class AvaApp extends ApplicationElement
 {
     constructor()
@@ -49,6 +50,19 @@ export default class AvaApp extends ApplicationElement
         this.addElement( this.moviesDrawer );
         this.addElement( this.actorsDrawer );
         this.addElement( this.trailerDialog );
+        //this.addElement( this.testDisplayElement );
+    }
+    get testDisplayElement()
+    {
+        if( !this._testDisplayElement )
+        {
+            this._testDisplayElement = new TestDisplayElement();
+            this._testDisplayElement.layoutData = new AnchorLayoutData( NaN, NaN, NaN, NaN, 0, 0 );
+            this._testDisplayElement.width = 200;
+            this._testDisplayElement.height = 200;
+            this._testDisplayElement.backgroundColor = "#CC0000";
+        }
+        return this._testDisplayElement;
     }
     get overlay()
     {
