@@ -43,6 +43,8 @@ export default class BottomNavigationBarItemRenderer extends BaseItemRenderer
         if( this.data )
         {
             this.aTag.href = this.data.href;
+            this.aTag.setAttribute( "aria-label", this.data.label );
+            this.aTag.title = this.data.label;
             this.icon.iconName = this.data.icon; 
             this.labelText.text = this.data.label;
         }
