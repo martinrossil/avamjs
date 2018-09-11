@@ -2,11 +2,11 @@
 <html lang="da-DK">
 	<head>
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, maximum-scale=1, user-scalable=no">
+        <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, maximum-scale=5, user-scalable=yes">
         <title>Ava</title>
         <meta name="description" content="Ava.dk er et værktøj til at finde den næste gode film at se.">
         
-        <link rel="manifest" href="https://ava.dk/manifest.json">
+        <link rel="manifest" href="manifest.json">
         
         <meta name="theme-color" content="#303030">
         
@@ -36,8 +36,10 @@
         
     </head>
 	<body>
-        <ava-app></ava-app>
-        <!--<script type="module" src="https://ava.dk/dk/website/app/AvaApp.js"></script>-->
+        <main>
+            <ava-app></ava-app>
+        </main>
+        <!--<script type="module" src="bundle.js"></script>-->
         <script type="module" src="dk/website/app/AvaApp.js"></script>
         <noscript>
                 <h1>Please enable Javascript for this website...</h1>
