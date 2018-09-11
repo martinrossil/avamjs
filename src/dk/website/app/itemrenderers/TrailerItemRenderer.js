@@ -5,7 +5,8 @@ import Theme from "../../../ava/styles/Theme.js";
 import FontWeight from "../../../ava/constants/FontWeight.js";
 import CornerSquare from "./CornerSquare.js";
 import TextAlign from "../../../ava/constants/TextAlign.js";
-export default class VideoItemRenderer extends BaseItemRenderer
+import Util from "../utils/Util.js";
+export default class TrailerItemRenderer extends BaseItemRenderer
 {
     constructor()
     {
@@ -19,7 +20,7 @@ export default class VideoItemRenderer extends BaseItemRenderer
             {
                 this.hasBackdropBeenLoaded = true;
                 let ext = ImageElement.extension;
-                let url = "/baggrunde/" + this.getBackdropSize + "/" + this.data.u + "-baggrund." + ext;
+                let url = "/baggrunde/" + Util.getImageSize( this.width ) + "/" + this.data.u + "-baggrund." + ext;
                 this.image.source = url;
                 
                 this.titleTextElement.text = this.data.t;
@@ -35,27 +36,6 @@ export default class VideoItemRenderer extends BaseItemRenderer
                 }
             }
         }
-    }
-    get getBackdropSize()
-    {
-        let w = this.width;
-        if( w < 240 )
-        {
-            return 240;
-        }
-        else if( w < 320 )
-        {
-            return 320;
-        }
-        else if( w < 400 )
-        {
-            return 400;
-        }
-        else if( w < 480 )
-        {
-            return 480;
-        }
-        return 560;
     }
     sizeChanged( w, h )
     {
@@ -164,4 +144,4 @@ export default class VideoItemRenderer extends BaseItemRenderer
         return this._cornerSquare;
     }
 }
-customElements.define("video-item-renderer", VideoItemRenderer ); 
+customElements.define("trailer-item-renderer", TrailerItemRenderer ); 
