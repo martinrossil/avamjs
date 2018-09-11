@@ -23,7 +23,7 @@
         [ 
           {
             "key" : "Cache-Control",
-            "value" : "public, max-age=7200, s-maxage=7200"
+            "value" : "public, max-age=2592000, s-maxage=2592000"
           } 
         ]
       }
