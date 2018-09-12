@@ -2,11 +2,24 @@ const path = require('path')
 
 module.exports = 
 {
-    entry : './src/dk/website/app/AvaApp.js',
-    output : 
+    entry: './src/dk/website/app/AvaApp.js',
+    output: 
     {
-        filename : 'bundle.js',
-        path : path.resolve(__dirname, 'src')
-        //path: path.resolve(__dirname, 'dist')
+        filename: 'es5-bundle.js',
+        path: path.resolve(__dirname, 'src')
+    },
+    module: 
+    {
+        rules: 
+        [
+            {
+                test: /\.js$/,
+                exclude: /(node_modules)/,
+                use: 
+                {
+                    loader: 'babel-loader'
+                }
+            }
+        ]
     }
 }
