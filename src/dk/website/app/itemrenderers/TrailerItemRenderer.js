@@ -25,7 +25,7 @@ export default class TrailerItemRenderer extends BaseItemRenderer
                 
                 this.titleTextElement.text = this.data.t;
                 this.typeTextElement.text = this.data.d;
-                //this.releaseTextElement.text = this.data.p;
+                this.releaseTextElement.text = this.data.p;
                 if( this.data.r )
                 {
                     this.cornerSquare.rating = this.data.r;
@@ -56,8 +56,8 @@ export default class TrailerItemRenderer extends BaseItemRenderer
         this.titleTextElement.y = h + 8;
         this.typeTextElement.width = w;
         this.typeTextElement.y = h + 30;
-        //this.releaseTextElement.width = w;
-        //this.releaseTextElement.y = h + 30;
+        this.releaseTextElement.width = w;
+        this.releaseTextElement.y = h + 8;
         this.cornerSquare.x = w - 30;
     }
     dataChanged()
@@ -72,7 +72,7 @@ export default class TrailerItemRenderer extends BaseItemRenderer
     initialize()
     {
         super.initialize();
-        this.z = 4;
+        this.z = 8;
         this.backgroundColor = Theme.SECONDARY_COLOR;
         this.createChildren();
     }
@@ -81,7 +81,7 @@ export default class TrailerItemRenderer extends BaseItemRenderer
         this.addElement( this.aTag );
         this.addElement( this.titleTextElement );
         this.addElement( this.typeTextElement );
-        //this.addElement( this.releaseTextElement );
+        this.addElement( this.releaseTextElement );
         this.addElement( this.cornerSquare );
     }
     get aTag()
@@ -117,7 +117,8 @@ export default class TrailerItemRenderer extends BaseItemRenderer
         if( !this._typeTextElement )
         {
             this._typeTextElement = new TextElement();
-            this._typeTextElement.textColor = "#8e9bab";
+            this._typeTextElement.opacity = .6;
+            this._typeTextElement.textColor = Theme.PRIMARY_TEXT_COLOR;
             this._typeTextElement.wordWrap = false;
         }
         return this._typeTextElement;
@@ -127,7 +128,8 @@ export default class TrailerItemRenderer extends BaseItemRenderer
         if( !this._releaseTextElement )
         {
             this._releaseTextElement = new TextElement();
-            this._releaseTextElement.textColor = "#8e9bab";
+            this._releaseTextElement.opacity = .6;
+            this._releaseTextElement.textColor = Theme.PRIMARY_TEXT_COLOR;
             this._releaseTextElement.wordWrap = false;
             this._releaseTextElement.textAlign = TextAlign.RIGHT;
         }
