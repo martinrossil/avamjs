@@ -14,7 +14,7 @@ export default class CornerSquare extends DisplayContainer
     {
         super.initialize();
         this.setSize( 42, 42 );
-        this.backgroundColor = Theme.PRIMARY_COLOR;
+        this.backgroundColor = Theme.PRIMARY_COLOR_DARK;
         this.addElement( this.textElement );
     }
     get textElement()
@@ -50,7 +50,7 @@ export default class CornerSquare extends DisplayContainer
             this.textElement.text = value;
             if( value > 6.9 )
             {
-                this.backgroundColor = Colors.GREEN_700
+                this.backgroundColor = "#75a529";// Colors.GREEN_700
             }
             else if( value > 4.9 )
             {
@@ -58,7 +58,7 @@ export default class CornerSquare extends DisplayContainer
             }
             else
             {
-                this.backgroundColor = Colors.RED_700;
+                this.backgroundColor = "#bf1400";// Colors.RED_700;
             }
         }
     }
