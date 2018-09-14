@@ -14,7 +14,7 @@ export default class LinkItemRenderer extends BaseItemRenderer
     }
     isSelectedChanged()
     {
-        this.selectionLayer.opacity = this.isSelected ? .12 : 0;
+        this.selectionLayer.opacity = this.isSelected ? .25 : 0;
     }
     dataChanged()
     {
