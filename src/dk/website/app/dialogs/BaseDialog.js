@@ -14,7 +14,6 @@ export default class BaseDialog extends LayoutContainer
     }
     propertyAnimationEnded( property )
     {
-        console.log( "BaseDialog", property );
         if( property === "y" )
         {
             if( this.y === window.innerHeight )
