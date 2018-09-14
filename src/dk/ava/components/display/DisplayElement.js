@@ -314,5 +314,18 @@ export default class DisplayElement extends BaseElement
     {
         return this._cornerRadius;
     }
+    set ariaLabel( value )
+    {
+        if( this._ariaLabel !== value )
+        {
+            this._ariaLabel = value;
+            this.title = value;
+            this.setAttribute( "aria-label", value );
+        }
+    }
+    get ariaLabel()
+    {
+        return this._ariaLabel;
+    }
 }
 customElements.define( "display-element", DisplayElement );
