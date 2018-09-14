@@ -45,7 +45,7 @@ export default class ActorItemRenderer extends BaseItemRenderer
         this.nameTextElement.width = w;
         this.nameTextElement.y = h + 8;
         this.birthCountryTextElement.width = w;
-        this.birthCountryTextElement.y = h + 28;
+        this.birthCountryTextElement.y = h + 30;
         this.cornerSquare.x = w - 30;
     }
     dataChanged()
@@ -60,7 +60,7 @@ export default class ActorItemRenderer extends BaseItemRenderer
     initialize()
     {
         super.initialize();
-        this.z = 4;
+        this.z = 8;
         this.backgroundColor = Theme.SECONDARY_COLOR;
         this.createChildren();
     }
@@ -106,7 +106,8 @@ export default class ActorItemRenderer extends BaseItemRenderer
         if( !this._birthCountryTextElement )
         {
             this._birthCountryTextElement = new TextElement();
-            this._birthCountryTextElement.textColor = "#8e9bab";
+            this._birthCountryTextElement.opacity = .6;
+            this._birthCountryTextElement.textColor = Theme.PRIMARY_TEXT_COLOR;
             this._birthCountryTextElement.wordWrap = false;
         }
         return this._birthCountryTextElement;
