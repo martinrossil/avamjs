@@ -49,7 +49,9 @@ export default class ScreensNavigator extends LayoutContainer
                     this.currentScreen.opacity = 0;
                 }
                 this.currentScreen = this.screens[ index ];
-                this.addElement( this.currentScreen );
+                //this.addElement( this.currentScreen );
+                this.currentScreen.isVisible = true;
+                this.currentScreen.isInteractive = true;
                 this.currentScreen.opacity = 1;
             }
         }
@@ -62,15 +64,22 @@ export default class ScreensNavigator extends LayoutContainer
     }
     screenHideComplete( screen )
     {
-        if( this.containsElement( screen ) )
+        screen.isVisible = false;
+        screen.isInteractive = false;
+        console.log( "screenHideComplete", screen );
+        /*if( this.containsElement( screen ) )
         {
             this.removeElement( screen );
-        }
+        }*/
     }
     addScreen( screen )
     {
+        screen.isInteractive = false;
+        screen.isVisible = false;
+        screen.opacity = 0;
         this.screens.push( screen );
         screen.listen( EventTypes.HIDE_COMPLETE, this.screenHideComplete );
+        this.addElement( screen );
         this.showHideScreens();
     }
     set selectedIndex( value )
