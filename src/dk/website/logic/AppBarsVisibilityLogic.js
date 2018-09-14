@@ -2,6 +2,7 @@ import Logic from "../../ava/logic/Logic.js";
 import EventTypes from "../../ava/constants/EventTypes.js";
 import ScrollDirection from "../../ava/constants/ScrollDirection.js";
 import UIDS from "../app/consts/UIDS.js";
+import Properties from "../app/consts/Properties.js";
 export default class AppBarsVisibilityLogic extends Logic
 {
     constructor()
@@ -15,7 +16,7 @@ export default class AppBarsVisibilityLogic extends Logic
     scrollDirectionChanged( data )
     {
         let showBars = data === ScrollDirection.DOWN;
-        this.setProperty( UIDS.APP_BAR, "isShown", showBars );
-        this.setProperty( UIDS.BOTTOM_NAVIGATION_BAR, "isShown", showBars );
+        this.setProperty( UIDS.APP_BAR, Properties.IS_SHOWN, showBars );
+        this.setProperty( UIDS.BOTTOM_NAVIGATION_BAR, Properties.IS_SHOWN, showBars );
     }
 }
