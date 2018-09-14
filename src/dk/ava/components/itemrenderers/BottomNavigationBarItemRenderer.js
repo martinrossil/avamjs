@@ -43,8 +43,7 @@ export default class BottomNavigationBarItemRenderer extends BaseItemRenderer
         if( this.data )
         {
             this.aTag.href = this.data.href;
-            this.aTag.setAttribute( "aria-label", this.data.label );
-            this.aTag.title = this.data.label;
+            this.ariaLabel = this.data.label;
             this.icon.iconName = this.data.icon; 
             this.labelText.text = this.data.label;
         }
@@ -60,8 +59,8 @@ export default class BottomNavigationBarItemRenderer extends BaseItemRenderer
     createChildren()
     {
         this.addElement( this.aTag );
-        this.addElement( this.icon );
-        this.addElement( this.labelText );
+        //this.addElement( this.icon );
+        //this.addElement( this.labelText );
         //this.addElement( this.rippleSurface );
     }
     get aTag()
@@ -70,8 +69,8 @@ export default class BottomNavigationBarItemRenderer extends BaseItemRenderer
         {
             this._aTag = document.createElement( "a" );
             this._aTag.appendChild( this.background );
-            //this._aTag.appendChild( this.icon );
-            //this._aTag.appendChild( this.labelText );
+            this._aTag.appendChild( this.icon );
+            this._aTag.appendChild( this.labelText );
             //this._aTag.appendChild( this.rippleSurface );
         }
         return this._aTag;
