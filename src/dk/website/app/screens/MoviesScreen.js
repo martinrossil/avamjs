@@ -38,9 +38,9 @@ export default class MoviesScreen extends BaseScreen
             this._tiledRowsLayout = new TiledRowsLayout();
             this._tiledRowsLayout.padding = 24;
             this._tiledRowsLayout.paddingTop = 56 + 24;
-            this._tiledRowsLayout.paddingBottom = 56 + 64;
+            this._tiledRowsLayout.paddingBottom = 56 + 64 + 16;
             this._tiledRowsLayout.gap = 24;
-            this._tiledRowsLayout.verticalGap = 64;
+            this._tiledRowsLayout.verticalGap = 64 + 16;
             this._tiledRowsLayout.maxColumns = 4;
             this._tiledRowsLayout.elementAspectRatio = 1 / 1.5;
             this._tiledRowsLayout.elementMinWidth = ( 320 - 72 ) * .5;
