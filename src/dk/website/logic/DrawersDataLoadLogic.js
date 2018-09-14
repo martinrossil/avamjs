@@ -4,6 +4,8 @@ import EventTypes from "../../ava/constants/EventTypes.js";
 import ArrayCollection from "../../ava/data/ArrayCollection.js";
 import ClickTargetUtil from "../app/utils/ClickTargetUtil.js";
 import UIDS from "../app/consts/UIDS.js";
+import Events from "../app/consts/Events.js";
+import Paths from "../app/consts/Paths.js";
 export default class DrawersDataLoadLogic extends Logic
 {
     constructor()
@@ -12,22 +14,22 @@ export default class DrawersDataLoadLogic extends Logic
         this.listen( UIDS.TRAILERS_DRAWER_ICON_BUTTON, EventTypes.TRIGGERED, this.trailersDrawerIconButtonTriggered.bind( this ) );
         this.listen( UIDS.MOVIES_DRAWER_ICON_BUTTON, EventTypes.TRIGGERED, this.moviesDrawerIconButtonTriggered.bind( this ) );
         this.listen( UIDS.ACTORS_DRAWER_ICON_BUTTON, EventTypes.TRIGGERED, this.actorsDrawerIconButtonTriggered.bind( this ) );
-        window.addEventListener( "popstate", this.popped.bind( this ) );
-        document.addEventListener( "click", this.clicked.bind( this ) );
+        window.addEventListener( Events.POP_STATE, this.popped.bind( this ) );
+        document.addEventListener( Events.CLICK, this.clicked.bind( this ) );
     }
     trailersDrawerIconButtonTriggered()
     {
-        let path = "/trailers/genrer";
+        let path = Paths.TRAILERS_GENRER;
         this.loadPath( path );
     }
     moviesDrawerIconButtonTriggered()
     {
-        let path = "/film/genrer";
+        let path = Paths.MOVIES_GENRER;
         this.loadPath( path );
     }
     actorsDrawerIconButtonTriggered()
     {
-        let path = "/skuespillere/lande";
+        let path = Paths.ACTORS_COUNTRIES;
         this.loadPath( path );
     }
     popped()
