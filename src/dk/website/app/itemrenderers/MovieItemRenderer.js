@@ -4,6 +4,7 @@ import TextElement from "../../../ava/components/text/TextElement.js";
 import Theme from "../../../ava/styles/Theme.js";
 import CornerSquare from "./CornerSquare.js";
 import Util from "../utils/Util.js";
+import FontWeight from "../../../ava/constants/FontWeight.js";
 export default class MovieItemRenderer extends BaseItemRenderer
 {
     constructor()
@@ -22,6 +23,7 @@ export default class MovieItemRenderer extends BaseItemRenderer
                 let ext = ImageElement.extension;
                 let url = "/plakater/" + Util.getImageSize( this.width ) + "/" + this.data.u + "-plakat." + ext;
                 this.image.source = url;
+                this.titleTextElement.text = this.data.t;
                 this.releaseTextElement.text = this.data.p;
                 if( this.data.r )
                 {
@@ -49,8 +51,10 @@ export default class MovieItemRenderer extends BaseItemRenderer
     layoutChildren( w, h )
     {
         this.image.setSize( w, h );
+        this.titleTextElement.width = w;
+        this.titleTextElement.y = h + 8;
         this.releaseTextElement.width = w;
-        this.releaseTextElement.y = h + 8;
+        this.releaseTextElement.y = h + 30;
         this.cornerSquare.x = w - 30;
     }
     dataChanged()
@@ -66,13 +70,14 @@ export default class MovieItemRenderer extends BaseItemRenderer
     {
         super.initialize();
         this.isVisible = false;
-        this.z = 4;
+        this.z = 8;
         this.backgroundColor = Theme.SECONDARY_COLOR;
         this.createChildren();
     }
     createChildren()
     {
         this.addElement( this.aTag );
+        this.addElement( this.titleTextElement );
         this.addElement( this.releaseTextElement );
         this.addElement( this.cornerSquare );
     }
@@ -93,12 +98,24 @@ export default class MovieItemRenderer extends BaseItemRenderer
         }
         return this._image;
     }
+    get titleTextElement()
+    {
+        if( !this._titleTextElement )
+        {
+            this._titleTextElement = new TextElement();
+            this._titleTextElement.textColor = Theme.PRIMARY_TEXT_COLOR;
+            this._titleTextElement.fontWeight = FontWeight.BOLD;
+            this._titleTextElement.wordWrap = false;
+        }
+        return this._titleTextElement;
+    }
     get releaseTextElement()
     {
         if( !this._releaseTextElement )
         {
             this._releaseTextElement = new TextElement();
             this._releaseTextElement.textColor = Theme.PRIMARY_TEXT_COLOR;
+            this._releaseTextElement.opacity = .6;
             this._releaseTextElement.wordWrap = false;
         }
         return this._releaseTextElement;
