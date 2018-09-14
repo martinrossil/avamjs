@@ -64,7 +64,7 @@ export default class IconButton extends DisplayContainer
         }
         this.svg.style.opacity = "0";
     }
-    windowMouseUp( e )
+    windowMouseUp()
     {
         window.removeEventListener( "mouseup", this.windowMouseUp );
         this.svg.style.opacity = "0";
