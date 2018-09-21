@@ -66,7 +66,6 @@ export default class ScreensNavigator extends LayoutContainer
     {
         screen.isVisible = false;
         screen.isInteractive = false;
-        console.log( "screenHideComplete", screen );
         /*if( this.containsElement( screen ) )
         {
             this.removeElement( screen );
