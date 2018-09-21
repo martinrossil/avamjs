@@ -1,8 +1,34 @@
 import Paths from "../consts/Paths.js";
+import UIDS from "../consts/UIDS.js";
 export default class Util
 {
     constructor()
     {
+    }
+    static getFilterListUidFromPath( path )
+    {
+        let uid;
+        if( path === Paths.TRAILERS_GENRER )
+        {
+            uid = UIDS.TRAILERS_GENRES_LIST;
+        }
+        else if( path === Paths.TRAILERS_COUNTRIES )
+        {
+            uid = UIDS.TRAILERS_COUNTRIES_LIST;
+        }
+        else if( path === Paths.MOVIES_GENRER )
+        {
+            uid = UIDS.MOVIES_GENRES_LIST;
+        }
+        else if( path === Paths.MOVIES_COUNTRIES )
+        {
+            uid = UIDS.MOVIES_COUNTRIES_LIST;
+        }
+        else if( path === Paths.ACTORS_COUNTRIES )
+        {
+            uid = UIDS.ACTORS_COUNTRIES_LIST;
+        }
+        return uid;
     }
     static getTopIndex( top )
     {
