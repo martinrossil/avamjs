@@ -2,13 +2,18 @@ import LayoutContainer from "../../../ava/components/display/LayoutContainer.js"
 import AnimatedProperty from "../../../ava/animation/AnimatedProperty.js";
 import AnchorLayout from "../../../ava/layouts/AnchorLayout.js";
 import EventTypes from "../../../ava/constants/EventTypes.js";
+import JSONLoader from "../../../ava/loaders/JSONLoader.js";
 export default class BaseDialog extends LayoutContainer
 {
     constructor()
     {
         super();
     }
-    hrefChanged()
+    pathChanged()
+    {
+        // override
+    }
+    infoComplete( data )
     {
         // override
     }
@@ -30,17 +35,13 @@ export default class BaseDialog extends LayoutContainer
         }
         this.y = this.isShown ? 0 : window.innerHeight;
     }
-    dataChanged()
-    {
-        // override
-    }
     initialize()
     {
         super.initialize();
         let wiw = window.innerWidth
         let wih = window.innerHeight;
         this.setSize( wiw, wih );
-        this.dialogTopBar.width = wiw;
+        //this.dialogTopBar.width = wiw;
         this.y = wih;
         this.isVisible = false;
         this.layout = new AnchorLayout();
@@ -56,7 +57,7 @@ export default class BaseDialog extends LayoutContainer
         let wiw = window.innerWidth
         let wih = window.innerHeight;
         this.setSize( wiw, wih );
-        this.dialogTopBar.width = wiw;
+        //this.dialogTopBar.width = wiw;
         this.y = this.isShown ? 0 : wih;
     }
     set isShown( value )
@@ -71,29 +72,34 @@ export default class BaseDialog extends LayoutContainer
     {
         return this._isShown;
     }
-    set href( value )
+    set path( value )
     {
-        if( this._href !== value )
+        if( this._path !== value )
         {
-            this._href = value;
-            this.hrefChanged();
+            this._path = value;
+            this.pathChanged();
         }
     }
-    get href()
+    get path()
     {
-        return this._href;
+        return this._path;
     }
-    set data( value )
+    get infoData()
     {
-        if( this._data !== value )
+        if( !this._infoData )
         {
-            this._data = value;
-            this.dataChanged();
+            this._infoData = {};
         }
+        return this._infoData;
     }
-    get data()
+    get infoLoader()
     {
-        return this._data;
+        if( !this._infoLoader )
+        {
+            this._infoLoader = new JSONLoader();
+            this._infoLoader.listen( EventTypes.LOAD_COMPLETE, this.infoComplete.bind( this ) );
+        }
+        return this._infoLoader;
     }
 }
 customElements.define("base-dialog", BaseDialog);
