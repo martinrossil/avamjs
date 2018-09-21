@@ -9,6 +9,7 @@ export default class IconNames
     static get FULLSCREEN_EXIT(){return "FULLSCREEN_EXIT";}
     static get FILTER_LIST()    {return "FILTER_LIST";}
     static get ARROW_FORWARD()  {return "ARROW_FORWARD";};
+    static get ARROW_DOWNWARD() {return "ARROW_DOWNWARD";};
     static get SORT()           {return "SORT";};
     static get PUBLIC()         {return "PUBLIC";};
     static get LANGUAGE()       {return "LANGUAGE"}
