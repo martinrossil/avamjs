@@ -5,6 +5,7 @@ import Theme from "../../../ava/styles/Theme.js";
 import FontWeight from "../../../ava/constants/FontWeight.js";
 import CornerSquare from "./CornerSquare.js";
 import Util from "../utils/Util.js";
+import Paths from "../consts/Paths.js";
 export default class ActorItemRenderer extends BaseItemRenderer
 {
     constructor()
@@ -19,7 +20,7 @@ export default class ActorItemRenderer extends BaseItemRenderer
             {
                 this.hasProfileBeenLoaded = true;
                 let ext = ImageElement.extension;
-                let url = "/profile/" + Util.getImageSize( this.width ) + "/" + this.data.u + "-profil." + ext;
+                let url = "/profile/" + Util.getImageSize( this.width ) + "/" + this.data.h + "-profil." + ext;
                 this.image.source = url;
                 this.nameTextElement.text = this.data.n;
                 this.birthCountryTextElement.text = this.data.b;
@@ -54,7 +55,10 @@ export default class ActorItemRenderer extends BaseItemRenderer
         {
             this.image.alt = this.data.n; 
             this.image.title = this.data.n;
-            this.aTag.href = "/skuespillere/" + this.data.u;
+            this.aTag.href = Paths.ACTORS + "/" + this.data.h;
+            this.aTag.name = this.data.n;
+            this.aTag.title = this.data.n;
+            this.ariaLabel = this.data.n;
         }
     }
     initialize()

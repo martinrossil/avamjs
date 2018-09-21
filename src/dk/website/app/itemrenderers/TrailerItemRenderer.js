@@ -6,6 +6,7 @@ import FontWeight from "../../../ava/constants/FontWeight.js";
 import CornerSquare from "./CornerSquare.js";
 import TextAlign from "../../../ava/constants/TextAlign.js";
 import Util from "../utils/Util.js";
+import Paths from "../consts/Paths.js";
 export default class TrailerItemRenderer extends BaseItemRenderer
 {
     constructor()
@@ -20,9 +21,8 @@ export default class TrailerItemRenderer extends BaseItemRenderer
             {
                 this.hasBackdropBeenLoaded = true;
                 let ext = ImageElement.extension;
-                let url = "/baggrunde/" + Util.getImageSize( this.width ) + "/" + this.data.u + "-baggrund." + ext;
+                let url = "/baggrunde/" + Util.getImageSize( this.width ) + "/" + this.data.h + "-baggrund." + ext;
                 this.image.source = url;
-                
                 this.titleTextElement.text = this.data.t;
                 this.typeTextElement.text = this.data.d;
                 this.releaseTextElement.text = this.data.p;
@@ -52,7 +52,7 @@ export default class TrailerItemRenderer extends BaseItemRenderer
     layoutChildren( w, h )
     {
         this.image.setSize( w, h );
-        this.titleTextElement.width = w;
+        this.titleTextElement.width = w - 96;
         this.titleTextElement.y = h + 8;
         this.typeTextElement.width = w;
         this.typeTextElement.y = h + 30;
@@ -66,7 +66,10 @@ export default class TrailerItemRenderer extends BaseItemRenderer
         {
             this.image.alt = this.data.t; 
             this.image.title = this.data.t;
-            this.aTag.href = "/trailers/" + this.data.u;
+            this.aTag.href = Paths.TRAILERS + "/" + this.data.h;
+            this.aTag.name = this.data.t;
+            this.aTag.title = this.data.t;
+            this.ariaLabel = this.data.t;
         }
     }
     initialize()

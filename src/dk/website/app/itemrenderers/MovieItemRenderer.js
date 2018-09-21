@@ -5,6 +5,7 @@ import Theme from "../../../ava/styles/Theme.js";
 import CornerSquare from "./CornerSquare.js";
 import Util from "../utils/Util.js";
 import FontWeight from "../../../ava/constants/FontWeight.js";
+import Paths from "../consts/Paths.js";
 export default class MovieItemRenderer extends BaseItemRenderer
 {
     constructor()
@@ -21,7 +22,7 @@ export default class MovieItemRenderer extends BaseItemRenderer
                 this.hasPosterBeenLoaded = true;
                 let i = this.data.i;
                 let ext = ImageElement.extension;
-                let url = "/plakater/" + Util.getImageSize( this.width ) + "/" + this.data.u + "-plakat." + ext;
+                let url = "/plakater/" + Util.getImageSize( this.width ) + "/" + this.data.h + "-plakat." + ext;
                 this.image.source = url;
                 this.titleTextElement.text = this.data.t;
                 this.releaseTextElement.text = this.data.p;
@@ -63,7 +64,10 @@ export default class MovieItemRenderer extends BaseItemRenderer
         {
             this.image.alt = this.data.t;
             this.image.title = this.data.t;
-            this.aTag.href = "/film/info/" + this.data.u;
+            this.aTag.href = Paths.MOVIES + "/" + this.data.h;
+            this.aTag.name = this.data.t;
+            this.aTag.title = this.data.t;
+            this.ariaLabel = this.data.t;
         }
     }
     initialize()
