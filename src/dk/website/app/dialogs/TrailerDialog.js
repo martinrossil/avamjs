@@ -8,32 +8,52 @@ import SpinnerElement from "../../../ava/components/progress/SpinnerElement.js";
 import VideoControls from "../../../ava/components/media/VideoControls.js";
 import RippleSurface from "../../../ava/components/display/RippleSurface.js";
 import DialogTopBar from "./DialogTopBar.js";
+import Theme from "../../../ava/styles/Theme.js";
 export default class TrailerDialog extends BaseDialog
 {
     constructor()
     {
         super();
     }
+    pathChanged()
+    {
+        if( this.path )
+        {
+            if( !this.infoData[ this.path ] )
+            {
+                let url = window.location.origin + "/info/trailers/" + this.path + ".json";
+                this.infoLoader.load( url );
+            }
+            else
+            {
+                let data = this.infoData[ this.path ];
+                this.infoComplete( data );
+            }
+        }
+    }
+    infoComplete( data )
+    {
+        if( data )
+        {
+            let source = "/trailers/" + data.fileName;
+            this.dialogTopBar.title = data.title;
+            this.videoElement.source = source;
+            this.videoElement.play();
+            this.hideControls();
+        }
+    }
     isShownChanged()
     {
         super.isShownChanged();
         if( !this.isShown )
         {
-            this.href = null;
-            this.data = null;
+            this.path = null;
+            this.dialogTopBar.title = null;
             this.videoElement.stop();
             this.videoElement.source = "";
             this.videoControls.loadProgress = 0;
-        }
-    }
-    dataChanged()
-    {
-        if( this.data )
-        {
-            let source = "/trailers/" + this.data.u;
-            this.dialogTopBar.title = this.data.t + " - " + this.data.d;
-            this.videoElement.source = source;
-            this.videoElement.play();
+            this.videoControls.currentTime = 0;
+            this.videoControls.duration = 0;
         }
     }
     initialize()
@@ -50,6 +70,36 @@ export default class TrailerDialog extends BaseDialog
     isPlaying( data )
     {
         this.videoControls.isPlaying = data;
+        if( data )
+        {
+            this.showControlsTimeoutId = window.setTimeout( this.showControlsTimedOut.bind( this ), 3000 );
+        }
+        else
+        {
+            this.clearHideConstrolsTimeOut();
+        }
+    }
+    clearHideConstrolsTimeOut()
+    {
+        if( this.showControlsTimeoutId )
+        {
+            window.clearTimeout( this.showControlsTimeoutId );
+            this.showControlsTimeoutId = null;
+        }
+    }
+    showControls()
+    {
+        this.dialogTopBar.isShown = true;
+        this.videoControls.isShown = true;
+    }
+    showControlsTimedOut()
+    {
+        this.hideControls();
+    }
+    hideControls()
+    {
+        this.dialogTopBar.isShown = false;
+        this.videoControls.isShown = false;
     }
     isPaused( data )
     {
@@ -92,8 +142,7 @@ export default class TrailerDialog extends BaseDialog
         {
             this._dialogTopBar = new DialogTopBar();
             this._dialogTopBar.layoutData = new AnchorLayoutData( 0, 0, 0 );
-            this._dialogTopBar.backgroundColor = Colors.GREY_900;
-            this._dialogTopBar.closeHref = "/trailers";
+            this._dialogTopBar.backgroundColor = Theme.PRIMARY_COLOR_DARK;
         }
         return this._dialogTopBar;
     }
@@ -118,13 +167,14 @@ export default class TrailerDialog extends BaseDialog
         {
             this.videoElement.play();
         }
+        this.showControls();
     }
     get videoControls()
     {
         if( !this._videoControls )
         {
             this._videoControls = new VideoControls();
-            this._videoControls.backgroundColor = Colors.GREY_900;
+            this._videoControls.backgroundColor = Theme.PRIMARY_COLOR_DARK;
             this._videoControls.layoutData = new AnchorLayoutData( 0, NaN, 0, 0 );
             this._videoControls.listen( MediaEventTypes.PLAY_PAUSE_TRIGGERED, this.playPauseTriggered.bind( this ) );
         }
