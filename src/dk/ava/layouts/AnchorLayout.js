@@ -1,5 +1,6 @@
 import BaseLayout from "./base/BaseLayout.js";
 import AnchorLayoutData from "./data/AnchorLayoutData.js";
+import TextElement from "../components/text/TextElement.js";
 export default class AnchorLayout extends BaseLayout
 {
     constructor()
@@ -92,7 +93,14 @@ export default class AnchorLayout extends BaseLayout
         }
         if( !isNaN( layoutData.verticalCenter ) )
         {
-            y = h * .5 - element.height * .5 + layoutData.verticalCenter;
+            if( element instanceof TextElement )
+            {
+                y = h * .5 - element.textHeight * .5 + layoutData.verticalCenter;
+            }
+            else
+            {
+                y = h * .5 - element.height * .5 + layoutData.verticalCenter;
+            }
         }
         if( !isNaN( x ) && !isNaN( y ) )
         {
