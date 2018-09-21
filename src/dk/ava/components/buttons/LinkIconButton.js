@@ -187,5 +187,19 @@ export default class LinkIconButton extends DisplayContainer
     {
         return this._href;
     }
+    set ariaLabel( value )
+    {
+        if( this._ariaLabel !== value )
+        {
+            this._ariaLabel = value;
+            this.aTag.title = value;
+            this.aTag.name = value;
+            this.aTag.setAttribute( "aria-label", value );
+        }
+    }
+    get ariaLabel()
+    {
+        return this._ariaLabel;
+    }
 }
 customElements.define("link-icon-button", LinkIconButton);
