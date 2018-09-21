@@ -42,7 +42,6 @@ export default class ProgressBar extends DisplayContainer
         super.initialize();
         this.currentValue = 0;
         this.currentTotal = 1;
-        this._color = Theme.ACCENT_COLOR;
         this.height = 4;
         this.isInteractive = false;
         this.createChildren();
@@ -85,6 +84,10 @@ export default class ProgressBar extends DisplayContainer
     }
     get color()
     {
+        if( !this._color )
+        {
+            this._color = Theme.PRIMARY_TEXT_COLOR;
+        }
         return this._color;
     }
     set showTrack( value )
