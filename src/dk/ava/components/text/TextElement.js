@@ -9,15 +9,6 @@ export default class TextElement extends DisplayElement
     {
         super();
     }
-    connectedCallback()
-    {
-        
-    }
-    heightChanged()
-    {
-        super.heightChanged();
-        //this.dispatch( EventTypes.HEIGHT_CHANGED, this.height )
-    }
     initialize()
     {
         super.initialize();
@@ -34,6 +25,7 @@ export default class TextElement extends DisplayElement
         {
             this._text = value;
             this.textContent = value;
+            //this.innerText = value;
             //this.height = this.scrollHeight;
         }
     }
@@ -139,6 +131,10 @@ export default class TextElement extends DisplayElement
     get wordWrap()
     {
         return this._wordWrap;
+    }
+    get textHeight()
+    {
+        return this.scrollHeight;
     }
 }
 customElements.define("text-element", TextElement);
