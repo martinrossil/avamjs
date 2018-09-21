@@ -11,15 +11,14 @@ import ScreensNavigator from "../../ava/screens/ScreensNavigator.js";
 import TrailersScreen from "./screens/TrailersScreen.js";
 import MoviesScreen from "./screens/MoviesScreen.js";
 import ActorsScreen from "./screens/ActorsScreen.js";
-import BusinessLogic from "../logic/BusinessLogic.js";
 import TrailerDialog from "./dialogs/TrailerDialog.js";
 import AvaAppBar from "./bars/AvaAppBar.js";
-import ActorsDrawer from "./drawers/ActorsDrawer.js";
-import TrailersDrawer from "./drawers/TrailersDrawer.js";
-import MoviesDrawer from "./drawers/MoviesDrawer.js";
 import ScrimElement from "../../ava/components/dialogs/ScrimElement.js";
 import UIDS from "./consts/UIDS.js";
 import Config from "./consts/Config.js";
+import FiltersDrawer from "./drawers/FiltersDrawer.js";
+import BusinessClasses from "../business/BusinessClasses.js";
+import MovieDialog from "./dialogs/MovieDialog.js";
 export default class AvaApp extends ApplicationElement
 {
     constructor()
@@ -29,9 +28,9 @@ export default class AvaApp extends ApplicationElement
     }
     initialize()
     {
-        Theme.APP_BACKGROUND_COLOR  = Config.APP_BACKGROUND_COLOR;
-        Theme.PRIMARY_COLOR         = Config.PRIMARY_COLOR
-        Theme.PRIMARY_COLOR_DARK    = Config.PRIMARY_COLOR_DARK;
+        Theme.APP_BACKGROUND_COLOR  = "#0d364c";// Config.APP_BACKGROUND_COLOR;
+        Theme.PRIMARY_COLOR         = "#427392";// "#00bcd4";//Config.PRIMARY_COLOR
+        Theme.PRIMARY_COLOR_DARK    = "#204764";// "#cd1a57";// "#00a5bb";//Config.PRIMARY_COLOR_DARK;
         Theme.ACCENT_COLOR          = Config.ACCENT_COLOR
         Theme.ACCENT_COLOR_DARK     = Config.ACCENT_COLOR_DARK;
         Theme.ICON_COLOR            = Colors.WHITE;
@@ -39,7 +38,7 @@ export default class AvaApp extends ApplicationElement
         Theme.RIPPLE_COLOR          = Colors.WHITE;
         super.initialize();
         this.layout = new AnchorLayout();
-        new BusinessLogic();
+        new BusinessClasses();
         this.createChildren();
     }
     createChildren()
@@ -48,10 +47,9 @@ export default class AvaApp extends ApplicationElement
         this.addElement( this.bottomNavigationBar );
         this.addElement( this.appBar );
         this.addElement( this.overlay );
-        this.addElement( this.trailersDrawer );
-        this.addElement( this.moviesDrawer );
-        this.addElement( this.actorsDrawer );
+        this.addElement( this.filtersDrawer );
         this.addElement( this.trailerDialog );
+        this.addElement( this.movieDialog );
     }
     get overlay()
     {
@@ -62,32 +60,14 @@ export default class AvaApp extends ApplicationElement
         }
         return this._overlay;
     }
-    get trailersDrawer()
+    get filtersDrawer()
     {
-        if( !this._trailersDrawer )
+        if( !this._filtersDrawer )
         {
-            this._trailersDrawer = new TrailersDrawer();
-            this._trailersDrawer.uid = UIDS.TRAILERS_DRAWER;
+            this._filtersDrawer = new FiltersDrawer();
+            this._filtersDrawer.uid = UIDS.FILTERS_DRAWER;
         }
-        return this._trailersDrawer;
-    }
-    get moviesDrawer()
-    {
-        if( !this._moviesDrawer )
-        {
-            this._moviesDrawer = new MoviesDrawer();
-            this._moviesDrawer.uid = UIDS.MOVIES_DRAWER;
-        }
-        return this._moviesDrawer;
-    }
-    get actorsDrawer()
-    {
-        if( !this._actorsDrawer )
-        {
-            this._actorsDrawer = new ActorsDrawer();
-            this._actorsDrawer.uid = UIDS.ACTORS_DRAWER;
-        }
-        return this._actorsDrawer;
+        return this._filtersDrawer;
     }
     get trailerDialog()
     {
@@ -97,6 +77,15 @@ export default class AvaApp extends ApplicationElement
             this._trailerDialog.uid = UIDS.TRAILER_DIALOG;
         }
         return this._trailerDialog;
+    }
+    get movieDialog()
+    {
+        if( !this._movieDialog )
+        {
+            this._movieDialog = new MovieDialog();
+            this._movieDialog.uid = UIDS.MOVIE_DIALOG;
+        }
+        return this._movieDialog;
     }
     get appBar()
     {
