@@ -6,11 +6,36 @@ import Theme from "../../../ava/styles/Theme.js";
 import AnchorLayoutData from "../../../ava/layouts/data/AnchorLayoutData.js";
 import IconButton from "../../../ava/components/buttons/IconButton.js";
 import IconNames from "../../../ava/constants/IconNames.js";
+import Strings from "../../app/consts/Strings.js";
+import EventTypes from "../../../ava/constants/EventTypes.js";
+import AnimatedProperty from "../../../ava/animation/AnimatedProperty.js";
 export default class DialogTopBar extends LayoutContainer
 {
     constructor()
     {
         super();
+    }
+    propertyAnimationEnded( property )
+    {
+        if( property === "opacity" )
+        {
+            if( this.opacity === 0 )
+            {
+                this.isVisible = false;
+            }
+        }
+    }
+    isShownChanged()
+    {
+        if( this.isShown )
+        {
+            this.isVisible = true;
+            this.opacity = 1;
+        }
+        else
+        {
+            this.opacity = 0;
+        }
     }
     initialize()
     {
@@ -21,6 +46,9 @@ export default class DialogTopBar extends LayoutContainer
         this.z = 4;
         this.addElement( this.titleTextElement );
         this.addElement( this.closeIconButton );
+        this.notifyPropertyAnimationEnd = true;
+        this.listen( EventTypes.PROPERTY_ANIMATION_ENDED, this.propertyAnimationEnded.bind( this ) );
+        this.animatedProperties = [ new AnimatedProperty( "opacity", 225, "ease-in" ) ];
     }
     get titleTextElement()
     {
@@ -40,10 +68,16 @@ export default class DialogTopBar extends LayoutContainer
         if( !this._closeIconButton )
         {
             this._closeIconButton = new IconButton();
-            this._closeIconButton.iconName = IconNames.CLOSE;
+            this._closeIconButton.iconName = IconNames.ARROW_DOWNWARD;
             this._closeIconButton.layoutData = new AnchorLayoutData( NaN, NaN, 4, NaN, NaN, 0 );
+            this._closeIconButton.listen( EventTypes.TRIGGERED, this.closeTriggered.bind( this ) );
+            this._closeIconButton.ariaLabel = Strings.CLOSE;
         }
         return this._closeIconButton;
+    }
+    closeTriggered()
+    {
+        history.back();
     }
     set title( value )
     {
@@ -57,17 +91,17 @@ export default class DialogTopBar extends LayoutContainer
     {
         return this._title;
     }
-    set closeHref( value )
+    set isShown( value )
     {
-        if( this._closeHref != value )
+        if( this._isShown !== value )
         {
-            this._closeHref = value;
-            this.closeIconButton.href = value;
+            this._isShown = value;
+            this.isShownChanged();
         }
     }
-    get closeHref()
+    get isShown()
     {
-        return this._closeHref;
+        return this._isShown;
     }
 }
 customElements.define("dialog-top-bar", DialogTopBar);
