@@ -6,4 +6,5 @@ export default class Properties
     static get TITLE(){         return "title";};
     static get DATA_PROVIDER(){ return "dataProvider";};
     static get HREF(){          return "href";};
+    static get PATH(){          return "path";};
 }
