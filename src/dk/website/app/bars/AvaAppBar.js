@@ -7,6 +7,7 @@ import IconNames from "../../../ava/constants/IconNames.js";
 import UIDS from "../consts/UIDS.js";
 import LinkIconButton from "../../../ava/components/buttons/LinkIconButton.js";
 import Paths from "../consts/Paths.js";
+import Strings from "../consts/Strings.js";
 export default class AvaAppBar extends AppBar
 {
     constructor()
@@ -22,7 +23,23 @@ export default class AvaAppBar extends AppBar
     {
         this.addElement( this.titleTextElement );
         this.addElement( this.openSortMenuIconButton );
-        this.addElement( this.openFilterDrawerLinkIconButton );
+        this.addElement( this.openFilterButton );
+        /*this.addElement( this.openTrailersFilterButton );
+        this.addElement( this.openMoviesFilterButton );
+        this.addElement( this.openActorsFilterButton );*/
+    }
+    get openFilterButton()
+    {
+        if( !this._openFilterButton )
+        {
+            this._openFilterButton = new LinkIconButton();
+            //this._openFilterButton.href = Paths.TRAILERS_GENRER;
+            this._openFilterButton.ariaLabel = Strings.OPEN_FILTER_MENU;
+            this._openFilterButton.uid = UIDS.OPEN_FILTER_DRAWER_LINK_ICON_BUTTON;
+            this._openFilterButton.iconName = IconNames.FILTER_LIST;
+            this._openFilterButton.layoutData = new AnchorLayoutData( NaN, NaN, 4, NaN, NaN, 0 );
+        }
+        return this._openFilterButton;
     }
     get titleTextElement()
     {
@@ -37,24 +54,53 @@ export default class AvaAppBar extends AppBar
         }
         return this._titleTextElement;
     }
-    get openFilterDrawerLinkIconButton()
+    get openTrailersFilterButton()
     {
-        if( !this._openFilterDrawerLinkIconButton )
+        if( !this._openTrailersFilterButton )
         {
-            this._openFilterDrawerLinkIconButton = new LinkIconButton();
-            this._openFilterDrawerLinkIconButton.ariaLabel = "Åbn Filter Menu";
-            this._openFilterDrawerLinkIconButton.uid = UIDS.OPEN_FILTER_DRAWER_LINK_ICON_BUTTON;
-            this._openFilterDrawerLinkIconButton.iconName = IconNames.FILTER_LIST;
-            this._openFilterDrawerLinkIconButton.layoutData = new AnchorLayoutData( NaN, NaN, 4, NaN, NaN, 0 );
+            this._openTrailersFilterButton = new LinkIconButton();
+            this._openTrailersFilterButton.href = Paths.TRAILERS_GENRER;
+            this._openTrailersFilterButton.ariaLabel = Strings.OPEN_FILTER_MENU;
+            this._openTrailersFilterButton.uid = UIDS.OPEN_TRAILERS_FILTER_BUTTON;
+            this._openTrailersFilterButton.iconName = IconNames.FILTER_LIST;
+            this._openTrailersFilterButton.layoutData = new AnchorLayoutData( NaN, NaN, 4, NaN, NaN, 0 );
         }
-        return this._openFilterDrawerLinkIconButton;
+        return this._openTrailersFilterButton;
+    }
+    get openMoviesFilterButton()
+    {
+        if( !this._openMoviesFilterButton )
+        {
+            this._openMoviesFilterButton = new LinkIconButton();
+            this._openMoviesFilterButton.isVisible = false;
+            this._openMoviesFilterButton.href = Paths.MOVIES_GENRER;
+            this._openMoviesFilterButton.ariaLabel = Strings.OPEN_FILTER_MENU;
+            this._openMoviesFilterButton.uid = UIDS.OPEN_MOVIES_FILTER_BUTTON;
+            this._openMoviesFilterButton.iconName = IconNames.FILTER_LIST;
+            this._openMoviesFilterButton.layoutData = new AnchorLayoutData( NaN, NaN, 4, NaN, NaN, 0 );
+        }
+        return this._openMoviesFilterButton;
+    }
+    get openActorsFilterButton()
+    {
+        if( !this._openActorsFilterButton )
+        {
+            this._openActorsFilterButton = new LinkIconButton();
+            this._openActorsFilterButton.isVisible = false;
+            this._openActorsFilterButton.href = Paths.ACTORS_COUNTRIES;
+            this._openActorsFilterButton.ariaLabel = Strings.OPEN_FILTER_MENU;
+            this._openActorsFilterButton.uid = UIDS.OPEN_ACTORS_FILTER_BUTTON;
+            this._openActorsFilterButton.iconName = IconNames.FILTER_LIST;
+            this._openActorsFilterButton.layoutData = new AnchorLayoutData( NaN, NaN, 4, NaN, NaN, 0 );
+        }
+        return this._openActorsFilterButton;
     }
     get openSortMenuIconButton()
     {
         if( !this._openSortMenuIconButton )
         {
             this._openSortMenuIconButton = new IconButton();
-            this._openSortMenuIconButton.ariaLabel = "Åbn Sorterings Menu";
+            this._openSortMenuIconButton.ariaLabel = Strings.OPEN_SORT_MENU;
             this._openSortMenuIconButton.uid = UIDS.OPEN_SORT_MENU_ICON_BUTTON;
             this._openSortMenuIconButton.iconName = IconNames.SORT;
             this._openSortMenuIconButton.layoutData = new AnchorLayoutData( NaN, NaN, 52, NaN, NaN, 0 );
