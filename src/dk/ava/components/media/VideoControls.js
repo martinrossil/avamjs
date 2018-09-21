@@ -10,6 +10,7 @@ import IconNames from "../../constants/IconNames.js";
 import EventTypes from "../../constants/EventTypes.js";
 import ApplicationElement from "../application/ApplicationElement.js";
 import MediaEventTypes from "../../constants/MediaEventTypes.js";
+import AnimatedProperty from "../../animation/AnimatedProperty.js";
 export default class VideoControls extends LayoutContainer
 {
     constructor()
@@ -24,6 +25,9 @@ export default class VideoControls extends LayoutContainer
         this.backgroundColor = Theme.PRIMARY_COLOR;
         this.shadowDirection = Direction.NORTH;
         this.z = 4;
+        this.notifyPropertyAnimationEnd = true;
+        this.listen( EventTypes.PROPERTY_ANIMATION_ENDED, this.propertyAnimationEnded.bind( this ) );
+        this.animatedProperties = [ new AnimatedProperty( "opacity", 225, "ease-in" ) ];
         this.createChildren();
     }
     createChildren()
@@ -33,6 +37,28 @@ export default class VideoControls extends LayoutContainer
         this.addElement( this.playbackProgressBar );
         this.addElement( this.playPauseIconButton );
         this.addElement( this.fullScreenIconButton );
+    }
+    propertyAnimationEnded( property )
+    {
+        if( property === "opacity" )
+        {
+            if( this.opacity === 0 )
+            {
+                this.isVisible = false;
+            }
+        }
+    }
+    isShownChanged()
+    {
+        if( this.isShown )
+        {
+            this.isVisible = true;
+            this.opacity = 1;
+        }
+        else
+        {
+            this.opacity = 0;
+        }
     }
     get playPauseIconButton()
     {
@@ -88,6 +114,18 @@ export default class VideoControls extends LayoutContainer
             this._timeIndicator.x = 40;
         }
         return this._timeIndicator;
+    }
+    set isShown( value )
+    {
+        if( this._isShown !== value )
+        {
+            this._isShown = value;
+            this.isShownChanged();
+        }
+    }
+    get isShown()
+    {
+        return this._isShown;
     }
     set loadProgress( value )
     {
