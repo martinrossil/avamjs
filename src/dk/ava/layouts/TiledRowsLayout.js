@@ -1,4 +1,5 @@
 import BaseLayout from "./base/BaseLayout.js";
+import ListElement from "../components/lists/ListElement.js";
 export default class TiledRowsLayout extends BaseLayout
 {
     constructor()
@@ -67,7 +68,7 @@ export default class TiledRowsLayout extends BaseLayout
     layoutElements( w, h )
     {
         super.layoutElements( w, h );
-        if( this.lastLayoutWidth !== w || this.lastLayoutHeight !== h )
+        if( this.lastLayoutWidth !== w || this.lastLayoutHeight !== h || this.host.autoSizeVertical )
         {
             this.lastLayoutWidth = w;
             this.lastLayoutHeight = h;
@@ -112,8 +113,30 @@ export default class TiledRowsLayout extends BaseLayout
     {
         if( this.host.autoSizeVertical )
         {
-            this.lastLayoutHeight = this.lastElement.y + this.elementHeight + this.paddingBottom;
-            this.host.height = this.lastLayoutHeight;
+            if( this.lastElement )
+            {
+                this.lastLayoutHeight = this.lastElement.y + this.elementHeight + this.paddingBottom;
+            }
+            else
+            {
+                this.lastLayoutHeight = 0;
+            }
+            if( this.host.parentNode instanceof ListElement )
+            {
+                if( this.host.parentNode.autoSizeVertical )
+                {
+                    this.host.parentNode.height = this.lastLayoutHeight;
+                }
+                else
+                {
+                    this.host.height = this.lastLayoutHeight;
+                }
+            }
+            else
+            {
+                this.host.height = this.lastLayoutHeight;
+            }
+            
         }
     }
     setInitialValues( w )
