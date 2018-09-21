@@ -7,17 +7,20 @@ import ArrayCollection from "../../ava/data/ArrayCollection.js";
 import Properties from "../app/consts/Properties.js";
 import Paths from "../app/consts/Paths.js";
 import UIDS from "../app/consts/UIDS.js";
+import Filters from "../app/consts/Filters.js";
 export default class DrawerDataProviderLogic extends Logic
 {
     constructor()
     {
         super();
+        this.setInitialFilters();
         this.listen( UIDS.APP, EventTypes.APPLICATION_LOAD_COMPLETE, this.applicationLoadComplete.bind( this ) );
         document.addEventListener( Events.CLICK, this.clicked.bind( this ) );
     }
     applicationLoadComplete()
     {
         let path = window.location.pathname;
+        this.setFilterHrefFromPath( path );
     }
     clicked( e )
     {
@@ -35,6 +38,7 @@ export default class DrawerDataProviderLogic extends Logic
             {
                 path = filterItemRenderer.data.h;
                 this.setSelectedFilterTypeFromPath( path );
+                this.setFilterHrefFromPath( path );
                 this.loadDrawerData( path );
             }
             else
@@ -45,6 +49,38 @@ export default class DrawerDataProviderLogic extends Logic
                     this.setSelectedSubFilterFromData( linkItemRenderer.data );
                 }
             }
+        }
+    }
+    setSelectedFilterTypeFromPath( path )
+    {
+        let filterListUid;
+        let filterIndex;
+        if( path.indexOf( Paths.TRAILERS ) != -1 )
+        {
+            filterListUid = UIDS.TRAILERS_FILTER_LIST;
+            if( path === Paths.TRAILERS_GENRER )
+            {
+                filterIndex = 0;
+                this.trailersFilter = Filters.GENRES;
+            }
+            else if( path === Paths.TRAILERS_COUNTRIES )
+            {
+                filterIndex = 1;
+                this.trailersFilter = Filters.COUNTRIES;
+            }
+        }
+        else if( path.indexOf( Paths.MOVIES ) != -1 )
+        {
+            filterListUid = UIDS.MOVIES_FILTER_LIST;
+            filterIndex = path === Paths.MOVIES_GENRER ? 0 : 1;
+        }
+        else if( path.indexOf( Paths.ACTORS ) != -1 )
+        {
+            filterListUid = UIDS.ACTORS_DRAWER_LIST;
+        }
+        if( filterListUid && filterIndex > -1 )
+        {
+            this.setProperty( filterListUid, Properties.SELECTED_INDEX, filterIndex );
         }
     }
     setSelectedSubFilterFromData( data )
@@ -67,28 +103,6 @@ export default class DrawerDataProviderLogic extends Logic
                 this.setProperty( UIDS.TRAILERS_GENRES_LIST, Properties.SELECTED_INDEX, -1 );
                 this.setProperty( UIDS.TRAILERS_COUNTRIES_LIST, Properties.SELECTED_INDEX, selectedIndex );
             }
-        }
-    }
-    setSelectedFilterTypeFromPath( path )
-    {
-        let filterListUid;
-        let filterIndex;
-        if( path.indexOf( Paths.TRAILERS ) != -1 )
-        {
-            filterListUid = UIDS.TRAILERS_FILTER_LIST;
-            filterIndex = path === Paths.TRAILERS_GENRER ? 0 : 1;
-        }
-        else if( path.indexOf( Paths.MOVIES ) != -1 )
-        {
-            filterListUid = UIDS.MOVIES_DRAWER_LIST;
-        }
-        else if( path.indexOf( Paths.ACTORS ) != -1 )
-        {
-            filterListUid = UIDS.ACTORS_DRAWER_LIST;
-        }
-        if( filterListUid && filterIndex !== undefined )
-        {
-            this.setProperty( filterListUid, Properties.SELECTED_INDEX, filterIndex );
         }
     }
     loadDrawerData( path )
@@ -160,5 +174,34 @@ export default class DrawerDataProviderLogic extends Logic
             this._drawersDataLoader.listen( EventTypes.LOAD_COMPLETE, this.drawersDataComplete.bind( this ) );
         }
         return this._drawersDataLoader;
+    }
+    setFilterHrefFromPath( path )
+    {
+        let href;
+        if( path === Paths.ROOT || path.indexOf( Paths.TRAILERS ) != -1 )
+        {
+            href = Paths.TRAILERS + "/" + this.trailersFilter;
+        }
+        else if( path.indexOf( Paths.MOVIES ) != -1 )
+        {
+            href = Paths.MOVIES + "/" + this.moviesFilter;
+        }
+        else if( path.indexOf( Paths.ACTORS ) != -1 )
+        {
+            href = Paths.ACTORS + "/" + this.actorsFilter;
+        }
+        if( href )
+        {
+            this.setProperty( UIDS.OPEN_FILTER_DRAWER_LINK_ICON_BUTTON, Properties.HREF, href );
+        }
+    }
+    setInitialFilters()
+    {
+        this.trailersFilter      = Filters.GENRES;
+        this.trailersSubFilter   = Filters.ALL;
+        this.moviesFilter        = Filters.GENRES;
+        this.moviesSubFilter     = Filters.ALL;
+        this.actorsFilter        = Filters.COUNTRIES;
+        this.actorsSubFilter     = Filters.ALL;
     }
 }
