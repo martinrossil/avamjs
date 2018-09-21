@@ -33,25 +33,48 @@ export default class ListsDataProviderLogic extends Logic
         let bottomNavigationBarItemRenderer = ClickTargetUtil.getBottomNavigationBarItemRendererFromTarget( e.target );
         if( bottomNavigationBarItemRenderer )
         {
-            console.log( bottomNavigationBarItemRenderer.data );
             let path = bottomNavigationBarItemRenderer.data.href;
-            let loadPath;
-            if( path === Paths.TRAILERS )
+            this.loadDataFromBottomNavigationPath( path );
+        }
+        else
+        {
+            let linkItemRenderer = ClickTargetUtil.getLinkItemRendererFromTarget( e.target );
+            if( linkItemRenderer )
             {
-                loadPath = path + "/" + this.trailersFilter + "/" + this.trailersSubFilter + "/" + this.currentSortOrder;
+                this.loadDataFromSubFilterPath( linkItemRenderer.data.h );
             }
-            else if( path === Paths.MOVIES )
-            {
-                loadPath = path + "/" + this.moviesFilter + "/" + this.moviesSubFilter + "/" + this.currentSortOrder;
-            }
-            else if( path === Paths.ACTORS )
-            {
-                loadPath = path + "/" + this.actorsFilter + "/" + this.actorsSubFilter + "/" + this.currentSortOrder;
-            }
-            if( loadPath )
-            {
-                this.loadListData( loadPath );
-            }
+        }
+    }
+    loadDataFromSubFilterPath( path )
+    { 
+        let pathArray = path.split( "/" );
+            pathArray.shift();
+        let top = pathArray[ 0 ];
+        if( top === "trailers" )
+        {
+            this.trailersFilter = pathArray[ 1 ];
+            this.trailersSubFilter = pathArray[ 2 ];
+            this.loadListData( path  + "/" + this.currentSortOrder );
+        }    
+    }
+    loadDataFromBottomNavigationPath( path )
+    {
+        let loadPath;
+        if( path === Paths.TRAILERS )
+        {
+            loadPath = path + "/" + this.trailersFilter + "/" + this.trailersSubFilter + "/" + this.currentSortOrder;
+        }
+        else if( path === Paths.MOVIES )
+        {
+            loadPath = path + "/" + this.moviesFilter + "/" + this.moviesSubFilter + "/" + this.currentSortOrder;
+        }
+        else if( path === Paths.ACTORS )
+        {
+            loadPath = path + "/" + this.actorsFilter + "/" + this.actorsSubFilter + "/" + this.currentSortOrder;
+        }
+        if( loadPath )
+        {
+            this.loadListData( loadPath );
         }
     }
     loadListData( path )
@@ -87,7 +110,18 @@ export default class ListsDataProviderLogic extends Logic
                 listChunk.index++;
                 listChunk.collection.addItems( data.items );
             }
-            this.setProperty( listChunk.view, Properties.DATA_PROVIDER, listChunk.collection );
+            if( data.path.indexOf( Paths.TRAILERS ) != -1 )
+            {
+                this.setProperty( UIDS.TRAILERS_LIST, Properties.DATA_PROVIDER, listChunk.collection );
+            }
+            else if( data.path.indexOf( Paths.MOVIES ) != -1 )
+            {
+                this.setProperty( UIDS.MOVIES_LIST, Properties.DATA_PROVIDER, listChunk.collection );
+            }
+            else if( data.path.indexOf( Paths.ACTORS )!= -1 )
+            {
+                this.setProperty( UIDS.ACTORS_LIST, Properties.DATA_PROVIDER, listChunk.collection );
+            }
         }
     }
     get listsData()
@@ -112,7 +146,8 @@ export default class ListsDataProviderLogic extends Logic
         let path = window.location.pathname;
         if( path === Paths.ROOT || path === Paths.TRAILERS )
         {
-            this.loadListData( "/" + Paths.TRAILERS + "/" + this.trailersFilter + "/" + this.trailersSubFilter + "/" + this.currentSortOrder );
+            let loadPath = "/" + Paths.TRAILERS + "/" + this.trailersFilter + "/" + this.trailersSubFilter + "/" + this.currentSortOrder;
+            this.loadListData( loadPath );
         }
     }
 }
