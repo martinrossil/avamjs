@@ -8,6 +8,15 @@ export default class UIDS
     static get OPEN_SORT_MENU_ICON_BUTTON(){            return "openSortMenuIconButton";};
     static get DRAWER_CLOSE_BUTTON(){                   return "drawerCloseButton";};
     static get OVERLAY(){                               return "overlay";};
+    static get FILTERS_DRAWER(){                        return "filtersDrawer";};
+    static get FILTER_SCREENS_NAVIGATOR(){              return "filterScreensNavigator";};
+    static get OPEN_TRAILERS_FILTER_BUTTON(){           return "openTrailersFilterButton";};
+    static get OPEN_MOVIES_FILTER_BUTTON(){             return "openMoviesFilterButton";};
+    static get OPEN_ACTORS_FILTER_BUTTON(){             return "openActorsFilterButton";};
+    static get TRAILERS_FILTERS_SCREEN_NAVIGATOR(){     return "trailersFiltersScreenNavigator";};
+    static get MOVIES_FILTERS_SCREEN_NAVIGATOR(){       return "moviesFiltersScreenNavigator";};
+    static get ACTORS_FILTERS_SCREEN_NAVIGATOR(){       return "actorsFiltersScreenNavigator";};
+
     static get TRAILERS_DRAWER_LIST(){                  return "trailersDrawerList";};
     static get TRAILERS_FILTER_LIST(){                  return "trailersFilterList";};
     static get MOVIES_DRAWER_LIST(){                    return "moviesDrawerList";};
@@ -25,6 +34,7 @@ export default class UIDS
     static get TRAILERS_GENRES_LIST(){return "trailersGenresList";};
     
     static get MOVIES_LIST(){return "moviesList";};
+    static get MOVIE_DIALOG(){return "movieDialog";};
     static get MOVIES_DRAWER(){return "moviesDrawer";};
     static get MOVIES_GENRER_ICON_BUTTON(){return "moviesGenrerIconButton";};
     static get MOVIES_SORT_ICON_BUTTON(){return "moviesSortIconButton";};
