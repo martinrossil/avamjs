@@ -8,8 +8,9 @@ import IconNames from "../../../ava/constants/IconNames.js";
 import DisplayElement from "../../../ava/components/display/DisplayElement.js";
 import Theme from "../../../ava/styles/Theme.js";
 import LinkItemRenderer from "../itemrenderers/base/LinkItemRenderer.js";
-import IconButton from "../../../ava/components/buttons/IconButton.js";
 import UIDS from "../consts/UIDS.js";
+import FilterItemRenderer from "../itemrenderers/FilterItemRenderer.js";
+import IconButton from "../../../ava/components/buttons/IconButton.js";
 export default class TrailersDrawer extends BaseDrawer
 {
     constructor()
@@ -28,8 +29,8 @@ export default class TrailersDrawer extends BaseDrawer
     }
     createChildren()
     {
-        this.addElement( this.trailersCountriesList );
-        this.addElement( this.trailersGenresList );
+        this.addElement( this.countriesList );
+        this.addElement( this.genresList );
         this.addElement( this.topBlock );
         this.addElement( this.closeIconButton ); 
         this.addElement( this.filterList );
@@ -41,7 +42,7 @@ export default class TrailersDrawer extends BaseDrawer
             this._topBlock = new DisplayElement();
             this._topBlock.backgroundColor = Theme.PRIMARY_COLOR_DARK;
             this._topBlock.z = 2;
-            this._topBlock.height = 148;
+            this._topBlock.height = 152;
         }
         return this._topBlock;
     }
@@ -50,8 +51,9 @@ export default class TrailersDrawer extends BaseDrawer
         if( !this._closeIconButton )
         {
             this._closeIconButton = new IconButton();
-            this._closeIconButton.uid = UIDS.TRAILERS_DRAWER_CLOSE_BUTTON;
+            this._closeIconButton.uid = UIDS.DRAWER_CLOSE_BUTTON;
             this._closeIconButton.iconName = IconNames.ARROW_FORWARD;
+            this._closeIconButton.ariaLabel = "Luk Filter Menu";
             this._closeIconButton.layoutData = new AnchorLayoutData( NaN, 4, 4 ); 
         }
         return this._closeIconButton;
@@ -61,12 +63,12 @@ export default class TrailersDrawer extends BaseDrawer
         if( !this._filterList )
         {
             this._filterList = new ListElement();
-            this._filterList.height = 96;
             this._filterList.uid = UIDS.TRAILERS_FILTER_LIST;
+            this._filterList.height = 96;
             this._filterList.horizontalScrollPolicy = ScrollPolicy.OFF;
             this._filterList.layout = new VerticalLayout();
             this._filterList.layoutData = new AnchorLayoutData( 8, 52, 8 );
-            this._filterList.itemRenderType = LinkItemRenderer;
+            this._filterList.itemRenderType = FilterItemRenderer;
             this._filterList.dataProvider = this.filterListDataProvider;
             this._filterList.selectedIndex = 0;
         }
@@ -74,7 +76,7 @@ export default class TrailersDrawer extends BaseDrawer
     }
     get filterListDataProvider()
     {
-        if( !this._filterListDataProvider )
+        if( !this._filterListDataProvider ) 
         {
             let filters = [ { icon : IconNames.MOVIE_FILTER, l : "Genrer", h : "/trailers/genrer" }, 
                             { icon : IconNames.PUBLIC, l : "Lande", h : "/trailers/lande" } 
@@ -83,34 +85,51 @@ export default class TrailersDrawer extends BaseDrawer
         }
         return this._filterListDataProvider;
     }
-    get trailersGenresList()
+    get genresList()
     {
-        if( !this._trailersGenresList )
+        if( !this._genresList )
         {
-            this._trailersGenresList = new ListElement();
-            this._trailersGenresList.uid = UIDS.TRAILERS_GENRES_LIST;
-            this._trailersGenresList.horizontalScrollPolicy = ScrollPolicy.OFF;
-            this._trailersGenresList.layout = new VerticalLayout();
-            this._trailersGenresList.layoutData = new AnchorLayoutData( 8, 148, 8, 16 );
-            this._trailersGenresList.itemRenderType = LinkItemRenderer;
-            this._trailersGenresList.selectedIndex = 0;
+            this._genresList = new ListElement();
+            this._genresList.uid = UIDS.TRAILERS_GENRES_LIST;
+            this._genresList.horizontalScrollPolicy = ScrollPolicy.OFF;
+            this._genresList.layout = this.genresListLayout;
+            this._genresList.layoutData = new AnchorLayoutData( 8, 152, 8, 0 );
+            this._genresList.itemRenderType = LinkItemRenderer;
+            this._genresList.selectedIndex = 0;
         }
-        return this._trailersGenresList;
+        return this._genresList;
     }
-    get trailersCountriesList()
+    get genresListLayout()
     {
-        if( !this._trailersCountriesList )
+        if( !this._genresListLayout )
         {
-            this._trailersCountriesList = new ListElement();
-            this._trailersCountriesList.isVisible = false;
-            this._trailersCountriesList.uid = UIDS.TRAILERS_COUNTRIES_LIST;
-            this._trailersCountriesList.horizontalScrollPolicy = ScrollPolicy.OFF;
-            this._trailersCountriesList.layout = new VerticalLayout();
-            this._trailersCountriesList.layoutData = new AnchorLayoutData( 8, 148, 8, 16 );
-            this._trailersCountriesList.itemRenderType = LinkItemRenderer;
-            this._trailersCountriesList.selectedIndex = 0;
+            this._genresListLayout =  new VerticalLayout();
+            this._genresListLayout.paddingTop = 4;
         }
-        return this._trailersCountriesList;
+        return this._genresListLayout;
+    }
+    get countriesList()
+    {
+        if( !this._countriesList )
+        {
+            this._countriesList = new ListElement();
+            this._countriesList.isVisible = false;
+            this._countriesList.uid = UIDS.TRAILERS_COUNTRIES_LIST;
+            this._countriesList.horizontalScrollPolicy = ScrollPolicy.OFF;
+            this._countriesList.layout = this.countriesListLayout;
+            this._countriesList.layoutData = new AnchorLayoutData( 8, 152, 8, 0 );
+            this._countriesList.itemRenderType = LinkItemRenderer;
+        }
+        return this._countriesList;
+    }
+    get countriesListLayout()
+    {
+        if( !this._countriesListLayout )
+        {
+            this._countriesListLayout =  new VerticalLayout();
+            this._countriesListLayout.paddingTop = 4;
+        }
+        return this._countriesListLayout;
     }
 }
 customElements.define("trailers-drawer", TrailersDrawer ); 
