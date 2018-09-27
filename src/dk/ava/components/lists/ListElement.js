@@ -17,12 +17,7 @@ export default class ListElement extends ScrollContainer
                 let data = this.dataProvider.getItemAt( this.selectedIndex );
                 if( data )
                 {
-                    let itemRenderers = this.childElements;
-                    let itemRenderer;
-                    for( itemRenderer of itemRenderers )
-                    {
-                        itemRenderer.isSelected = itemRenderer.data === data;
-                    }
+                    this.setSelectedItemRendererFromData( data );
                 }
                 else
                 {
@@ -39,6 +34,16 @@ export default class ListElement extends ScrollContainer
             this.unSelectAllItemRenderers();
         }
     }
+    setSelectedItemRendererFromData( data )
+    {
+        let itemRenderers = this.childElements;
+        let itemRenderer;
+        for( itemRenderer of itemRenderers )
+        {
+            itemRenderer.isSelected = itemRenderer.data === data;
+        }
+        this.selectedItem = data;
+    }
     unSelectAllItemRenderers()
     {
         let itemRenderers = this.childElements;
@@ -47,6 +52,7 @@ export default class ListElement extends ScrollContainer
         {
             itemRenderer.isSelected = false;
         }
+        this.selectedItem = null;
     }
     initialize()
     {
@@ -59,6 +65,14 @@ export default class ListElement extends ScrollContainer
         this._selectedIndex = -1;
         this.lastScrollPosition = 0;
         this.requestTick();
+        this.addEventListener( EventTypes.LIST_ITEM_SELECTED, this.listItemSelected.bind( this ) );
+    }
+    listItemSelected( e )
+    {
+        if( e.detail )
+        {
+            this.setSelectedItemRendererFromData( e.detail );
+        }
     }
     itemRendererTriggered( e )
     {
@@ -260,6 +274,18 @@ export default class ListElement extends ScrollContainer
     get selectedIndex()
     {
         return this._selectedIndex;
+    }
+    set selectedItem( value )
+    {
+        if( this._selectedItem !== value )
+        {
+            this._selectedItem = value;
+            this.dispatch( EventTypes.SELECTED_ITEM_CHANGED, value );
+        }
+    }
+    get selectedItem()
+    {
+        return this._selectedItem;
     }
 }
 customElements.define("list-element", ListElement ); 
