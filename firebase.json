@@ -18,6 +18,17 @@
     "headers": 
     [ 
       {
+        "source" : "/manifest.json",
+        "headers" : 
+        [ 
+          {
+            "key" : "Cache-Control",
+            "value" : "public, max-age=2592000, s-maxage=2592000"
+          } 
+        ]
+      }
+      ,
+      {
         "source" : "**/*.@(mp4|webm|jpg|webp|png|ico)",
         "headers" : 
         [ 
