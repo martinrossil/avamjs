@@ -18,8 +18,11 @@ export default class CastItemRenderer extends BaseItemRenderer
             {
                 this.hasProfileBeenLoaded = true;
                 let ext = ImageElement.extension;
-                let url = "/profile/" + Util.getImageSize( this.width ) + "/" + this.data.fileName + "-profil." + ext;
+                let url = "/profile/" + Util.getImageSize( this.width ) + "/" + this.data.href + "-profil." + ext;
                 this.image.source = url;
+                this.aTag.title = this.data.name;
+                this.aTag.setAttribute( "aria-label", this.data.name );
+                this.aTag.href = "/skuespillere/" + this.data.href;
                 this.nameTextElement.text = this.data.name;
                 this.characterTextElement.text = this.data.character;
             }
@@ -49,7 +52,7 @@ export default class CastItemRenderer extends BaseItemRenderer
     {  
         if( this.data )
         {
-            console.log( this.data );
+            //console.log( this.data );
         }
     }
     initialize()
