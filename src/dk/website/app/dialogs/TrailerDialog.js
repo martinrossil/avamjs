@@ -15,6 +15,17 @@ export default class TrailerDialog extends BaseDialog
     {
         super();
     }
+    dataChanged()
+    {
+        if( this.data )
+        {
+            let source = "/trailers/" + this.data.h;
+            this.dialogTopBar.title = this.data.t + " - " + this.data.d;
+            this.videoElement.source = source;
+            this.videoElement.play();
+            this.showControls();
+        }
+    }
     pathChanged()
     {
         if( this.path )
@@ -47,6 +58,7 @@ export default class TrailerDialog extends BaseDialog
         super.isShownChanged();
         if( !this.isShown )
         {
+            this.data = null;
             this.path = null;
             this.dialogTopBar.title = null;
             this.videoElement.stop();
