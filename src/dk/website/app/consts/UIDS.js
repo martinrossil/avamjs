@@ -4,15 +4,13 @@ export default class UIDS
     static get APP_BAR(){                               return "appBar";};
     static get BOTTOM_NAVIGATION_BAR(){                 return "bottomNavigationBar";};
     static get SCREENS_NAVIGATOR(){                     return "screensNavigator";};
-    static get OPEN_FILTER_DRAWER_LINK_ICON_BUTTON(){   return "openFilterDrawerLinkIconButton";};
-    static get OPEN_SORT_MENU_ICON_BUTTON(){            return "openSortMenuIconButton";};
+    static get OPEN_FILTER_BUTTON(){                    return "openFilterButton";};
+    static get CLOSE_FILTER_MENU(){                     return "closeFilterMenu";};
+    static get OPEN_SORT_BUTTON(){                      return "openSortButton";};
     static get DRAWER_CLOSE_BUTTON(){                   return "drawerCloseButton";};
     static get OVERLAY(){                               return "overlay";};
     static get FILTERS_DRAWER(){                        return "filtersDrawer";};
     static get FILTER_SCREENS_NAVIGATOR(){              return "filterScreensNavigator";};
-    static get OPEN_TRAILERS_FILTER_BUTTON(){           return "openTrailersFilterButton";};
-    static get OPEN_MOVIES_FILTER_BUTTON(){             return "openMoviesFilterButton";};
-    static get OPEN_ACTORS_FILTER_BUTTON(){             return "openActorsFilterButton";};
     static get TRAILERS_FILTERS_SCREEN_NAVIGATOR(){     return "trailersFiltersScreenNavigator";};
     static get MOVIES_FILTERS_SCREEN_NAVIGATOR(){       return "moviesFiltersScreenNavigator";};
     static get ACTORS_FILTERS_SCREEN_NAVIGATOR(){       return "actorsFiltersScreenNavigator";};
