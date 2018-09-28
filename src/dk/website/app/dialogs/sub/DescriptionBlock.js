@@ -15,11 +15,11 @@ export default class DescriptionBlock extends DisplayContainer
         super.sizeChanged( w, h );
         this.height = this.descriptionTextElement.textHeight;
         this.background.height = this.height;
+        console.log( "DescriptionBlock sizeChanged", this.height );
     }
     widthChanged( w )
     {
         super.widthChanged( w );
-        this.background.width = w;
         this.descriptionTextElement.width = w;
         this.height = this.descriptionTextElement.textHeight;
     }
@@ -27,24 +27,12 @@ export default class DescriptionBlock extends DisplayContainer
     {
         this.descriptionTextElement.text = this.description;
         this.height = this.descriptionTextElement.textHeight;
-        this.background.height = this.height;
+        console.log( "descriptionChanged", this.height );
     }
     initialize()
     {
         super.initialize();
-        //this.z = 8;
-        //this.addElement( this.background );
         this.addElement( this.descriptionTextElement );
-    }
-    get background()
-    {
-        if( !this._background )
-        {
-            this._background = new DisplayElement();
-            this._background.backgroundColor = Colors.BLACK;
-            this._background.opacity = .8;
-        }
-        return this._background;
     }
     get descriptionTextElement()
     {
@@ -75,6 +63,7 @@ export default class DescriptionBlock extends DisplayContainer
         {
             this._fontSize = value;
             this.descriptionTextElement.fontSize = value;
+            this.height = this.descriptionTextElement.textHeight;
         }
     }
     get fontSize()
