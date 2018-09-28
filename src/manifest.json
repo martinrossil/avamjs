@@ -1,12 +1,19 @@
 {
     "name": "Ava",
     "short_name": "Ava",
-    "description": "Watch the latest Trailers and Movie / Actor info.",
-    "lang": "en-US",
-    "start_url": "index.html",
+    "description": "Ava.dk er et værktøj til at finde den næste gode film at se.",
+    "lang": "da-DK",
+    "scope": "/",
+    "start_url": "/",
     "display": "fullscreen",
-    "theme_color": "#303030",
+    "theme_color": "#0d364c",
+    "background_color": "#0d364c",
     "icons": [
+        {
+            "src": "icon1024.png",
+            "sizes": "1024x1024",
+            "type": "image/png"
+        },
         {
             "src": "icon512.png",
             "sizes": "512x512",
@@ -18,8 +25,28 @@
             "type": "image/png"
         },
         {
+            "src": "icon180.png",
+            "sizes": "180x180",
+            "type": "image/png"
+        },
+        {
+            "src": "icon152.png",
+            "sizes": "152x152",
+            "type": "image/png"
+        },
+        {
+            "src": "icon144.png",
+            "sizes": "144x144",
+            "type": "image/png"
+        },
+        {
             "src": "icon128.png",
             "sizes": "128x128",
+            "type": "image/png"
+        },
+        {
+            "src": "icon120.png",
+            "sizes": "120x120",
             "type": "image/png"
         },
         {
@@ -28,10 +55,29 @@
             "type": "image/png"
         },
         {
+            "src": "icon76.png",
+            "sizes": "76x76",
+            "type": "image/png"
+        },
+        {
+            "src": "icon72.png",
+            "sizes": "72x72",
+            "type": "image/png"
+        },
+        {
             "src": "icon48.png",
             "sizes": "48x48",
             "type": "image/png"
+        },
+        {
+            "src": "icon32.png",
+            "sizes": "32x32",
+            "type": "image/png"
+        },
+        {
+            "src": "icon16.png",
+            "sizes": "16x16",
+            "type": "image/png"
         }
-    ],
-    "background_color": "#303030"
+    ]
   }
