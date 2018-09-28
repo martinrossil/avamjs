@@ -6,7 +6,7 @@ import Theme from "../../../ava/styles/Theme.js";
 import AnchorLayoutData from "../../../ava/layouts/data/AnchorLayoutData.js";
 import IconButton from "../../../ava/components/buttons/IconButton.js";
 import IconNames from "../../../ava/constants/IconNames.js";
-import Strings from "../../app/consts/Strings.js";
+import Strings from "../consts/Strings.js";
 import EventTypes from "../../../ava/constants/EventTypes.js";
 import AnimatedProperty from "../../../ava/animation/AnimatedProperty.js";
 export default class DialogTopBar extends LayoutContainer
