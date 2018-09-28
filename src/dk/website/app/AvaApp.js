@@ -19,6 +19,7 @@ import Config from "./consts/Config.js";
 import FiltersDrawer from "./drawers/FiltersDrawer.js";
 import MovieDialog from "./dialogs/MovieDialog.js";
 import AppBehavior from "./behavior/AppBehavior.js";
+import ActorDialog from "./dialogs/ActorDialog.js";
 export default class AvaApp extends ApplicationElement
 {
     constructor()
@@ -48,8 +49,9 @@ export default class AvaApp extends ApplicationElement
         this.addElement( this.appBar );
         this.addElement( this.overlay );
         this.addElement( this.filtersDrawer );
-        this.addElement( this.trailerDialog );
         this.addElement( this.movieDialog );
+        this.addElement( this.trailerDialog );
+        this.addElement( this.actorDialog );
     }
     get overlay()
     {
@@ -86,6 +88,15 @@ export default class AvaApp extends ApplicationElement
             this._movieDialog.uid = UIDS.MOVIE_DIALOG;
         }
         return this._movieDialog;
+    }
+    get actorDialog()
+    {
+        if( !this._actorDialog )
+        {
+            this._actorDialog = new ActorDialog();
+            this._actorDialog.uid = UIDS.ACTOR_DIALOG;
+        }
+        return this._actorDialog;
     }
     get appBar()
     {
