@@ -21,7 +21,7 @@ export default class TrailerDialog extends BaseDialog
         {
             if( !this.infoData[ this.path ] )
             {
-                let url = window.location.origin + "/info/trailers/" + this.path + ".json";
+                let url = window.location.origin + "/info" + this.path + ".json";
                 this.infoLoader.load( url );
             }
             else
@@ -39,7 +39,7 @@ export default class TrailerDialog extends BaseDialog
             this.dialogTopBar.title = data.title;
             this.videoElement.source = source;
             this.videoElement.play();
-            this.hideControls();
+            this.showControls();
         }
     }
     isShownChanged()
@@ -159,15 +159,11 @@ export default class TrailerDialog extends BaseDialog
     }
     rippleSurfaceTriggered()
     {
+        this.showControls();
         if( this.videoElement.isPlaying )
         {
-            this.videoElement.pause();
+            this.showControlsTimeoutId = window.setTimeout( this.showControlsTimedOut.bind( this ), 3000 );
         }
-        else
-        {
-            this.videoElement.play();
-        }
-        this.showControls();
     }
     get videoControls()
     {
