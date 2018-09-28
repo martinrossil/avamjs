@@ -13,105 +13,51 @@ import CastItemRenderer from "../itemrenderers/CastItemRenderer.js";
 import ArrayCollection from "../../../ava/data/ArrayCollection.js";
 import DescriptionBlock from "./sub/DescriptionBlock.js";
 import RatingBlock from "./sub/RatingBlock.js";
-import System from "../../../ava/system/System.js";
+import MovieInfoTrailerItemRenderer from "../itemrenderers/MovieInfoTrailerItemRenderer.js";
 export default class MovieDialog extends BaseDialog
 {
     constructor()
     {
         super();
     }
-    sizeChanged( w, h )
-    {
-        super.sizeChanged( w, h );
-        this.layoutChildren( w, h );
-    }
-    widthChanged( w )
-    {
-        super.widthChanged( w );
-        this.layoutChildren( w, this.height );
-    }
-    heightChanged( h )
-    {
-        super.heightChanged( h );
-        this.layoutChildren( this.width, h );
-    }
     layoutChildren( w, h )
     {
-        if( Math.min( window.outerWidth, window.outerHeight ) < 768 )
+        if( w < 640 )
         {
-            if( w >= h )
-            {
-                this.layoutPhoneHorizontal( w, h );
-            }
-            else
-            {
-                this.layoutPhoneVertical( w, h );
-            }
-            this.setPhoneBaseValues( w, h );
+            this.layoutNarrow( w, h );
         }
         else
         {
-            if( w >= h )
-            {
-                this.layoutTabletHorizontal( w, h );
-            }
-            else
-            {
-                this.layoutTabletVertical( w, h );
-            }
-            this.setTabletBaseValues( w, h );
+            this.layoutWide( w, h );
         }
-        this.setAllBaseValues( w, h);
-    }
-    setAllBaseValues( w, h )
-    {
         this.ratingBlock.x = w - this.ratingBlock.width - 16;
         this.darkBlock.width = w;
+        this.trailersList.width = w;
         this.castList.width = w;
-        this.darkBlock.height = this.castList.y + this.castList.height;
+        this.castList.y = this.trailersList.y + this.trailersList.height + 16;
+        this.darkBlock.height = this.castList.y + this.castList.height - this.darkBlock.y;
     }
-    setPhoneBaseValues( w, h )
+    layoutNarrow( w, h )
     {
-        this.descriptionBlock.fontSize = 16;
         this.posterBlock.setSize( 160, 240 );
-        this.darkBlock.y = 24 + 240 * .75;
         this.ratingBlock.setSize( 42, 42 );
+        this.darkBlock.y = 204;
+        this.descriptionBlock.x = 16;
+        this.descriptionBlock.width = w - 32;
+        this.descriptionBlock.y = this.posterBlock.y + this.posterBlock.height + 16;
+        this.descriptionBlock.fontSize = 16;
+        this.trailersList.y = this.descriptionBlock.y + this.descriptionBlock.height;
     }
-    setTabletBaseValues( w, h )
+    layoutWide( w, h )
     {
         this.posterBlock.setSize( 240, 360 );
-        this.descriptionBlock.fontSize = 20;
-        this.descriptionBlock.width = w - ( 240 + 48 );
-        this.descriptionBlock.y = ( 24 + 270 ) - this.descriptionBlock.height - 16;
-        this.descriptionBlock.x = 240 + 32;
-        this.darkBlock.y = 24 + 360 * .75;
-        this.castList.y = 24 + 360 + 16;
         this.ratingBlock.setSize( 84, 84 );
-    }
-    layoutPhoneVertical( w, h )
-    {
-        console.log( "layoutPhoneVertical", w, h );
-        
-        this.descriptionBlock.y = 24 + 240 + 16;
-        this.descriptionBlock.width = w - 32;
-        this.descriptionBlock.x = 16;
-        this.castList.y = this.descriptionBlock.y + this.descriptionBlock.height + 16;
-    }
-    layoutPhoneHorizontal( w, h )
-    {
-        console.log( "layoutPhoneHorizontal", w, h );
-        this.descriptionBlock.width = w - ( 160 + 48 );
-        this.descriptionBlock.y = ( 24 + 180 ) - this.descriptionBlock.height - 16;
-        this.descriptionBlock.x = 160 + 32;
-        this.castList.y = 240 + 32;
-    }
-    layoutTabletVertical( w, h )
-    {
-        console.log( "layoutTabletVertical", w, h );
-    }
-    layoutTabletHorizontal( w, h )
-    {
-        console.log( "layoutTabletHorizontal", w, h );
+        this.darkBlock.y = 294;
+        this.descriptionBlock.fontSize = 20;
+        this.descriptionBlock.x = this.posterBlock.x + this.posterBlock.width + 16;
+        this.descriptionBlock.width = w - ( 16 + 240 + 32 );
+        this.descriptionBlock.y = this.darkBlock.y - this.descriptionBlock.height - 16;
+        this.trailersList.y = this.posterBlock.y + this.posterBlock.height + 16;
     }
     pathChanged()
     {
@@ -136,12 +82,9 @@ export default class MovieDialog extends BaseDialog
         {
             this.dialogTopBar.title = data.title;
             this.posterBlock.data = data;
+            this.trailersCollection.arrayData = data.trailers;
             this.castCollection.arrayData = data.cast;
-            
-            let sizes = "wow [" + window.outerWidth + " / " + window.outerHeight + "]\n";
-                sizes += "screen width [" + screen.width + " / " + screen.height + "]\n";
-                sizes += "screen avail width [" + screen.availWidth + " / " + screen.availHeight + "]\n";
-            this.descriptionBlock.description = sizes; // data.description;
+            this.descriptionBlock.description = data.description;
             if( data.rating )
             {
                 this.ratingBlock.isVisible = true;
@@ -184,8 +127,9 @@ export default class MovieDialog extends BaseDialog
             this._scrollContainer.addElement( this.darkBlock );
             this._scrollContainer.addElement( this.posterBlock );
             this._scrollContainer.addElement( this.ratingBlock );
-            this._scrollContainer.addElement( this.castList );
             this._scrollContainer.addElement( this.descriptionBlock );
+            this._scrollContainer.addElement( this.trailersList );
+            this._scrollContainer.addElement( this.castList );
         }
         return this._scrollContainer;
     }
@@ -209,6 +153,43 @@ export default class MovieDialog extends BaseDialog
         }
         return this._descriptionBlock;
     }
+    get trailersList()
+    {
+        if( !this._trailersList )
+        {
+            this._trailersList = new ListElement();
+            this._trailersList.autoSizeVertical = true;
+            this._trailersList.horizontalScrollPolicy = ScrollPolicy.OFF;
+            this._trailersList.layout = this.trailersListLayout;
+            this._trailersList.dataProvider = this.trailersCollection;
+            this._trailersList.itemRenderType = MovieInfoTrailerItemRenderer;
+        }
+        return this._trailersList;
+    }
+    get trailersListLayout()
+    {
+        if( !this._trailersListLayout )
+        {
+            this._trailersListLayout = new TiledRowsLayout();
+            this._trailersListLayout.padding = 16;
+            this._trailersListLayout.gap = 16;
+            this._trailersListLayout.verticalGap = 48;
+            this._trailersListLayout.paddingBottom = 32;
+            this._trailersListLayout.maxColumns = 3;
+            this._trailersListLayout.elementAspectRatio = 2;
+            this._trailersListLayout.elementMinWidth = 240;
+            this._trailersListLayout.maxTotalWidth = 1024;
+        }
+        return this._trailersListLayout;
+    }
+    get trailersCollection()
+    {
+        if( !this._trailersCollection )
+        {
+            this._trailersCollection = new ArrayCollection();
+        }
+        return this._trailersCollection;
+    }
     get castList()
     {
         if( !this._castList )
@@ -216,8 +197,7 @@ export default class MovieDialog extends BaseDialog
             this._castList = new ListElement();
             this._castList.autoSizeVertical = true;
             this._castList.horizontalScrollPolicy = ScrollPolicy.OFF;
-            this._castList.layout = this.tiledRowsLayout;
-            //this._castList.backgroundColor = Theme.ACCENT_COLOR;
+            this._castList.layout = this.castListLayout;
             this._castList.itemRenderType = CastItemRenderer;
             this._castList.dataProvider = this.castCollection;
         }
@@ -231,20 +211,21 @@ export default class MovieDialog extends BaseDialog
         }
         return this._castCollection;
     }
-    get tiledRowsLayout()
+    get castListLayout()
     {
-        if( !this._tiledRowsLayout )
+        if( !this._castListLayout )
         {
-            this._tiledRowsLayout = new TiledRowsLayout();
-            this._tiledRowsLayout.padding = 16;
-            this._tiledRowsLayout.gap = 16;
-            this._tiledRowsLayout.verticalGap = 80;
-            this._tiledRowsLayout.paddingBottom = 96;
-            //this._tiledRowsLayout.maxColumns = 4;
-            this._tiledRowsLayout.elementAspectRatio = 1 / 1.5;
-            this._tiledRowsLayout.elementMinWidth = 100;
+            this._castListLayout = new TiledRowsLayout();
+            this._castListLayout.padding = 16;
+            this._castListLayout.gap = 16;
+            this._castListLayout.verticalGap = 80;
+            this._castListLayout.paddingBottom = 96;
+            this._castListLayout.maxColumns = 5;
+            this._castListLayout.elementAspectRatio = 1 / 1.5;
+            this._castListLayout.elementMinWidth = 136;
+            this._castListLayout.maxTotalWidth = 1024;
         }
-        return this._tiledRowsLayout;
+        return this._castListLayout;
     }
     get dialogTopBar()
     {
@@ -271,7 +252,6 @@ export default class MovieDialog extends BaseDialog
         if( !this._darkBlock )
         {
             this._darkBlock = new DisplayElement();
-            this._darkBlock.layoutData = new AnchorLayoutData( 0, NaN, 0, 0 );
             this._darkBlock.z = 4;
             this._darkBlock.shadowDirection = Direction.NORTH;
             this._darkBlock.backgroundColor = Theme.PRIMARY_COLOR_DARK;
