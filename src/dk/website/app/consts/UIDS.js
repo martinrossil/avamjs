@@ -43,6 +43,7 @@ export default class UIDS
     static get MOVIES_COUNTRIES_LIST(){return "moviesCountriesList";};
     
     static get ACTORS_LIST(){return "actorsList";};
+    static get ACTOR_DIALOG(){return "actorDialog";};
     static get ACTORS_DRAWER(){return "actorsDrawer";};
     static get ACTORS_SORT_ICON_BUTTON(){return "actorsSortIconButton";};
     static get ACTORS_DRAWER_ICON_BUTTON(){return "actorsDrawerIconButton";};
