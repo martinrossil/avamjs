@@ -9,6 +9,29 @@ export default class BaseDialog extends LayoutContainer
     {
         super();
     }
+    sizeChanged( w, h )
+    {
+        super.sizeChanged( w, h );
+        this.layoutChildren( w, h );
+    }
+    widthChanged( w )
+    {
+        super.widthChanged( w );
+        this.layoutChildren( w, this.height );
+    }
+    heightChanged( h )
+    {
+        super.heightChanged( h );
+        this.layoutChildren( this.width, h );
+    }
+    layoutChildren( w, h )
+    {
+        // override
+    }
+    dataChanged()
+    {
+        // override
+    }
     pathChanged()
     {
         // override
@@ -41,7 +64,6 @@ export default class BaseDialog extends LayoutContainer
         let wiw = window.innerWidth
         let wih = window.innerHeight;
         this.setSize( wiw, wih );
-        //this.dialogTopBar.width = wiw;
         this.y = wih;
         this.isVisible = false;
         this.layout = new AnchorLayout();
@@ -57,7 +79,6 @@ export default class BaseDialog extends LayoutContainer
         let wiw = window.innerWidth
         let wih = window.innerHeight;
         this.setSize( wiw, wih );
-        //this.dialogTopBar.width = wiw;
         this.y = this.isShown ? 0 : wih;
     }
     set isShown( value )
@@ -100,6 +121,18 @@ export default class BaseDialog extends LayoutContainer
             this._infoLoader.listen( EventTypes.LOAD_COMPLETE, this.infoComplete.bind( this ) );
         }
         return this._infoLoader;
+    }
+    set data( value )
+    {
+        if( this._data !== value )
+        {
+            this._data = value;
+            this.dataChanged();
+        }
+    }
+    get data()
+    {
+        return this._data;
     }
 }
 customElements.define("base-dialog", BaseDialog);
