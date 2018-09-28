@@ -17,8 +17,8 @@ import ScrimElement from "../../ava/components/dialogs/ScrimElement.js";
 import UIDS from "./consts/UIDS.js";
 import Config from "./consts/Config.js";
 import FiltersDrawer from "./drawers/FiltersDrawer.js";
-import BusinessClasses from "../business/BusinessClasses.js";
 import MovieDialog from "./dialogs/MovieDialog.js";
+import AppBehavior from "./behavior/AppBehavior.js";
 export default class AvaApp extends ApplicationElement
 {
     constructor()
@@ -38,7 +38,7 @@ export default class AvaApp extends ApplicationElement
         Theme.RIPPLE_COLOR          = Colors.WHITE;
         super.initialize();
         this.layout = new AnchorLayout();
-        new BusinessClasses();
+        new AppBehavior();
         this.createChildren();
     }
     createChildren()
@@ -121,7 +121,7 @@ export default class AvaApp extends ApplicationElement
             this._bottomNavigationBar.dataProvider = new ArrayCollection( [ { icon : IconNames.VIDEO_LIBRARY, label : "Trailers", href : "/trailers" },
                                                                             { icon : IconNames.MOVIE, label : "Film", href : "/film" }, 
                                                                             { icon : IconNames.PEOPLE, label : "Skuespillere", href : "/skuespillere" }
-                                                                            ] );                                                         
+                                                                            ] );                                                                                                                
         }
         return this._bottomNavigationBar;
     }
