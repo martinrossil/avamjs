@@ -18,7 +18,7 @@
     "headers": 
     [ 
       {
-        "source" : "**/*.@(mp4|webm|jpg|webp)",
+        "source" : "**/*.@(mp4|webm|jpg|webp|png|ico)",
         "headers" : 
         [ 
           {
