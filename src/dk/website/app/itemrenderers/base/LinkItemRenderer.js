@@ -3,7 +3,6 @@ import VerticalLayoutData from "../../../../ava/layouts/data/VerticalLayoutData.
 import DisplayElement from "../../../../ava/components/display/DisplayElement.js";
 import Theme from "../../../../ava/styles/Theme.js";
 import TextElement from "../../../../ava/components/text/TextElement.js";
-import RippleSurface from "../../../../ava/components/display/RippleSurface.js";
 import TextAlign from "../../../../ava/constants/TextAlign.js";
 import AnimatedProperty from "../../../../ava/animation/AnimatedProperty.js";
 export default class LinkItemRenderer extends BaseItemRenderer
@@ -46,7 +45,6 @@ export default class LinkItemRenderer extends BaseItemRenderer
     }
     layoutChildren( w, h )
     {
-        //this.rippleSurface.setSize( w, h );
         this.selectionLayer.setSize( w, h - 8 );
         this.countTextElement.width = w - 8;
     }
@@ -60,6 +58,7 @@ export default class LinkItemRenderer extends BaseItemRenderer
     createChildren()
     {
         this.addElement( this.aTag );
+        
     }
     get aTag()
     {
@@ -69,8 +68,6 @@ export default class LinkItemRenderer extends BaseItemRenderer
             this._aTag.appendChild( this.selectionLayer );
             this._aTag.appendChild( this.labelTextElement );
             this._aTag.appendChild( this.countTextElement );
-            
-            //this._aTag.appendChild( this.rippleSurface );
         }
         return this._aTag;
     }
@@ -110,15 +107,6 @@ export default class LinkItemRenderer extends BaseItemRenderer
             this._selectionLayer.cornerRadius = 4;
         }
         return this._selectionLayer;
-    }
-    get rippleSurface()
-    {
-        if( !this._rippleSurface )
-        {
-            this._rippleSurface = new RippleSurface();
-            this._rippleSurface.rippleColor = Theme.RIPPLE_COLOR;
-        }
-        return this._rippleSurface;
     }
 }
 customElements.define("link-item-renderer", LinkItemRenderer ); 
