@@ -37,8 +37,10 @@ export default class PosterBlock extends DisplayContainer
     {
         if( this.data )
         {
-            this.image.alt = this.data.title + " Plakat";
-            this.image.title = this.data.title + " Plakat";
+            let title = this.data.title + " Plakat";;
+            this.ariaLabel = title;
+            this.image.alt = title;
+            this.image.title = title;
         }
     }
     initialize()
