@@ -53,7 +53,7 @@ export default class RippleSurface extends DisplayContainer
     }
     touchStart( e )
     {
-        e.preventDefault();
+        //e.preventDefault();
         window.addEventListener( "touchend", this.windowTouchEnd );
         if( !this.hasMouseEventsBeenRemoved )
         {
