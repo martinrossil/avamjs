@@ -4,6 +4,10 @@ export default class Logic
     constructor()
     {
     }
+    dispatch( uid, type, data = null )
+    {
+        ComCenter.dispatch( uid, type, data );
+    }
     listen( uid, type, listener )
     {
         ComCenter.listen( uid, type, listener );
