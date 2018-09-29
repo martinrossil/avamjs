@@ -1,4 +1,4 @@
-# avamjs is a technical prrof of concept.
+# avamjs is a technical proof of concept.
 
 ## Problem, create a Progessive Web App with the following properties:
 
