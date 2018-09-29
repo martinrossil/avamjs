@@ -13,6 +13,7 @@
 * Total gzipped size below 30 Kb.
 * Offline capabilities.
 * Deeplink and routing support.
+* Completely decoupled business logic.
 * Native feel.
 
 ## Solution:
