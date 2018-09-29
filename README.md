@@ -1,6 +1,6 @@
 # avamjs is a technical proof of concept.
 
-## Problem, create a Progessive Web App with the following properties:
+## Goal, create a Progessive Web App with the following properties:
 
 * Get a Lighthouse Audit score of 100 in all 5 categories.
 * No use of external libraries.
@@ -23,7 +23,9 @@
 3. Create a static read layer, using json.
 4. Bundle and deploy on a fast CDN.
 
-## Screenshots
+## Screenshots and website
+
+Web Application here: [ava.dk](https://ava.dk)
 
 |Trailers|Movies|Actors|
 |---|---|---|
