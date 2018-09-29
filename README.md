@@ -1,6 +1,15 @@
 # avamjs is a technical proof of concept.
 
-## Goal, create a Progessive Web App with the following properties:
+## Contents
+
+1. Goal
+2. Solution
+3. Screenshots and Website
+4. Library Description
+5. Architecture
+6. Conclusion
+
+## 1. Goal, create a Progessive Web App with the following properties:
 
 * Get a Lighthouse Audit score of 100 in all 5 categories.
 * No use of external libraries.
@@ -13,17 +22,18 @@
 * Total gzipped size below 30 Kb.
 * Offline capabilities.
 * Deeplink and routing support.
+* Progressive data loading.
 * Completely decoupled business logic.
 * Native feel.
 
-## Solution:
+## 2. Solution:
 
 1. Create a base Web Component library, written in pure Javascript as ES6 Classes, exported as Modules.
 2. Create Single Page Application ( PWA ), using this library, using best Object Oriented principles, composition and inheritance.
 3. Create a static read layer, using json.
 4. Bundle and deploy on a fast CDN.
 
-## Screenshots and website
+## 3. Screenshots and website
 
 Web Application here: [ava.dk](https://ava.dk)
 
@@ -38,3 +48,9 @@ Web Application here: [ava.dk](https://ava.dk)
 |Playback|
 |---|
 |<img src="/screenshots/phone_trailer_playback.png"/>|
+
+## 4. Library Description
+
+## 5. Architecture
+
+## 6. Conclusion
