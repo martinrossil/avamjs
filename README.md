@@ -23,3 +23,14 @@
 3. Create a static read layer, using json.
 4. Bundle and deploy on a fast CDN.
 
+## Screenshots
+
+Trailers | Movies | Actors | Movie Info | Filter Options
+--- | --- | --- | --- | ---
+<img src="/screenshots/phone_trailers.png" width="120px"/>|<img src="/screenshots/phone_movies.png" width="120px"/>|<img src="/screenshots/phone_actors.png" width="120px"/>|<img src="/screenshots/phone_movie_info.png" width="120px"/>|<img src="/screenshots/phone_movies_drawer.png" width="120px"/>
+
+<img src="/screenshots/phone_trailer_playback.png" width="400px"/>
+
+
+
+
