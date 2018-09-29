@@ -8,8 +8,8 @@
 * Implement Googles Material Design principles with Theming support.
 * 100% pure Javascript implementation.
 * Use Web Components, written in ES6 Classes, exported as Modules.
-* First contentfull paint in 1 second.
-* Time to interactive in 1.5 seconds.
+* First meaningful paint in less than 2 second.
+* Time to interactive in less than 2 seconds.
 * Total gzipped size below 30 Kb.
 * Offline capabilities.
 * Deeplink and routing support.
