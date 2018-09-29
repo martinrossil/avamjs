@@ -9,7 +9,7 @@
 * 100% pure Javascript implementation.
 * Use Web Components, written in ES6 Classes, exported as Modules.
 * First contentfull paint in 1 second.
-* Time to interactive in 3 seconds.
+* Time to interactive in 1.5 seconds.
 * Total gzipped size below 30 Kb.
 * Offline capabilities.
 * Deeplink and routing support.
