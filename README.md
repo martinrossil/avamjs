@@ -25,12 +25,10 @@
 
 ## Screenshots
 
-Trailers | Movies | Actors | Movie Info | Filter Options
---- | --- | --- | --- | ---
-<img src="/screenshots/phone_trailers.png" width="120px"/>|<img src="/screenshots/phone_movies.png" width="120px"/>|<img src="/screenshots/phone_actors.png" width="120px"/>|<img src="/screenshots/phone_movie_info.png" width="120px"/>|<img src="/screenshots/phone_movies_drawer.png" width="120px"/>
+|Trailers|
+|---|
+|<img src="/screenshots/phone_trailers.png"/>|
 
-<img src="/screenshots/phone_trailer_playback.png" width="400px"/>
-
-
-
-
+|Movies|Actors|
+|---|---|
+|<img src="/screenshots/phone_movies.png"/>|<img src="/screenshots/phone_actors.png"/>|
