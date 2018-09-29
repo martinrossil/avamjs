@@ -25,10 +25,10 @@
 
 ## Screenshots
 
-|Trailers|
-|---|
-|<img src="/screenshots/phone_trailers.png"/>|
-
-|Movies|Actors|
+|Trailers|Movies|
 |---|---|
-|<img src="/screenshots/phone_movies.png"/>|<img src="/screenshots/phone_actors.png"/>|
+|<img src="/screenshots/phone_trailers.png"/>|<img src="/screenshots/phone_movies.png"/>|
+
+|Actors|Filters
+|---|---|
+|<img src="/screenshots/phone_actors.png"/>|<img src="/screenshots/phone_movies_drawer.png"/>|
