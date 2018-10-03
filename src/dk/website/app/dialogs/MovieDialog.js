@@ -30,11 +30,11 @@ export default class MovieDialog extends BaseDialog
         {
             this.layoutWide( w, h );
         }
-        this.ratingBlock.x = w - this.ratingBlock.width - 16;
+        this.ratingBlock.x = w - this.ratingBlock.width - 24;
         this.darkBlock.width = w;
         this.trailersList.width = w;
         this.castList.width = w;
-        this.castList.y = this.trailersList.y + this.trailersList.height + 16;
+        this.castList.y = this.trailersList.y + this.trailersList.height + 24;
         this.darkBlock.height = this.castList.y + this.castList.height - this.darkBlock.y;
     }
     layoutNarrow( w, h )
@@ -42,10 +42,9 @@ export default class MovieDialog extends BaseDialog
         this.posterBlock.setSize( 160, 240 );
         this.ratingBlock.setSize( 42, 42 );
         this.darkBlock.y = 204;
-        this.descriptionBlock.x = 16;
-        this.descriptionBlock.width = w - 32;
-        this.descriptionBlock.y = this.posterBlock.y + this.posterBlock.height + 16;
-        this.descriptionBlock.fontSize = 16;
+        this.descriptionBlock.x = 24;
+        this.descriptionBlock.width = w - 48;
+        this.descriptionBlock.y = this.posterBlock.y + this.posterBlock.height + 24;
         this.trailersList.y = this.descriptionBlock.y + this.descriptionBlock.height;
     }
     layoutWide( w, h )
@@ -53,11 +52,10 @@ export default class MovieDialog extends BaseDialog
         this.posterBlock.setSize( 240, 360 );
         this.ratingBlock.setSize( 84, 84 );
         this.darkBlock.y = 294;
-        this.descriptionBlock.fontSize = 20;
-        this.descriptionBlock.x = this.posterBlock.x + this.posterBlock.width + 16;
-        this.descriptionBlock.width = w - ( 16 + 240 + 32 );
-        this.descriptionBlock.y = this.darkBlock.y - this.descriptionBlock.height - 16;
-        this.trailersList.y = this.posterBlock.y + this.posterBlock.height + 16;
+        this.descriptionBlock.x = this.posterBlock.x + this.posterBlock.width + 24;
+        this.descriptionBlock.width = w - ( 24 + 240 + 32 );
+        this.descriptionBlock.y = this.darkBlock.y - this.descriptionBlock.height - 24;
+        this.trailersList.y = this.posterBlock.y + this.posterBlock.height + 24;
     }
     pathChanged()
     {
@@ -138,7 +136,7 @@ export default class MovieDialog extends BaseDialog
         if( !this._ratingBlock )
         {
             this._ratingBlock = new RatingBlock();
-            this._ratingBlock.y = 16;
+            this._ratingBlock.y = 24;
             this._ratingBlock.isVisible = false;
             this._ratingBlock.backgroundColor = Theme.PRIMARY_COLOR_DARK;
             this._ratingBlock.z = 2;
@@ -171,8 +169,8 @@ export default class MovieDialog extends BaseDialog
         if( !this._trailersListLayout )
         {
             this._trailersListLayout = new TiledRowsLayout();
-            this._trailersListLayout.padding = 16;
-            this._trailersListLayout.gap = 16;
+            this._trailersListLayout.padding = 24;
+            this._trailersListLayout.gap = 24;
             this._trailersListLayout.verticalGap = 48;
             this._trailersListLayout.paddingBottom = 32;
             this._trailersListLayout.maxColumns = 3;
@@ -216,8 +214,8 @@ export default class MovieDialog extends BaseDialog
         if( !this._castListLayout )
         {
             this._castListLayout = new TiledRowsLayout();
-            this._castListLayout.padding = 16;
-            this._castListLayout.gap = 16;
+            this._castListLayout.padding = 24;
+            this._castListLayout.gap = 24;
             this._castListLayout.verticalGap = 80;
             this._castListLayout.paddingBottom = 96;
             this._castListLayout.maxColumns = 5;
@@ -242,8 +240,8 @@ export default class MovieDialog extends BaseDialog
         if( !this._posterBlock )
         {
             this._posterBlock = new PosterBlock();
-            this._posterBlock.x = 16;
-            this._posterBlock.y = 16;
+            this._posterBlock.x = 24;
+            this._posterBlock.y = 24;
         }
         return this._posterBlock;
     }
