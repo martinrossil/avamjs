@@ -1,9 +1,7 @@
 import DisplayContainer from "../../../../ava/components/display/DisplayContainer.js";
-import Colors from "../../../../ava/styles/Colors.js";
 import TextElement from "../../../../ava/components/text/TextElement.js";
 import Theme from "../../../../ava/styles/Theme.js";
 import FontWeight from "../../../../ava/constants/FontWeight.js";
-import DisplayElement from "../../../../ava/components/display/DisplayElement.js";
 export default class DescriptionBlock extends DisplayContainer
 {
     constructor()
@@ -15,7 +13,6 @@ export default class DescriptionBlock extends DisplayContainer
         super.sizeChanged( w, h );
         this.height = this.descriptionTextElement.textHeight;
         this.background.height = this.height;
-        console.log( "DescriptionBlock sizeChanged", this.height );
     }
     widthChanged( w )
     {
@@ -27,7 +24,6 @@ export default class DescriptionBlock extends DisplayContainer
     {
         this.descriptionTextElement.text = this.description;
         this.height = this.descriptionTextElement.textHeight;
-        console.log( "descriptionChanged", this.height );
     }
     initialize()
     {
