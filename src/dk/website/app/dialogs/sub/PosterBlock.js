@@ -28,6 +28,7 @@ export default class PosterBlock extends DisplayContainer
     {
         if( this.path )
         {
+            console.log( "PosterBlock", "pathChanged", this.path );
             let ext = ImageElement.extension;
             let url = "/plakater/" + Util.getImageSize( this.width ) + "/" + this.path + "-plakat." + ext;
             this.image.source = url;
@@ -37,7 +38,7 @@ export default class PosterBlock extends DisplayContainer
     {
         if( this.data )
         {
-            let title = this.data.title + " Plakat";;
+            let title = this.data.title + " Plakat";
             this.ariaLabel = title;
             this.image.alt = title;
             this.image.title = title;
