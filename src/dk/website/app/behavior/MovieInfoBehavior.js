@@ -10,7 +10,7 @@ export default class MovieInfoBehavior extends BaseBehavior
     }
     applicationLoadComplete()
     {
-        this.pathChanged( "/film/mission-impossible-fallout(2018)" );
+        //this.pathChanged( "/film/mission-impossible-fallout(2018)" );
     }
     pathChanged( path )
     {
