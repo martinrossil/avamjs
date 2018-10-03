@@ -44,15 +44,6 @@ export default class TiledRowsLayout extends BaseLayout
         super.elementsAdded( elements );
         this.host.height = 0;
         this.layoutElements( this.host.width, this.host.height );
-        /*if( !this.lastElement )
-        {
-            this.layoutElements( this.host.width, this.host.height )
-        }
-        else
-        {
-            this.iterateElements( elements );
-            this.setHostHeight();
-        }*/
     }
     layoutElementsHorizontal( w, h )
     {
@@ -167,11 +158,7 @@ export default class TiledRowsLayout extends BaseLayout
         let c = Math.floor( this.availableWidth / this.elementMinWidth );
         if( c === 0 )
         {
-            c = 1;
-        }
-        if( c > elements.length )
-        {
-            c = elements.length;
+            c = this.maxColumns;
         }
         if( c > this.maxColumns )
         {
