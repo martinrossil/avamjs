@@ -28,8 +28,7 @@ export default class AvaAppBar extends AppBar
         if( !this._titleTextElement )
         {
             this._titleTextElement = new TextElement();
-            this._titleTextElement.layoutData = new AnchorLayoutData( 16, NaN, 100 );
-            this._titleTextElement.setPosition( 16, 13 );
+            this._titleTextElement.layoutData = new AnchorLayoutData( 24, 13, 100 );
             this._titleTextElement.textColor = Theme.PRIMARY_TEXT_COLOR;
             this._titleTextElement.fontSize = 20;
             this._titleTextElement.wordWrap = false;
