@@ -2,7 +2,6 @@ import DisplayElement from "../display/DisplayElement.js";
 import FontWeight from "../../constants/FontWeight.js";
 import TextAlign from "../../constants/TextAlign.js";
 import Theme from "../../styles/Theme.js";
-import EventTypes from "../../constants/EventTypes.js";
 export default class TextElement extends DisplayElement
 {
     constructor()
