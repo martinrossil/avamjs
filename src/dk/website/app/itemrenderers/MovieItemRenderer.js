@@ -20,7 +20,6 @@ export default class MovieItemRenderer extends BaseItemRenderer
             if( !this.hasPosterBeenLoaded )
             {
                 this.hasPosterBeenLoaded = true;
-                let i = this.data.i;
                 let ext = ImageElement.extension;
                 let url = "/plakater/" + Util.getImageSize( this.width ) + "/" + this.data.h + "-plakat." + ext;
                 this.image.source = url;
