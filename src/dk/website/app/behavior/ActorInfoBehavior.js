@@ -8,6 +8,10 @@ export default class ActorInfoBehavior extends BaseBehavior
     {
         super();
     }
+    applicationLoadComplete()
+    {
+        //this.pathChanged( "/skuespillere/tom-cruise(1962)" );
+    }
     pathChanged( path )
     {
         let pathArray = path.split( "/" );
@@ -17,26 +21,21 @@ export default class ActorInfoBehavior extends BaseBehavior
         {
             if( path.indexOf( Paths.ACTORS ) === 0 )
             {
-                this.showActorInfo( pathArray[ 1 ] );
+                this.isActorInfoShown( true, pathArray[ 1 ] );
             }
             else
             {
-                this.hideActorInfo();
+                this.isActorInfoShown( false, null );
             }
         }
         else
         {
-            this.hideActorInfo();
+            this.isActorInfoShown( false, null );
         }
     }
-    showActorInfo( path )
+    isActorInfoShown( isShown, path )
     {
-        this.setProperty( UIDS.ACTOR_DIALOG, Properties.IS_SHOWN, true );
+        this.setProperty( UIDS.ACTOR_DIALOG, Properties.IS_SHOWN, isShown );
         this.setProperty( UIDS.ACTOR_DIALOG, Properties.PATH, path );
-    }
-    hideActorInfo()
-    {
-        this.setProperty( UIDS.ACTOR_DIALOG, Properties.IS_SHOWN, false );
-        this.setProperty( UIDS.ACTOR_DIALOG, Properties.PATH, null );
     }
 }
