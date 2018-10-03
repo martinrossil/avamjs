@@ -5,6 +5,7 @@ import Properties from "../consts/Properties.js";
 import ClickTargetUtil from "../utils/ClickTargetUtil.js";
 import TrailerItemRenderer from "../itemrenderers/TrailerItemRenderer.js"
 import MovieInfoTrailerItemRenderer from "../itemrenderers/MovieInfoTrailerItemRenderer.js";
+import ActorInfoTrailerItemRenderer from "../itemrenderers/ActorInfoTrailerItemRenderer.js";
 export default class TrailerPlaybackBehavior extends BaseBehavior
 {
     constructor()
@@ -14,7 +15,9 @@ export default class TrailerPlaybackBehavior extends BaseBehavior
     clicked( e )
     {
         let itemRenderer = ClickTargetUtil.getItemRendererFromTarget( e.target );
-        if( itemRenderer instanceof TrailerItemRenderer || itemRenderer instanceof MovieInfoTrailerItemRenderer )
+        if( itemRenderer instanceof TrailerItemRenderer || 
+            itemRenderer instanceof MovieInfoTrailerItemRenderer ||
+            itemRenderer instanceof ActorInfoTrailerItemRenderer )
         {
             let data = itemRenderer.data;
             this.setProperty( UIDS.TRAILER_DIALOG, Properties.IS_SHOWN, true );
@@ -30,14 +33,21 @@ export default class TrailerPlaybackBehavior extends BaseBehavior
         {
             if( path.indexOf( Paths.TRAILERS ) === 0 )
             {
-                this.setProperty( UIDS.TRAILER_DIALOG, Properties.IS_SHOWN, true );
-                this.setProperty( UIDS.TRAILER_DIALOG, Properties.PATH, path );
+                this.isTrailerDialogShown( true, path );
+            }
+            else
+            {
+                this.isTrailerDialogShown( false, null );
             }
         }
         else
         {
-            this.setProperty( UIDS.TRAILER_DIALOG, Properties.IS_SHOWN, false );
-            this.setProperty( UIDS.TRAILER_DIALOG, Properties.PATH, null );
+            this.isTrailerDialogShown( false, null );
         }
+    }
+    isTrailerDialogShown( isShown, path )
+    {
+        this.setProperty( UIDS.TRAILER_DIALOG, Properties.IS_SHOWN, isShown );
+        this.setProperty( UIDS.TRAILER_DIALOG, Properties.PATH, path );
     }
 }
