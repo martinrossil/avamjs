@@ -4,7 +4,6 @@ import TextElement from "../../../../ava/components/text/TextElement.js";
 import FontWeight from "../../../../ava/constants/FontWeight.js";
 import TextAlign from "../../../../ava/constants/TextAlign.js";
 import Colors from "../../../../ava/styles/Colors.js";
-import AnchorLayout from "../../../../ava/layouts/AnchorLayout.js";
 import AnchorLayoutData from "../../../../ava/layouts/data/AnchorLayoutData.js";
 export default class RatingBlock extends LayoutContainer
 {
