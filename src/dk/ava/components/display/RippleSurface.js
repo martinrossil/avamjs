@@ -22,7 +22,6 @@ export default class RippleSurface extends DisplayContainer
         this.clipContent = true;
         this.addEventListener( "touchstart", this.touchStart, { capture : true, passive : false } );
         this.addEventListener( "mousedown", this.mouseDown, { capture : true } );
-        
         this.createChildren();
     }
     createChildren()
@@ -53,7 +52,7 @@ export default class RippleSurface extends DisplayContainer
     }
     touchStart( e )
     {
-        //e.preventDefault();
+        e.preventDefault();
         window.addEventListener( "touchend", this.windowTouchEnd );
         if( !this.hasMouseEventsBeenRemoved )
         {
