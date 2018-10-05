@@ -15,6 +15,39 @@ export default class DialogTopBar extends LayoutContainer
     {
         super();
     }
+    sizeChanged( w, h )
+    {
+        super.sizeChanged( w, h );
+        this.layoutChildren( w );
+    }
+    widthChanged( w )
+    {
+        super.widthChanged( w );
+        this.layoutChildren( w );
+    }
+    layoutChildren( w )
+    {
+        if( w > 1024 )
+        {
+            let padding = ( w - 1024 ) * .5;
+            if( padding < 24 )
+            {
+                this.titleTextElement.x = 24;
+                this.closeIconButton.x = w - 56;
+            }
+            else
+            {
+                this.titleTextElement.x = padding;
+                this.closeIconButton.x = w - padding - 32;
+            }
+            
+        }
+        else
+        {
+            this.titleTextElement.x = 24;
+            this.closeIconButton.x = w - 56;
+        }
+    }
     propertyAnimationEnded( property )
     {
         if( property === "opacity" )
@@ -55,7 +88,7 @@ export default class DialogTopBar extends LayoutContainer
         if( !this._titleTextElement )
         {
             this._titleTextElement = new TextElement();
-            this._titleTextElement.layoutData = new AnchorLayoutData( 24, 13, 56 );
+            this._titleTextElement.setPosition( 24, 13 );
             this._titleTextElement.textColor = Theme.PRIMARY_TEXT_COLOR;
             this._titleTextElement.fontSize = 20;
             this._titleTextElement.wordWrap = false;
@@ -67,8 +100,8 @@ export default class DialogTopBar extends LayoutContainer
         if( !this._closeIconButton )
         {
             this._closeIconButton = new IconButton();
+            this._closeIconButton.y = 4;
             this._closeIconButton.iconName = IconNames.ARROW_DOWNWARD;
-            this._closeIconButton.layoutData = new AnchorLayoutData( NaN, NaN, 4, NaN, NaN, 0 );
             this._closeIconButton.listen( EventTypes.TRIGGERED, this.closeTriggered.bind( this ) );
             this._closeIconButton.ariaLabel = Strings.CLOSE;
         }

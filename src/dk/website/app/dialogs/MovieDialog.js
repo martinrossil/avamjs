@@ -30,7 +30,26 @@ export default class MovieDialog extends BaseDialog
         {
             this.layoutWide( w, h );
         }
-        this.ratingBlock.x = w - this.ratingBlock.width - 24;
+        if( w > 1024 )
+        {
+            let padding = ( w - 1024 ) * .5;
+            if( padding < 24 )
+            {
+                this.posterBlock.x = 24;
+                this.ratingBlock.x = w - this.ratingBlock.width - 24;
+            }
+            else
+            {
+                this.posterBlock.x = padding;
+                this.ratingBlock.x = w - padding - this.ratingBlock.width;
+            }
+        }
+        else
+        {
+            this.posterBlock.x = 24;
+            this.ratingBlock.x = w - this.ratingBlock.width - 24;
+        }
+        
         this.darkBlock.width = w;
         this.trailersList.width = w;
         this.castList.width = w;
