@@ -60,8 +60,7 @@ export default class ApplicationElement extends LayoutContainer
     }
     appLoadComplete( e )
     {
-        window.removeEventListener( "load", this.appLoadComplete );
-        this.dispatch( EventTypes.APPLICATION_LOAD_COMPLETE );
+        // override
     }
     get background()
     {
