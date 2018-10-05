@@ -20,12 +20,72 @@ import FiltersDrawer from "./drawers/FiltersDrawer.js";
 import MovieDialog from "./dialogs/MovieDialog.js";
 import AppBehavior from "./behavior/AppBehavior.js";
 import ActorDialog from "./dialogs/ActorDialog.js";
+import EventTypes from "../../ava/constants/EventTypes.js";
 export default class AvaApp extends ApplicationElement
 {
     constructor()
     {
         super();
+        performance.mark( "AppStart" );
         this.uid = UIDS.APP;
+    }
+    appLoadComplete( e )
+    {
+        if( "serviceWorker" in navigator )
+        {
+            this.registerServiceWorker();
+        }
+        else
+        {
+            console.log( "Service worker NOT supported" );
+            this.dispatch( EventTypes.APPLICATION_LOAD_COMPLETE );
+        }
+    }
+    registerServiceWorker()
+    {
+        navigator.serviceWorker.register('ServiceWorker.v17.js')
+            .then( ( registration ) =>
+            {
+                if( !registration.active && registration.installing )
+                {
+                    console.log( "First time visit, no Service Worker detected." );
+                    console.log( "Installing new Service Worker now." );
+                    this.addStateChangeListener( registration.installing );
+                }
+                else if( registration.active && registration.installing )
+                {
+                    console.log( "Found existing Service Worker" );
+                    console.log( "New service worker is replacing old one." );
+                    this.addStateChangeListener( registration.installing );
+                }
+                else if( registration.active && !registration.installing )
+                {
+                    console.log( "Found existing Service Worker" );
+                    console.log( "Nothing new, continue using existing Service Worker" );
+                    this.dispatch( EventTypes.APPLICATION_LOAD_COMPLETE );
+                }
+                else
+                {
+                    console.log( "No active or installing Service Worker found?" );
+                    this.dispatch( EventTypes.APPLICATION_LOAD_COMPLETE );
+                }
+            } )
+            .catch( ( error ) =>
+            {
+                console.log( "Service worker registration Error", error );
+                this.dispatch( EventTypes.APPLICATION_LOAD_COMPLETE );
+            } );
+    }
+    addStateChangeListener( serviceWorker )
+    {
+        serviceWorker.addEventListener( "statechange", () =>
+        {
+            console.log( "serviceWorker state", serviceWorker.state );
+            if( serviceWorker.state === "activated" )
+            {
+                this.dispatch( EventTypes.APPLICATION_LOAD_COMPLETE );
+            }
+        } );
     }
     initialize()
     {
