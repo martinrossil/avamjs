@@ -52,7 +52,6 @@ export default class CastItemRenderer extends BaseItemRenderer
     {  
         if( this.data )
         {
-            //console.log( this.data );
         }
     }
     initialize()

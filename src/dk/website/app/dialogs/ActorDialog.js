@@ -78,7 +78,6 @@ export default class ActorDialog extends BaseDialog
     {
         if( data )
         {
-            console.log( "info", data );
             this.dialogTopBar.title = data.name;
             this.moviesCollection.arrayData = data.movies;
             this.trailersCollection.arrayData = data.trailers;
