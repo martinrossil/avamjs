@@ -43,7 +43,7 @@ export default class AvaApp extends ApplicationElement
     }
     registerServiceWorker()
     {
-        navigator.serviceWorker.register('ServiceWorker.v17.js')
+        navigator.serviceWorker.register('ServiceWorker.0.5.0.js')
             .then( ( registration ) =>
             {
                 if( !registration.active && registration.installing )

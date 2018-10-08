@@ -1,6 +1,6 @@
-var VERSION             = "v17";
+var VERSION             = "0.5.0";
 var WEBSITE             = "website-" + VERSION;
-var WEBSITE_FILES       = [ "/", "/index.html", "/bundle.v17.js" ];
+var WEBSITE_FILES       = [ "/", "/index.html", "/bundle." + VERSION + ".js", "/offline.svg" ]; // 
 var IMMUTABLE_IMAGES    = "immutable-images";
 var MUTABLE_JSON        = "mutable-json";
 self.addEventListener( 'install', ( e ) =>
@@ -20,13 +20,48 @@ self.addEventListener( 'activate', ( e ) =>
 {
     console.log( "activateComplete", VERSION );
     self.clients.claim();
+    e.waitUntil
+    (
+        caches.keys().then( ( cacheNames ) =>
+        {
+            return Promise.all(
+            cacheNames.map
+            ( 
+                ( cacheName ) =>
+                {
+                    if( cacheName !== WEBSITE && cacheName !== IMMUTABLE_IMAGES ) 
+                    {
+                        return caches.delete( cacheName );
+                    }
+                })
+            );
+        })
+    );
     // cleanup old cache
 } );
 self.addEventListener( 'fetch', ( e ) =>
 {
     const requestURL = new URL( e.request.url );
     const pathname = requestURL.pathname;
-    if( pathname === "/" || pathname === "/bundle." + VERSION + ".js" )
+    if( pathname === "/" )
+    {
+        e.respondWith
+        (
+            caches.open( WEBSITE ).then( ( cache ) => 
+            {
+                return cache.match( e.request ).then( ( response ) => 
+                {
+                    var fetchPromise = fetch( e.request ).then( ( networkResponse ) => 
+                    {
+                        cache.put( e.request, networkResponse.clone() );
+                        return networkResponse;
+                    })
+                    return response || fetchPromise;
+                })
+            })
+        );
+    }
+    else if( pathname === "/bundle." + VERSION + ".js" )
     {
         e.respondWith
         (
@@ -51,7 +86,14 @@ self.addEventListener( 'fetch', ( e ) =>
                     {
                         cache.put( e.request, response.clone() );
                         return response;
-                    });
+                    })
+                    .catch( ( error ) =>
+                    {
+                        return new Response( JSON.stringify( { offline : true } ), 
+                        {
+                            headers: { 'Content-Type': 'application/json' }
+                        } );
+                    } );
                 });
             })
         );
@@ -68,13 +110,23 @@ self.addEventListener( 'fetch', ( e ) =>
                     {
                         cache.put( e.request, response.clone() );
                         return response;
-                    });
+                    })
+                    .catch( () =>
+                    {
+                        return new Response( JSON.stringify( { offline : true } ), 
+                        {
+                            headers: { 'Content-Type': 'application/json' }
+                        } );
+                    } )
                 });
             })
         );
     }
     else
     {
-        e.respondWith( fetch( e.request ).then( ( response ) => { return response; }) );
+        return new Response( JSON.stringify( { unknown : true } ), 
+        {
+            headers: { 'Content-Type': 'application/json' }
+        } );
     }
 });
