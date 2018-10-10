@@ -1,18 +1,23 @@
-var VERSION             = "0.5.0";
+var VERSION             = "0.5.3";
 var WEBSITE             = "website-" + VERSION;
-var WEBSITE_FILES       = [ "/", "/index.html", "/bundle." + VERSION + ".js", "/offline.svg" ]; // 
+var WEBSITE_FILES       = [ "/bundle." + VERSION + ".js", "/offline.svg" ]; // 
 var IMMUTABLE_IMAGES    = "immutable-images";
 var MUTABLE_JSON        = "mutable-json";
 self.addEventListener( 'install', ( e ) =>
 { 
     console.log( "installComplete", VERSION );
     self.skipWaiting();
+    var offlinePage = new Request( 'offline.' + VERSION + '.html' );
     e.waitUntil
     (
-        caches.open( WEBSITE ).then( (cache)=>
+        fetch( offlinePage ).then( ( response ) => 
         {
-          return cache.addAll( WEBSITE_FILES );
-        })
+            return caches.open( WEBSITE ).then( ( cache ) =>
+            {
+                cache.put( offlinePage, response );
+                return cache.addAll( WEBSITE_FILES );
+            })
+        } )
     );
     // create cache and store website assets
 } );
@@ -47,17 +52,16 @@ self.addEventListener( 'fetch', ( e ) =>
     {
         e.respondWith
         (
-            caches.open( WEBSITE ).then( ( cache ) => 
+            fetch( e.request).then( ( networkResponse ) =>
             {
-                return cache.match( e.request ).then( ( response ) => 
+                return networkResponse;
+            } )
+            .catch( ( error ) => 
+            {
+                return caches.open( WEBSITE ).then(function(cache) 
                 {
-                    var fetchPromise = fetch( e.request ).then( ( networkResponse ) => 
-                    {
-                        cache.put( e.request, networkResponse.clone() );
-                        return networkResponse;
-                    })
-                    return response || fetchPromise;
-                })
+                  return cache.match( 'offline.' + VERSION + '.html' );
+                });
             })
         );
     }

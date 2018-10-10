@@ -43,7 +43,7 @@ export default class AvaApp extends ApplicationElement
     }
     registerServiceWorker()
     {
-        navigator.serviceWorker.register('ServiceWorker.0.5.0.js')
+        navigator.serviceWorker.register('ServiceWorker.0.5.3.js')
             .then( ( registration ) =>
             {
                 if( !registration.active && registration.installing )
@@ -89,9 +89,9 @@ export default class AvaApp extends ApplicationElement
     }
     initialize()
     {
-        Theme.APP_BACKGROUND_COLOR  = "#0d364c";// Config.APP_BACKGROUND_COLOR;
-        Theme.PRIMARY_COLOR         = "#427392";// "#00bcd4";//Config.PRIMARY_COLOR
-        Theme.PRIMARY_COLOR_DARK    = "#204764";// "#cd1a57";// "#00a5bb";//Config.PRIMARY_COLOR_DARK;
+        Theme.APP_BACKGROUND_COLOR  = "#0d364c";
+        Theme.PRIMARY_COLOR         = "#427392";
+        Theme.PRIMARY_COLOR_DARK    = "#204764";
         Theme.ACCENT_COLOR          = Config.ACCENT_COLOR
         Theme.ACCENT_COLOR_DARK     = Config.ACCENT_COLOR_DARK;
         Theme.ICON_COLOR            = Colors.WHITE;
