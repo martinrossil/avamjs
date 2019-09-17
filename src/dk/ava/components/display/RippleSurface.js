@@ -21,7 +21,7 @@ export default class RippleSurface extends DisplayContainer
         this._rippleColor = Theme.RIPPLE_COLOR;
         this.clipContent = true;
         this.addEventListener( "touchstart", this.touchStart, { capture : true, passive : false } );
-        this.addEventListener( "mousedown", this.mouseDown, { capture : true } );
+        this.addEventListener( "mousedown", this.mouseDown, { capture : true } ); 
         this.createChildren();
     }
     createChildren()

@@ -10,7 +10,7 @@ export default class IconElement extends DisplayElement
     sizeChanged()
     {
         super.sizeChanged();
-        this.svg.setAttribute( "width", this.width );
+        this.svg.setAttribute( "width", this.width ); 
         this.svg.setAttribute( "height", this.height );
     }
     widthChanged()

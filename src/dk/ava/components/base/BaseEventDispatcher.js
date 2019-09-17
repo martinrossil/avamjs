@@ -59,7 +59,7 @@ export default class BaseEventDispatcher extends HTMLElement
         if( this._uid !== value )
         {
             this._uid = value;
-            ComCenter.register( value, this );
+            ComCenter.register( value, this ); 
         }
     }
     get uid()

@@ -1,0 +1,147 @@
+[debug] [2019-01-09T14:14:21.600Z] ----------------------------------------------------------------------
+[debug] [2019-01-09T14:14:21.603Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\Martin\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy
+[debug] [2019-01-09T14:14:21.604Z] CLI Version:   6.2.2
+[debug] [2019-01-09T14:14:21.604Z] Platform:      win32
+[debug] [2019-01-09T14:14:21.604Z] Node Version:  v8.11.1
+[debug] [2019-01-09T14:14:21.606Z] Time:          Wed Jan 09 2019 15:14:21 GMT+0100 (Rom, normaltid)
+[debug] [2019-01-09T14:14:21.606Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2019-01-09T14:14:21.625Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2019-01-09T14:14:21.625Z] > authorizing via signed-in user
+[debug] [2019-01-09T14:14:21.625Z] [iam] checking project avaapp-4786c for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2019-01-09T14:14:21.625Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2019-01-09T14:14:21.625Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2019-01-09T14:14:21.876Z] <<< HTTP RESPONSE 200
+[debug] [2019-01-09T14:14:21.907Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/avaapp-4786c:testIamPermissions  
+
+[debug] [2019-01-09T14:14:23.218Z] <<< HTTP RESPONSE 200
+[debug] [2019-01-09T14:14:23.222Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/avaapp-4786c  
+ 
+[debug] [2019-01-09T14:14:23.842Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Deploying to 'avaapp-4786c'...
+[info] 
+[info] i  deploying hosting
+[debug] [2019-01-09T14:14:23.857Z] >>> HTTP REQUEST POST https://firebasehosting.googleapis.com/v1beta1/sites/avaapp-4786c/versions  
+
+[debug] [2019-01-09T14:14:26.089Z] <<< HTTP RESPONSE 200
+[info] i  hosting[avaapp-4786c]: beginning deploy...
+[info] i  hosting[avaapp-4786c]: found 41841 files in src
+[debug] [2019-01-09T14:14:39.491Z] [hosting] hash cache [c3Jj] load error: lines is not defined
+[debug] [2019-01-09T14:14:46.687Z] >>> HTTP REQUEST POST https://firebasehosting.googleapis.com/v1beta1/sites/avaapp-4786c/versions/3f3afc311454271f:populateFiles  
+ <request body omitted>
+[debug] [2019-01-09T14:14:50.765Z] <<< HTTP RESPONSE 200
+[debug] [2019-01-09T14:14:51.061Z] >>> HTTP REQUEST POST https://firebasehosting.googleapis.com/v1beta1/sites/avaapp-4786c/versions/3f3afc311454271f:populateFiles  
+ <request body omitted>
+[debug] [2019-01-09T14:14:53.024Z] >>> HTTP REQUEST POST https://firebasehosting.googleapis.com/v1beta1/sites/avaapp-4786c/versions/3f3afc311454271f:populateFiles  
+ <request body omitted>
+[debug] [2019-01-09T14:14:54.686Z] <<< HTTP RESPONSE 200
+[debug] [2019-01-09T14:14:55.833Z] >>> HTTP REQUEST POST https://firebasehosting.googleapis.com/v1beta1/sites/avaapp-4786c/versions/3f3afc311454271f:populateFiles  
+ <request body omitted>
+[debug] [2019-01-09T14:14:56.405Z] <<< HTTP RESPONSE 200
+[debug] [2019-01-09T14:14:58.130Z] >>> HTTP REQUEST POST https://firebasehosting.googleapis.com/v1beta1/sites/avaapp-4786c/versions/3f3afc311454271f:populateFiles  
+ <request body omitted>
+[debug] [2019-01-09T14:14:59.062Z] <<< HTTP RESPONSE 200
+[debug] [2019-01-09T14:15:00.362Z] >>> HTTP REQUEST POST https://firebasehosting.googleapis.com/v1beta1/sites/avaapp-4786c/versions/3f3afc311454271f:populateFiles  
+ <request body omitted>
+[debug] [2019-01-09T14:15:01.164Z] <<< HTTP RESPONSE 200
+[debug] [2019-01-09T14:15:03.396Z] <<< HTTP RESPONSE 200
+[debug] [2019-01-09T14:15:08.636Z] >>> HTTP REQUEST POST https://firebasehosting.googleapis.com/v1beta1/sites/avaapp-4786c/versions/3f3afc311454271f:populateFiles  
+ <request body omitted>
+[debug] [2019-01-09T14:15:11.859Z] <<< HTTP RESPONSE 200
+[debug] [2019-01-09T14:15:15.993Z] >>> HTTP REQUEST POST https://firebasehosting.googleapis.com/v1beta1/sites/avaapp-4786c/versions/3f3afc311454271f:populateFiles  
+ <request body omitted>
+[debug] [2019-01-09T14:15:18.957Z] <<< HTTP RESPONSE 200
+[debug] [2019-01-09T14:15:24.090Z] >>> HTTP REQUEST POST https://firebasehosting.googleapis.com/v1beta1/sites/avaapp-4786c/versions/3f3afc311454271f:populateFiles  
+ <request body omitted>
+[debug] [2019-01-09T14:15:27.722Z] <<< HTTP RESPONSE 200
+[debug] [2019-01-09T14:15:32.132Z] >>> HTTP REQUEST POST https://firebasehosting.googleapis.com/v1beta1/sites/avaapp-4786c/versions/3f3afc311454271f:populateFiles  
+ <request body omitted>
+[debug] [2019-01-09T14:15:35.097Z] <<< HTTP RESPONSE 200
+[debug] [2019-01-09T14:15:41.724Z] >>> HTTP REQUEST POST https://firebasehosting.googleapis.com/v1beta1/sites/avaapp-4786c/versions/3f3afc311454271f:populateFiles  
+ <request body omitted>
+[debug] [2019-01-09T14:15:44.850Z] <<< HTTP RESPONSE 200
+[debug] [2019-01-09T14:15:51.584Z] >>> HTTP REQUEST POST https://firebasehosting.googleapis.com/v1beta1/sites/avaapp-4786c/versions/3f3afc311454271f:populateFiles  
+ <request body omitted>
+[debug] [2019-01-09T14:15:54.552Z] <<< HTTP RESPONSE 200
+[debug] [2019-01-09T14:15:58.206Z] >>> HTTP REQUEST POST https://firebasehosting.googleapis.com/v1beta1/sites/avaapp-4786c/versions/3f3afc311454271f:populateFiles  
+ <request body omitted>
+[debug] [2019-01-09T14:16:01.459Z] <<< HTTP RESPONSE 200
+[debug] [2019-01-09T14:16:04.783Z] >>> HTTP REQUEST POST https://firebasehosting.googleapis.com/v1beta1/sites/avaapp-4786c/versions/3f3afc311454271f:populateFiles  
+ <request body omitted>
+[debug] [2019-01-09T14:16:07.917Z] <<< HTTP RESPONSE 200
+[debug] [2019-01-09T14:16:11.971Z] >>> HTTP REQUEST POST https://firebasehosting.googleapis.com/v1beta1/sites/avaapp-4786c/versions/3f3afc311454271f:populateFiles  
+ <request body omitted>
+[debug] [2019-01-09T14:16:14.900Z] <<< HTTP RESPONSE 200
+[debug] [2019-01-09T14:16:19.486Z] >>> HTTP REQUEST POST https://firebasehosting.googleapis.com/v1beta1/sites/avaapp-4786c/versions/3f3afc311454271f:populateFiles  
+ <request body omitted>
+[debug] [2019-01-09T14:16:22.641Z] <<< HTTP RESPONSE 200
+[debug] [2019-01-09T14:16:26.820Z] >>> HTTP REQUEST POST https://firebasehosting.googleapis.com/v1beta1/sites/avaapp-4786c/versions/3f3afc311454271f:populateFiles  
+ <request body omitted>
+[debug] [2019-01-09T14:16:30.381Z] <<< HTTP RESPONSE 200
+[debug] [2019-01-09T14:16:33.043Z] >>> HTTP REQUEST POST https://firebasehosting.googleapis.com/v1beta1/sites/avaapp-4786c/versions/3f3afc311454271f:populateFiles  
+ <request body omitted>
+[debug] [2019-01-09T14:16:35.571Z] <<< HTTP RESPONSE 200
+[debug] [2019-01-09T14:16:42.221Z] >>> HTTP REQUEST POST https://firebasehosting.googleapis.com/v1beta1/sites/avaapp-4786c/versions/3f3afc311454271f:populateFiles  
+ <request body omitted>
+[debug] [2019-01-09T14:16:45.664Z] <<< HTTP RESPONSE 200
+[debug] [2019-01-09T14:16:48.839Z] >>> HTTP REQUEST POST https://firebasehosting.googleapis.com/v1beta1/sites/avaapp-4786c/versions/3f3afc311454271f:populateFiles  
+ <request body omitted>
+[debug] [2019-01-09T14:16:51.951Z] <<< HTTP RESPONSE 200
+[debug] [2019-01-09T14:16:55.492Z] >>> HTTP REQUEST POST https://firebasehosting.googleapis.com/v1beta1/sites/avaapp-4786c/versions/3f3afc311454271f:populateFiles  
+ <request body omitted>
+[debug] [2019-01-09T14:16:59.278Z] <<< HTTP RESPONSE 200
+[debug] [2019-01-09T14:17:02.950Z] >>> HTTP REQUEST POST https://firebasehosting.googleapis.com/v1beta1/sites/avaapp-4786c/versions/3f3afc311454271f:populateFiles  
+ <request body omitted>
+[debug] [2019-01-09T14:17:07.127Z] <<< HTTP RESPONSE 200
+[debug] [2019-01-09T14:17:09.949Z] >>> HTTP REQUEST POST https://firebasehosting.googleapis.com/v1beta1/sites/avaapp-4786c/versions/3f3afc311454271f:populateFiles  
+ <request body omitted>
+[debug] [2019-01-09T14:17:13.251Z] <<< HTTP RESPONSE 200
+[debug] [2019-01-09T14:17:16.782Z] >>> HTTP REQUEST POST https://firebasehosting.googleapis.com/v1beta1/sites/avaapp-4786c/versions/3f3afc311454271f:populateFiles  
+ <request body omitted>
+[debug] [2019-01-09T14:17:19.749Z] <<< HTTP RESPONSE 200
+[debug] [2019-01-09T14:17:24.353Z] >>> HTTP REQUEST POST https://firebasehosting.googleapis.com/v1beta1/sites/avaapp-4786c/versions/3f3afc311454271f:populateFiles  
+ <request body omitted>
+[debug] [2019-01-09T14:17:28.192Z] <<< HTTP RESPONSE 200
+[debug] [2019-01-09T14:17:31.594Z] >>> HTTP REQUEST POST https://firebasehosting.googleapis.com/v1beta1/sites/avaapp-4786c/versions/3f3afc311454271f:populateFiles  
+ <request body omitted>
+[debug] [2019-01-09T14:17:35.062Z] <<< HTTP RESPONSE 200
+[debug] [2019-01-09T14:17:39.196Z] >>> HTTP REQUEST POST https://firebasehosting.googleapis.com/v1beta1/sites/avaapp-4786c/versions/3f3afc311454271f:populateFiles  
+ <request body omitted>
+[debug] [2019-01-09T14:17:42.984Z] <<< HTTP RESPONSE 200
+[debug] [2019-01-09T14:17:44.291Z] >>> HTTP REQUEST POST https://firebasehosting.googleapis.com/v1beta1/sites/avaapp-4786c/versions/3f3afc311454271f:populateFiles  
+ <request body omitted>
+[debug] [2019-01-09T14:17:47.754Z] <<< HTTP RESPONSE 200
+[debug] [2019-01-09T14:17:51.391Z] >>> HTTP REQUEST POST https://firebasehosting.googleapis.com/v1beta1/sites/avaapp-4786c/versions/3f3afc311454271f:populateFiles  
+ <request body omitted>
+[debug] [2019-01-09T14:17:54.740Z] <<< HTTP RESPONSE 200
+[debug] [2019-01-09T14:17:57.060Z] >>> HTTP REQUEST POST https://firebasehosting.googleapis.com/v1beta1/sites/avaapp-4786c/versions/3f3afc311454271f:populateFiles  
+ <request body omitted>
+[debug] [2019-01-09T14:18:00.744Z] <<< HTTP RESPONSE 200
+[debug] [2019-01-09T14:18:04.511Z] >>> HTTP REQUEST POST https://firebasehosting.googleapis.com/v1beta1/sites/avaapp-4786c/versions/3f3afc311454271f:populateFiles  
+ <request body omitted>
+[debug] [2019-01-09T14:18:07.932Z] <<< HTTP RESPONSE 200
+[debug] [2019-01-09T14:18:12.560Z] >>> HTTP REQUEST POST https://firebasehosting.googleapis.com/v1beta1/sites/avaapp-4786c/versions/3f3afc311454271f:populateFiles  
+ <request body omitted>
+[debug] [2019-01-09T14:18:16.562Z] <<< HTTP RESPONSE 200
+[debug] [2019-01-09T14:18:20.214Z] >>> HTTP REQUEST POST https://firebasehosting.googleapis.com/v1beta1/sites/avaapp-4786c/versions/3f3afc311454271f:populateFiles  
+ <request body omitted>
+[debug] [2019-01-09T14:18:23.516Z] <<< HTTP RESPONSE 200
+[debug] [2019-01-09T14:18:27.609Z] >>> HTTP REQUEST POST https://firebasehosting.googleapis.com/v1beta1/sites/avaapp-4786c/versions/3f3afc311454271f:populateFiles  
+ <request body omitted>
+[debug] [2019-01-09T14:18:31.329Z] <<< HTTP RESPONSE 200
+[debug] [2019-01-09T14:18:35.780Z] >>> HTTP REQUEST POST https://firebasehosting.googleapis.com/v1beta1/sites/avaapp-4786c/versions/3f3afc311454271f:populateFiles  
+ <request body omitted>
+[debug] [2019-01-09T14:18:39.233Z] <<< HTTP RESPONSE 200
+[debug] [2019-01-09T14:18:43.018Z] >>> HTTP REQUEST POST https://firebasehosting.googleapis.com/v1beta1/sites/avaapp-4786c/versions/3f3afc311454271f:populateFiles  
+ <request body omitted>
+[debug] [2019-01-09T14:18:46.275Z] <<< HTTP RESPONSE 200
+[debug] [2019-01-09T14:18:50.500Z] >>> HTTP REQUEST POST https://firebasehosting.googleapis.com/v1beta1/sites/avaapp-4786c/versions/3f3afc311454271f:populateFiles  
+ <request body omitted>
+[debug] [2019-01-09T14:18:53.696Z] <<< HTTP RESPONSE 200
+[debug] [2019-01-09T14:18:57.910Z] >>> HTTP REQUEST POST https://firebasehosting.googleapis.com/v1beta1/sites/avaapp-4786c/versions/3f3afc311454271f:populateFiles  
+ <request body omitted>
+[debug] [2019-01-09T14:19:01.313Z] <<< HTTP RESPONSE 200
+[debug] [2019-01-09T14:19:05.956Z] >>> HTTP REQUEST POST https://firebasehosting.googleapis.com/v1beta1/sites/avaapp-4786c/versions/3f3afc311454271f:populateFiles  
+ <request body omitted>

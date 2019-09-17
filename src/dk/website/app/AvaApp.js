@@ -1,3 +1,4 @@
+// @ts-check
 import ApplicationElement from "../../ava/components/application/ApplicationElement.js";
 import Theme from "../../ava/styles/Theme.js";
 import Colors from "../../ava/styles/Colors.js";
@@ -27,10 +28,13 @@ export default class AvaApp extends ApplicationElement
     {
         super();
         performance.mark( "AppStart" );
+
         this.uid = UIDS.APP;
     }
     appLoadComplete( e )
     {
+        this.dispatch( EventTypes.APPLICATION_LOAD_COMPLETE );
+        return;
         if( "serviceWorker" in navigator )
         {
             this.registerServiceWorker();
@@ -92,8 +96,8 @@ export default class AvaApp extends ApplicationElement
         Theme.APP_BACKGROUND_COLOR  = "#0d364c";
         Theme.PRIMARY_COLOR         = "#427392";
         Theme.PRIMARY_COLOR_DARK    = "#204764";
-        Theme.ACCENT_COLOR          = Config.ACCENT_COLOR
-        Theme.ACCENT_COLOR_DARK     = Config.ACCENT_COLOR_DARK;
+        Theme.ACCENT_COLOR          = Config.SECONDARY_COLOR
+        Theme.ACCENT_COLOR_DARK     = Config.SECONDARY_COLOR;
         Theme.ICON_COLOR            = Colors.WHITE;
         Theme.PRIMARY_TEXT_COLOR    = Colors.WHITE;
         Theme.RIPPLE_COLOR          = Colors.WHITE;

@@ -5,7 +5,7 @@ module.exports =
     entry: './src/dk/website/app/AvaApp.js',
     output: 
     {
-        filename: 'bundle.v5.js',
+        filename: 'bundle.0.5.4.js',
         path: path.resolve(__dirname, './src')
     }
 }

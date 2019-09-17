@@ -102,7 +102,7 @@ export default class BottomNavigationBarItemRenderer extends BaseItemRenderer
     {
         if( !this._icon )
         {
-            this._icon = new IconElement();
+            this._icon = new IconElement(); 
             this._icon.opacity = .76;
             this._icon.y = 16;
             this._icon.animatedProperties = [   new AnimatedProperty( "opacity", 225 ), 

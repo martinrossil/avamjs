@@ -21,7 +21,7 @@ export default class ComCenter
     {
         if( !this.uids[ uid ] )
         {
-            this.uids[ uid ] = new EventDispatcher();
+            this.uids[ uid ] = new EventDispatcher(); 
         }
         this.instances[ uid ] = instance;
     }
